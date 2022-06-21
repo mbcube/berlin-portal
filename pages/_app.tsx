@@ -1,8 +1,20 @@
-import '../styles/globals.css'
-import type { AppProps } from 'next/app'
+import "../styles/globals.css";
+import type { AppProps } from "next/app";
+import Navbar from "../components/navbar";
+import { Toaster } from "react-hot-toast";
+import { UserContext } from "../lib/context";
+import { useUserData } from "../lib/hooks";
 
-function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+export default function MyApp({ Component, pageProps }: AppProps) {
+  const user = useUserData();
+
+  return (
+    <>
+      <UserContext.Provider value={user}>
+        <Navbar></Navbar>
+        <Component {...pageProps} />
+        <Toaster></Toaster>
+      </UserContext.Provider>
+    </>
+  );
 }
-
-export default MyApp
