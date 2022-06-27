@@ -9,42 +9,46 @@ export default function Navbar() {
   const user = useContext(UserContext);
 
   return (
-    <nav className="navbar">
-      <ul>
-        {user && <li>{user.displayName}</li>}
-        <li>
+    <nav>
+      <ul className="nav mt-1">
+        <li className="nav-item">
           <Link href="/">
-            <button>Feed</button>
+            <button type="button" className="btn btn-link">
+              Feed
+            </button>
           </Link>
         </li>
-        {!!user && (
-          <li>
-            <button onClick={() => auth.signOut()}>Logout</button>
-          </li>
-        )}
         {!user && (
-          <li>
+          <li className="nav-item">
             <Link href="/login">
-              <button>Login</button>
+              <button type="button" className="btn btn-link">
+                Login
+              </button>
             </Link>
           </li>
         )}
         {/*  admin specific nav items */}
         {user && user.userType === UserType.Admin && (
           <>
-            <li>
+            <li className="nav-item">
               <Link href="/admin/users">
-                <button>Create User</button>
+                <button type="button" className="btn btn-link">
+                  Create User
+                </button>
               </Link>
             </li>
-            <li>
+            <li className="nav-item">
               <Link href="/">
-                <button>admin link 2</button>
+                <button type="button" className="btn btn-link">
+                  admin link 2
+                </button>
               </Link>
             </li>
-            <li>
+            <li className="nav-item">
               <Link href="/">
-                <button>admin link 3</button>
+                <button type="button" className="btn btn-link">
+                  admin link 3
+                </button>
               </Link>
             </li>
           </>
@@ -52,22 +56,39 @@ export default function Navbar() {
         {/*  admin specific nav items */}
         {user && user.userType === UserType.Teacher && (
           <>
-            <li>
+            <li className="nav-item">
               <Link href="/">
-                <button>treacher link 1</button>
+                <button type="button" className="btn btn-link">
+                  treacher link 1
+                </button>
               </Link>
             </li>
-            <li>
+            <li className="nav-item">
               <Link href="/">
-                <button>treacher link 2</button>
+                <button type="button" className="btn btn-link">
+                  treacher link 2
+                </button>
               </Link>
             </li>
-            <li>
+            <li className="nav-item">
               <Link href="/">
-                <button>treacher link 3</button>
+                <button type="button" className="btn btn-link">
+                  treacher link 3
+                </button>
               </Link>
             </li>
           </>
+        )}
+        {!!user && (
+          <li className="nav-item">
+            <Link href="/">
+              <button type="button" className="btn btn-link d-flex">
+                {user?.displayName}
+                &nbsp;
+                <i className="bi bi-box-arrow-right"></i>
+              </button>
+            </Link>
+          </li>
         )}
       </ul>
     </nav>
