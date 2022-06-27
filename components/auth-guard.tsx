@@ -1,7 +1,7 @@
+import ErrorPage from "next/error";
 import { useContext } from "react";
 import { UserContext } from "../lib/context";
 import { UserType } from "../lib/models/user-type.enum";
-import ErrorPage from "next/error";
 
 export default function AuthGuard(props: {
   userTypes: UserType[];

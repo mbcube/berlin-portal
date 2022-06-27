@@ -1,3 +1,8 @@
 {
-  "WhiteSource Advise.Diff.BaseBranch": "main"
+  "WhiteSource Advise.Diff.BaseBranch": "main",
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": true
+  }
 }

@@ -1,9 +1,7 @@
 import Link from "next/link";
-import { UserType } from "../lib/models/user-type.enum";
-import { User } from "../lib/models/user.model";
-import { UserContext } from "../lib/context";
 import { useContext } from "react";
-import { auth } from "../lib/firebase";
+import { UserContext } from "../lib/context";
+import { UserType } from "../lib/models/user-type.enum";
 
 export default function Navbar() {
   const user = useContext(UserContext);
