@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { useContext } from "react";
 import { UserContext } from "../lib/context";
+import { auth } from "../lib/firebase";
 import { UserType } from "../lib/models/user-type.enum";
 
 export default function Navbar() {
@@ -29,23 +30,23 @@ export default function Navbar() {
         {user && user.userType === UserType.Admin && (
           <>
             <li className="nav-item">
-              <Link href="/admin/users">
+              <Link href="/users/new">
                 <button type="button" className="btn btn-link">
                   Create User
                 </button>
               </Link>
             </li>
             <li className="nav-item">
-              <Link href="/">
+              <Link href="/users">
                 <button type="button" className="btn btn-link">
-                  admin link 2
+                  User List
                 </button>
               </Link>
             </li>
             <li className="nav-item">
-              <Link href="/">
+              <Link href="/courses">
                 <button type="button" className="btn btn-link">
-                  admin link 3
+                  Create Course
                 </button>
               </Link>
             </li>
@@ -80,9 +81,12 @@ export default function Navbar() {
         {!!user && (
           <li className="nav-item">
             <Link href="/">
-              <button type="button" className="btn btn-link d-flex">
-                {user?.displayName}
-                &nbsp;
+              <button
+                onClick={() => auth.signOut()}
+                type="button"
+                className="btn btn-link d-flex"
+              >
+                logout &nbsp;
                 <i className="bi bi-box-arrow-right"></i>
               </button>
             </Link>

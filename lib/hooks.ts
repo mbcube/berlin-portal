@@ -1,7 +1,7 @@
 import { collection, doc, onSnapshot } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { auth, firestore } from "./firebase";
+import { auth, database } from "./firebase";
 import { User } from "./models/user.model";
 
 export function useUserData() {
@@ -12,13 +12,15 @@ export function useUserData() {
     let unsubscribe;
 
     if (authUser) {
-      const userDoc = doc(collection(firestore, "users"), authUser.uid);
+      const userDoc = doc(collection(database, "users"), authUser.uid);
       unsubscribe = onSnapshot(userDoc, (document) => {
+        const data = document.data();
         setUser({
-          ...authUser,
-          userType: document.data()?.userType,
-          displayName: document.data()?.displayName,
-        });
+          id: data?.userType,
+          userType: data?.userType,
+          displayName: data?.displayName,
+          email: data?.email,
+        } as User);
       });
     } else {
       setUser(null);

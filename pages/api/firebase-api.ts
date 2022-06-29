@@ -14,7 +14,7 @@ export default async function handler(
     return;
   }
 
-  const request = JSON.parse(req.body) as UserRequest;
+  const request = req.body as UserRequest;
 
   if (
     !(

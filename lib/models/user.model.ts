@@ -1,7 +1,8 @@
-import { UserInfo as FirebaseUser } from "firebase/auth";
 import { UserType } from "./user-type.enum";
 
-export interface User extends FirebaseUser {
+export interface User {
+  id: string;
   displayName: string;
   userType: UserType;
+  email: string;
 }
