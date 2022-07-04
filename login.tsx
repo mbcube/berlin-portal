@@ -37,7 +37,7 @@ export default function Login() {
           onSubmit={handleSubmit(onLogin)}
           className="text-center w-100"
         >
-          <img className=" mb-3 logo" src="berlin-logo.png" alt="logo" />
+          <img className=" mb-3 logo" src="2.png" alt="logo" />
           <h1 className="h3 mb-3 fw-normal">Login</h1>
           <div className="form-floating">
             <input
@@ -45,6 +45,7 @@ export default function Login() {
               className="form-control"
               id="floatingInput"
               placeholder="name@example.com"
+             
               {...register('email', { required: true, pattern: EMAIL_REGEX })}
             />
             <label htmlFor="floatingInput">Type Email</label>
