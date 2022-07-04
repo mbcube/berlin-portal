@@ -1,27 +1,31 @@
-import { signInWithEmailAndPassword } from 'firebase/auth'
-import { useContext } from 'react'
-import Button from 'react-bootstrap/Button'
-import { useForm } from 'react-hook-form'
-import toast from 'react-hot-toast'
-import { UserContext } from '../lib/context'
-import { auth } from '../lib/firebase'
-import { EMAIL_REGEX } from '../lib/utils'
+import { signInWithEmailAndPassword } from "firebase/auth";
+import Image from "next/image";
+import { useRouter } from "next/router";
+import { useContext } from "react";
+import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
+import { UserContext } from "../lib/context";
+import { auth } from "../lib/firebase";
+import { EMAIL_REGEX } from "../lib/utils";
 
 export default function Login() {
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm()
+  } = useForm();
 
-  const user = useContext(UserContext)
+  const user = useContext(UserContext);
 
   async function onLogin(formData: any) {
     try {
-      await signInWithEmailAndPassword(auth, formData.email, formData.password)
-      toast.success(`Welcome`)
+      await signInWithEmailAndPassword(auth, formData.email, formData.password);
+      toast.success(`Welcome`);
+      router.push("/");
     } catch (error) {
-      toast.error(`Invalid Credentials`)
+      toast.error(`Invalid Credentials`);
     }
   }
 
@@ -37,20 +41,27 @@ export default function Login() {
           onSubmit={handleSubmit(onLogin)}
           className="text-center w-100"
         >
-          <img className=" mb-3 logo" src="berlin-logo.png" alt="logo" />
-          <h1 className="h3 mb-3 fw-normal">Login</h1>
+          <Image
+            className="logo"
+            src="/berlin-logo.png"
+            width={120}
+            height={120}
+            layout="fixed"
+            alt="logo"
+          />
+          <h4 className="h4 mb-3 fw-normal">Login</h4>
           <div className="form-floating">
             <input
               type="email"
               className="form-control"
               id="floatingInput"
               placeholder="name@example.com"
-              {...register('email', { required: true, pattern: EMAIL_REGEX })}
+              {...register("email", { required: true, pattern: EMAIL_REGEX })}
             />
             <label htmlFor="floatingInput">Type Email</label>
           </div>
           {errors.email && (
-            <span style={{ color: 'red' }}>Email is missing or invalid.</span>
+            <span style={{ color: "red" }}>Email is missing or invalid.</span>
           )}
 
           <div className="form-floating">
@@ -59,12 +70,12 @@ export default function Login() {
               className="form-control mb-3"
               id="floatingPassword"
               placeholder="Password"
-              {...register('password', { required: true })}
+              {...register("password", { required: true })}
             />
             <label htmlFor="floatingPassword">Password</label>
           </div>
           {errors.password && (
-            <span style={{ color: 'red' }}>Password is missing.</span>
+            <span style={{ color: "red" }}>Password is missing.</span>
           )}
 
           <div className="checkbox mb-3 ">
@@ -74,14 +85,11 @@ export default function Login() {
             </label>
           </div>
 
-          <Button
+          <input
             className="w-100 btn btn-lg btn-primary"
             type="submit"
             value="login"
-          >
-            login
-          </Button>
-
+          />
           <p className="mt-5 mb-3 text-muted">&copy; 2022-2023</p>
         </form>
       ) : (
@@ -91,5 +99,5 @@ export default function Login() {
         </>
       )}
     </main>
-  )
+  );
 }
