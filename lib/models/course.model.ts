@@ -1,6 +1,7 @@
 import { DAYS_OF_THE_WEEK } from "../utils";
 
 export interface Course {
+  id?: string;
   courseName: string;
   startDate: string;
   endDate: string;

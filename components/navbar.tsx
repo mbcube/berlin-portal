@@ -9,94 +9,94 @@ export default function Navbar() {
   const user = useContext(UserContext);
   const router = useRouter();
 
-  return (
-    router.route !== "/login" && (
-      <nav>
-        <ul className="nav mt-1">
+  return router.route === "/login" ? (
+    <></>
+  ) : (
+    <nav>
+      <ul className="nav mt-1">
+        <li className="nav-item">
+          <Link href="/">
+            <button type="button" className="btn btn-link">
+              Feed
+            </button>
+          </Link>
+        </li>
+        {!user && (
           <li className="nav-item">
-            <Link href="/">
+            <Link href="/login">
               <button type="button" className="btn btn-link">
-                Feed
+                Login
               </button>
             </Link>
           </li>
-          {!user && (
+        )}
+        {/*  admin specific nav items */}
+        {user && user.userType === UserType.Admin && (
+          <>
             <li className="nav-item">
-              <Link href="/login">
+              <Link href="/users/new">
                 <button type="button" className="btn btn-link">
-                  Login
+                  Create User
                 </button>
               </Link>
             </li>
-          )}
-          {/*  admin specific nav items */}
-          {user && user.userType === UserType.Admin && (
-            <>
-              <li className="nav-item">
-                <Link href="/users/new">
-                  <button type="button" className="btn btn-link">
-                    Create User
-                  </button>
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link href="/users">
-                  <button type="button" className="btn btn-link">
-                    User List
-                  </button>
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link href="/courses">
-                  <button type="button" className="btn btn-link">
-                    Create Course
-                  </button>
-                </Link>
-              </li>
-            </>
-          )}
-          {/*  admin specific nav items */}
-          {user && user.userType === UserType.Teacher && (
-            <>
-              <li className="nav-item">
-                <Link href="/">
-                  <button type="button" className="btn btn-link">
-                    treacher link 1
-                  </button>
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link href="/">
-                  <button type="button" className="btn btn-link">
-                    treacher link 2
-                  </button>
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link href="/">
-                  <button type="button" className="btn btn-link">
-                    treacher link 3
-                  </button>
-                </Link>
-              </li>
-            </>
-          )}
-          {!!user && (
+            <li className="nav-item">
+              <Link href="/users">
+                <button type="button" className="btn btn-link">
+                  User List
+                </button>
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link href="/courses">
+                <button type="button" className="btn btn-link">
+                  Create Course
+                </button>
+              </Link>
+            </li>
+          </>
+        )}
+        {/*  admin specific nav items */}
+        {user && user.userType === UserType.Teacher && (
+          <>
             <li className="nav-item">
               <Link href="/">
-                <button
-                  onClick={() => auth.signOut()}
-                  type="button"
-                  className="btn btn-link d-flex"
-                >
-                  logout &nbsp;
-                  <i className="bi bi-box-arrow-right"></i>
+                <button type="button" className="btn btn-link">
+                  treacher link 1
                 </button>
               </Link>
             </li>
-          )}
-        </ul>
-      </nav>
-    )
+            <li className="nav-item">
+              <Link href="/">
+                <button type="button" className="btn btn-link">
+                  treacher link 2
+                </button>
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link href="/">
+                <button type="button" className="btn btn-link">
+                  treacher link 3
+                </button>
+              </Link>
+            </li>
+          </>
+        )}
+        {!!user && (
+          <li className="nav-item">
+            <Link href="/">
+              <button
+                onClick={() => auth.signOut()}
+                type="button"
+                className="btn btn-link d-flex"
+              >
+                logout &nbsp;
+                <i className="bi bi-box-arrow-right"></i>
+              </button>
+            </Link>
+          </li>
+        )}
+      </ul>
+    </nav>
   );
 }
