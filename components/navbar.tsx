@@ -20,6 +20,11 @@ export default function Navbar() {
               Feed
             </button>
           </Link>
+          <Link href="/home">
+            <button type="button" className="btn btn-link">
+              Home
+            </button>
+          </Link>
         </li>
         {!user && (
           <li className="nav-item">
@@ -31,57 +36,40 @@ export default function Navbar() {
           </li>
         )}
         {/*  admin specific nav items */}
-        {user && user.userType === UserType.Admin && (
-          <>
-            <li className="nav-item">
-              <Link href="/users/new">
-                <button type="button" className="btn btn-link">
-                  Create User
-                </button>
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link href="/users">
-                <button type="button" className="btn btn-link">
-                  User List
-                </button>
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link href="/courses">
-                <button type="button" className="btn btn-link">
-                  Create Course
-                </button>
-              </Link>
-            </li>
-          </>
-        )}
-        {/*  admin specific nav items */}
-        {user && user.userType === UserType.Teacher && (
-          <>
-            <li className="nav-item">
-              <Link href="/">
-                <button type="button" className="btn btn-link">
-                  treacher link 1
-                </button>
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link href="/">
-                <button type="button" className="btn btn-link">
-                  treacher link 2
-                </button>
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link href="/">
-                <button type="button" className="btn btn-link">
-                  treacher link 3
-                </button>
-              </Link>
-            </li>
-          </>
-        )}
+        {user &&
+          (user.userType === UserType.Admin ||
+            user.userType === UserType.Teacher) && (
+            <>
+              <li className="nav-item">
+                <Link href="/users/new">
+                  <button type="button" className="btn btn-link">
+                    Create User
+                  </button>
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link href="/users">
+                  <button type="button" className="btn btn-link">
+                    User List
+                  </button>
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link href="/courses/new">
+                  <button type="button" className="btn btn-link">
+                    Create Course
+                  </button>
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link href="/courses">
+                  <button type="button" className="btn btn-link">
+                    Course List
+                  </button>
+                </Link>
+              </li>
+            </>
+          )}
         {!!user && (
           <li className="nav-item">
             <Link href="/">

@@ -7,6 +7,7 @@ import { UserContext } from "../../lib/context";
 import { database } from "../../lib/firebase";
 import { Course, Student } from "../../lib/models/course.model";
 import { UserType } from "../../lib/models/user-type.enum";
+import { DAYS_OF_THE_WEEK } from "../../lib/utils";
 
 export default function ViewEditCourse() {
   const router = useRouter();
@@ -31,7 +32,7 @@ export default function ViewEditCourse() {
     } as Course;
 
     setCourseState(course);
-    setStudentSelectionState(course.students);
+    setStudentSelectionState(course.students || []);
   }
 
   async function courseEdited() {
@@ -55,6 +56,7 @@ export default function ViewEditCourse() {
 function EditCourse({ router, course, students, onCourseEdited }: any) {
   const [showEditMode, setShowEditMode] = useState(false);
   const [initialFormData, setInitialFormData] = useState<any>();
+  const [courseState, setCourseState] = useState<Course>();
   const [studentSelectionState, setStudentSelectionState] =
     useState<Student[]>();
 
@@ -65,6 +67,7 @@ function EditCourse({ router, course, students, onCourseEdited }: any) {
       endDate: course?.endDate || 0,
       daysOfTheWeek: course?.daysOfTheWeek || [],
     });
+    setCourseState(course);
   }, [course]);
 
   useEffect(() => {
@@ -76,6 +79,7 @@ function EditCourse({ router, course, students, onCourseEdited }: any) {
       await editCourseDocument({
         ...formData,
         students,
+        enrollments: students.map((student) => student.id),
       });
       toast.success(`Course Edited`);
       setShowEditMode(false);
@@ -103,7 +107,6 @@ function EditCourse({ router, course, students, onCourseEdited }: any) {
       </div>
       {showEditMode ? (
         <>
-          <p>{router.query.courseId.id}</p>
           <h1>Edit Course </h1>
           <CourseForm
             onCourseFormSubmitted={onEditCourse}
@@ -112,13 +115,36 @@ function EditCourse({ router, course, students, onCourseEdited }: any) {
           ></CourseForm>
         </>
       ) : (
-        <></>
+        <>
+          <h1>View Course </h1>
+          <p>Name: {courseState?.courseName}</p>
+          <p>Start Date: {courseState?.startDate}</p>
+          <p>End Date: {courseState?.endDate}</p>
+          <br />
+          <h3> Students : </h3>
+          {courseState?.students?.map((student: Student) => (
+            <p
+              key={student.id}
+            >{`- ${student.displayName}, ${student.email}`}</p>
+          ))}
+          <p>{courseState?.courseName}</p>
+          <br />
+          <h3> Sessions : </h3>
+          {Object.values(DAYS_OF_THE_WEEK).map(
+            (dayOfTheWeek: DAYS_OF_THE_WEEK) =>
+              courseState?.daysOfTheWeek[dayOfTheWeek].isActive && (
+                <p>
+                  {`- ${dayOfTheWeek}: ${course.daysOfTheWeek[dayOfTheWeek].startTime} - ${course.daysOfTheWeek[dayOfTheWeek].endTime}`}
+                </p>
+              )
+          )}
+        </>
       )}
     </>
   );
 }
 
-function ViewCourse({ showEditMode, setShowEditMode, router }: any) {
+function ViewCourse({ router }: any) {
   return (
     <div className="d-flex align-items-center justify-content-between">
       <p> Hello Student your Course Id is : {router.query.courseId} </p>

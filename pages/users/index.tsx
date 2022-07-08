@@ -6,7 +6,7 @@ import { database } from "../../lib/firebase";
 import { UserType } from "../../lib/models/user-type.enum";
 import { User } from "../../lib/models/user.model";
 
-export default function CreateUser() {
+export default function UserList() {
   const [usersState, setUsersState] = useState<User[]>();
 
   useEffect(() => {

@@ -1,60 +1,46 @@
-import { addDoc, collection } from "firebase/firestore";
-import moment from "moment";
-import { useRouter } from "next/router";
+import { collection, getDocs, query } from "firebase/firestore";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 import "react-bootstrap-typeahead/css/Typeahead.css";
-import toast from "react-hot-toast";
 import AuthGuard from "../../components/auth-guard";
-import CourseForm from "../../components/forms/course-form";
 import { database } from "../../lib/firebase";
-import { Course, DaysOfTheWeek, Student } from "../../lib/models/course.model";
+import { Course } from "../../lib/models/course.model";
 import { UserType } from "../../lib/models/user-type.enum";
-import { DATE_FORMAT, DAYS_OF_THE_WEEK } from "../../lib/utils";
 
-export default function CreateCourse() {
-  const router = useRouter();
-  const today = moment().format(DATE_FORMAT);
-  const nextMonth = moment().add(30, "day").format(DATE_FORMAT);
-  const initialFormData = {
-    courseName: "",
-    startDate: today,
-    endDate: nextMonth,
-    daysOfTheWeek: Object.values(DAYS_OF_THE_WEEK).reduce(
-      (previous: any, current: any) => ({
-        ...previous,
-        [current]: { isActive: false, startTime: null, endTime: null },
-      }),
-      {}
-    ) as DaysOfTheWeek,
-  };
+export default function CourseList() {
+  const [coursesState, setCoursesState] = useState<Course[]>();
 
-  async function onCreateCourse(formData: any, students: Student[]) {
-    try {
-      const id = await createCourseDocument({
-        ...formData,
-        students,
-      });
-      toast.success(`Course Created`);
-      router.push(`/courses/${id}`);
-    } catch (error) {
-      toast.error(`Unable to create course`);
-    }
-  }
+  useEffect(() => {
+    const getUsers = async () => {
+      const courseDocuments = await getDocs(
+        query(collection(database, "courses"))
+      );
+      const courses = courseDocuments.docs.map(
+        (document) =>
+          ({
+            id: document.id,
+            ...document.data(),
+          } as Course)
+      );
+      setCoursesState(courses);
+    };
 
-  async function createCourseDocument(course: Course): Promise<string> {
-    const response = await addDoc(collection(database, "courses"), {
-      ...course,
-    });
-
-    return response.id;
-  }
+    getUsers();
+  }, []);
 
   return (
     <AuthGuard userTypes={[UserType.Admin, UserType.Teacher]}>
-      <h1>Create Course Page</h1>
-      <CourseForm
-        onCourseFormSubmitted={onCreateCourse}
-        initialFormData={initialFormData}
-      ></CourseForm>
+      <h1>Course List</h1>
+      {!coursesState && <p> Your data is on the way!</p>}
+      {coursesState?.map((course) => {
+        return (
+          <Link key={course.id} href={"courses/" + course.id}>
+            <button className="btn btn-link d-block">
+              {course.courseName}
+            </button>
+          </Link>
+        );
+      })}
     </AuthGuard>
   );
 }

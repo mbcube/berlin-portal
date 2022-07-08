@@ -5,7 +5,8 @@ export interface Course {
   courseName: string;
   startDate: string;
   endDate: string;
-  students: Student[];
+  students?: Student[];
+  enrollments?: string[];
   daysOfTheWeek: DaysOfTheWeek;
 }
 
