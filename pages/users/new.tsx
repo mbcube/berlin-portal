@@ -3,7 +3,7 @@ import { doc, setDoc } from "firebase/firestore";
 import { useContext } from "react";
 import toast from "react-hot-toast";
 import AuthGuard from "../../components/auth-guard";
-import UserForm from "../../components/user-form";
+import UserForm from "../../components/forms/user-form";
 import { UserContext } from "../../lib/context";
 import { auth, database } from "../../lib/firebase";
 import { UserType } from "../../lib/models/user-type.enum";
@@ -51,6 +51,7 @@ export default function NewUser() {
 
   return (
     <AuthGuard userTypes={[UserType.Admin, UserType.Teacher]}>
+      <h1>Create User</h1>
       <UserForm
         onUserFormSubmitted={onCreateUser}
         heading="Create User"

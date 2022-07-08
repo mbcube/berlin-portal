@@ -1,11 +1,10 @@
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { UserType } from "../lib/models/user-type.enum";
-import { EMAIL_REGEX } from "../lib/utils";
+import { UserType } from "../../lib/models/user-type.enum";
+import { EMAIL_REGEX } from "../../lib/utils";
 
 export default function UserForm({
   onUserFormSubmitted,
-  heading,
   initialFormData,
 }: any) {
   const {
@@ -25,7 +24,6 @@ export default function UserForm({
 
   return (
     <form onSubmit={handleSubmit(onCreateUser)}>
-      <h1>{heading} </h1>
       <label>email</label>
       <input
         type="text"
