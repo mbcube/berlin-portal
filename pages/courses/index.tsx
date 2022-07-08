@@ -1,25 +1,28 @@
 import { collection, getDocs, query } from "firebase/firestore";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import "react-bootstrap-typeahead/css/Typeahead.css";
 import AuthGuard from "../../components/auth-guard";
 import { database } from "../../lib/firebase";
+import { Course } from "../../lib/models/course.model";
 import { UserType } from "../../lib/models/user-type.enum";
-import { User } from "../../lib/models/user.model";
 
-export default function UserList() {
-  const [usersState, setUsersState] = useState<User[]>();
+export default function CourseList() {
+  const [coursesState, setCoursesState] = useState<Course[]>();
 
   useEffect(() => {
     const getUsers = async () => {
-      const userDocuments = await getDocs(query(collection(database, "users")));
-      const users = userDocuments.docs.map(
+      const courseDocuments = await getDocs(
+        query(collection(database, "courses"))
+      );
+      const courses = courseDocuments.docs.map(
         (document) =>
           ({
             id: document.id,
             ...document.data(),
-          } as User)
+          } as Course)
       );
-      setUsersState(users);
+      setCoursesState(courses);
     };
 
     getUsers();
@@ -27,13 +30,13 @@ export default function UserList() {
 
   return (
     <AuthGuard userTypes={[UserType.Admin, UserType.Teacher]}>
-      <h1>User List</h1>
-      {!usersState && <p> Your data is on the way!</p>}
-      {usersState?.map((user) => {
+      <h1>Course List</h1>
+      {!coursesState && <p> Your data is on the way!</p>}
+      {coursesState?.map((course) => {
         return (
-          <Link key={user.id} href={"users/" + user.id}>
+          <Link key={course.id} href={"courses/" + course.id}>
             <button className="btn btn-link d-block">
-              {user.displayName} | {user.userType}
+              {course.courseName}
             </button>
           </Link>
         );

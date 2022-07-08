@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import AuthGuard from "../../components/auth-guard";
-import UserForm from "../../components/user-form";
+import UserForm from "../../components/forms/user-form";
 import { database } from "../../lib/firebase";
 import { UserType } from "../../lib/models/user-type.enum";
 import { User } from "../../lib/models/user.model";

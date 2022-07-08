@@ -16,7 +16,7 @@ export function useUserData() {
       unsubscribe = onSnapshot(userDoc, (document) => {
         const data = document.data();
         setUser({
-          id: data?.userType,
+          id: document.id,
           userType: data?.userType,
           displayName: data?.displayName,
           email: data?.email,
