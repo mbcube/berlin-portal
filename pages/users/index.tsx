@@ -1,29 +1,11 @@
-import { collection, getDocs, query } from "firebase/firestore";
 import Link from "next/link";
-import { useEffect, useState } from "react";
 import AuthGuard from "../../components/auth-guard";
-import { database } from "../../lib/firebase";
+import { useGetCollectionDocuments } from "../../lib/hooks";
 import { UserType } from "../../lib/models/user-type.enum";
 import { User } from "../../lib/models/user.model";
 
 export default function UserList() {
-  const [usersState, setUsersState] = useState<User[]>();
-
-  useEffect(() => {
-    const getUsers = async () => {
-      const userDocuments = await getDocs(query(collection(database, "users")));
-      const users = userDocuments.docs.map(
-        (document) =>
-          ({
-            id: document.id,
-            ...document.data(),
-          } as User)
-      );
-      setUsersState(users);
-    };
-
-    getUsers();
-  }, []);
+  const usersState = useGetCollectionDocuments<User>("users");
 
   return (
     <AuthGuard userTypes={[UserType.Admin, UserType.Teacher]}>

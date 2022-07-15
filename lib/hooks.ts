@@ -1,4 +1,10 @@
-import { collection, doc, onSnapshot } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDocs,
+  onSnapshot,
+  query,
+} from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, database } from "./firebase";
@@ -30,4 +36,28 @@ export function useUserData() {
   }, [authUser]);
 
   return user;
+}
+
+export function useGetCollectionDocuments<T>(collectionName: string) {
+  const [collectionDocuments, setCollectionDocuments] = useState<T[]>();
+
+  useEffect(() => {
+    const getDocuments = async () => {
+      const documentQuery = await getDocs(
+        query(collection(database, collectionName))
+      );
+      const documents = documentQuery.docs.map(
+        (document) =>
+          ({
+            id: document.id,
+            ...document.data(),
+          } as any as T)
+      );
+      setCollectionDocuments(documents);
+    };
+
+    getDocuments();
+  }, []);
+
+  return collectionDocuments;
 }
