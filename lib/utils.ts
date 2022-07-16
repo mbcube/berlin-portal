@@ -15,3 +15,5 @@ export enum DAYS_OF_THE_WEEK {
   Saturday = "Saturday",
   Sunday = "Sunday",
 }
+
+export const DATE_KEY_FORMAT = "DD-MM-YYYY";

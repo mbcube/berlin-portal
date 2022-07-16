@@ -1,1 +1,1 @@
-export default function Stduent() {}
+export default function Student() {}
