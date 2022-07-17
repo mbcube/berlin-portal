@@ -1,4 +1,5 @@
 import { DAYS_OF_THE_WEEK } from "../utils";
+import { UserInformation } from "./user.model";
 
 export interface Course {
   id: string;
@@ -6,15 +7,16 @@ export interface Course {
   startDate: string;
   endDate: string;
   students?: Student[];
+  teachers?: Teacher[];
   enrollments?: string[];
   daysOfTheWeek: DaysOfTheWeek;
 }
 
-export interface Student {
-  id: string;
-  displayName: string;
-  email: string;
-}
+export interface Teacher extends UserInformation {}
+
+export interface Student extends UserInformation {}
+
+export interface Teacher {}
 
 export type DaysOfTheWeek = {
   [key in DAYS_OF_THE_WEEK]: {

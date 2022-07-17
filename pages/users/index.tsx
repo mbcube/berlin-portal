@@ -11,15 +11,27 @@ export default function UserList() {
     <AuthGuard userTypes={[UserType.Admin, UserType.Teacher]}>
       <h1>User List</h1>
       {!usersState && <p> Your data is on the way!</p>}
-      {usersState?.map((user) => {
-        return (
-          <Link key={user.id} href={"users/" + user.id}>
-            <button className="btn btn-link d-block">
-              {user.displayName} | {user.userType}
-            </button>
-          </Link>
-        );
-      })}
+
+      <div className="row">
+        {[UserType.Admin, UserType.Teacher, UserType.Student].map(
+          (userType) => (
+            <div className="col" key={userType}>
+              <p>{userType}s</p>
+              {usersState
+                ?.filter((user) => user.userType === userType)
+                .map((user) => {
+                  return (
+                    <Link key={user.id} href={"users/" + user.id}>
+                      <button className="btn btn-link d-block">
+                        {user.displayName} | {user.userType}
+                      </button>
+                    </Link>
+                  );
+                })}
+            </div>
+          )
+        )}
+      </div>
     </AuthGuard>
   );
 }

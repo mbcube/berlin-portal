@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 import CourseForm from "../../components/forms/course-form";
 import { UserContext } from "../../lib/context";
 import { database } from "../../lib/firebase";
-import { Course, Student } from "../../lib/models/course.model";
+import { Course, Student, Teacher } from "../../lib/models/course.model";
 import { UserType } from "../../lib/models/user-type.enum";
 import { DAYS_OF_THE_WEEK } from "../../lib/utils";
 
@@ -16,23 +16,26 @@ export default function ViewEditCourse() {
   const [studentSelectionState, setStudentSelectionState] = useState<Student[]>(
     []
   );
-
+  const [teacherSelectionState, setTeacherSelectionState] = useState<Teacher[]>(
+    []
+  );
   useEffect(() => {
     getCourse();
   }, [router.query.courseId]);
 
   async function getCourse() {
     if (!router.query.courseId) return;
-    const coursedocument = await getDoc(
+    const courseDocument = await getDoc(
       doc(database, "courses", `${router.query.courseId}`)
     );
     const course = {
       id: router.query.userId,
-      ...coursedocument.data(),
+      ...courseDocument.data(),
     } as Course;
 
     setCourseState(course);
     setStudentSelectionState(course.students || []);
+    setTeacherSelectionState(course.teachers || []);
   }
 
   async function courseEdited() {
@@ -48,16 +51,25 @@ export default function ViewEditCourse() {
       router={router}
       course={courseState}
       students={studentSelectionState}
+      teachers={teacherSelectionState}
       onCourseEdited={courseEdited}
     />
   );
 }
 
-function EditCourse({ router, course, students, onCourseEdited }: any) {
+function EditCourse({
+  router,
+  course,
+  students,
+  teachers,
+  onCourseEdited,
+}: any) {
   const [showEditMode, setShowEditMode] = useState(false);
   const [initialFormData, setInitialFormData] = useState<any>();
   const [courseState, setCourseState] = useState<Course>();
   const [studentSelectionState, setStudentSelectionState] =
+    useState<Student[]>();
+  const [teacherSelectionState, setTeacherSelectionState] =
     useState<Student[]>();
 
   useEffect(() => {
@@ -74,12 +86,24 @@ function EditCourse({ router, course, students, onCourseEdited }: any) {
     setStudentSelectionState(students);
   }, [students]);
 
-  async function onEditCourse(formData: any, students: Student[]) {
+  useEffect(() => {
+    setTeacherSelectionState(teachers);
+  }, [teachers]);
+
+  async function onEditCourse(
+    formData: any,
+    students: Student[],
+    teachers: Teacher[]
+  ) {
     try {
       await editCourseDocument({
         ...formData,
         students,
-        enrollments: students.map((student) => student.id),
+        teachers,
+        enrollments: [
+          ...students.map((student) => student.id),
+          ...teachers.map((teacher) => teacher.id),
+        ],
       });
       toast.success(`Course Edited`);
       setShowEditMode(false);
@@ -112,6 +136,7 @@ function EditCourse({ router, course, students, onCourseEdited }: any) {
             onCourseFormSubmitted={onEditCourse}
             initialFormData={initialFormData}
             initialStudentSelection={studentSelectionState}
+            initialTeacherSelection={teacherSelectionState}
           ></CourseForm>
         </>
       ) : (
@@ -121,13 +146,19 @@ function EditCourse({ router, course, students, onCourseEdited }: any) {
           <p>Start Date: {courseState?.startDate}</p>
           <p>End Date: {courseState?.endDate}</p>
           <br />
+          <h3> Teachers : </h3>
+          {courseState?.teachers?.map((teacher: Student) => (
+            <p
+              key={teacher.id}
+            >{`- ${teacher.displayName}, ${teacher.email}`}</p>
+          ))}
+          <br />
           <h3> Students : </h3>
           {courseState?.students?.map((student: Student) => (
             <p
               key={student.id}
             >{`- ${student.displayName}, ${student.email}`}</p>
           ))}
-          <p>{courseState?.courseName}</p>
           <br />
           <h3> Sessions : </h3>
           {Object.values(DAYS_OF_THE_WEEK).map(
