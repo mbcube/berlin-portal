@@ -6,7 +6,12 @@ import toast from "react-hot-toast";
 import AuthGuard from "../../components/auth-guard";
 import CourseForm from "../../components/forms/course-form";
 import { database } from "../../lib/firebase";
-import { Course, DaysOfTheWeek, Student } from "../../lib/models/course.model";
+import {
+  Course,
+  DaysOfTheWeek,
+  Student,
+  Teacher,
+} from "../../lib/models/course.model";
 import { UserType } from "../../lib/models/user-type.enum";
 import { DATE_FORMAT, DAYS_OF_THE_WEEK } from "../../lib/utils";
 
@@ -27,12 +32,20 @@ export default function CreateCourse() {
     ) as DaysOfTheWeek,
   };
 
-  async function onCreateCourse(formData: any, students: Student[]) {
+  async function onCreateCourse(
+    formData: any,
+    students: Student[],
+    teachers: Teacher[]
+  ) {
     try {
       const id = await createCourseDocument({
         ...formData,
         students,
-        enrollments: students.map((student) => student.id),
+        teachers,
+        enrollments: [
+          ...students.map((student) => student.id),
+          ...teachers.map((teacher) => teacher.id),
+        ],
       });
       toast.success(`Course Created`);
       router.push(`/courses/${id}`);

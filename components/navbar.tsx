@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { useRouter } from "next/router";
 import { useContext } from "react";
 import { UserContext } from "../lib/context";
 import { auth } from "../lib/firebase";
@@ -7,11 +6,8 @@ import { UserType } from "../lib/models/user-type.enum";
 
 export default function Navbar() {
   const user = useContext(UserContext);
-  const router = useRouter();
 
-  return router.route === "/login" ? (
-    <></>
-  ) : (
+  return (
     <nav>
       <ul className="nav mt-1">
         <li className="nav-item">

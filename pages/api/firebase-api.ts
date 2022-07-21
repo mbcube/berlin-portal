@@ -1,5 +1,8 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  sendPasswordResetEmail,
+} from "firebase/auth";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { auth } from "../../lib/firebase";
 import { UserRequest, UserResponse } from "../../lib/models/api.model";
@@ -39,6 +42,8 @@ export default async function handler(
       request.email,
       randomPassword
     );
+
+    await sendPasswordResetEmail(auth, request.email);
     await auth.signOut();
     res.status(200).json({ uid: userCredentials.user.uid });
   } catch (error) {

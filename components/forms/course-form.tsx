@@ -5,18 +5,22 @@ import { Typeahead } from "react-bootstrap-typeahead";
 import "react-bootstrap-typeahead/css/Typeahead.css";
 import { useForm } from "react-hook-form";
 import { database } from "../../lib/firebase";
-import { Student } from "../../lib/models/course.model";
+import { Student, Teacher } from "../../lib/models/course.model";
 import { UserType } from "../../lib/models/user-type.enum";
-import { User } from "../../lib/models/user.model";
 import { DATE_FORMAT, DATE_REGEX, DAYS_OF_THE_WEEK } from "../../lib/utils";
 
 export default function CourseForm({
   onCourseFormSubmitted,
   initialFormData,
   initialStudentSelection,
+  initialTeacherSelection,
 }: any) {
-  const [multiSelections, setMultiSelections] = useState<any>([]);
+  const [studentMultiSelections, setStudentMultiSelections] = useState<any>([]);
+  const [teacherMultiSelections, setTeacherMultiSelections] = useState<any>([]);
+
   const [allStudents, setAllStudents] = useState<Student[]>([]);
+  const [allTeachers, setAllTeachers] = useState<Teacher[]>([]);
+
   const {
     register,
     handleSubmit,
@@ -33,33 +37,44 @@ export default function CourseForm({
   const watchAllFields = watch("daysOfTheWeek");
 
   useEffect(() => {
-    setMultiSelections(initialStudentSelection || []);
+    setStudentMultiSelections(initialStudentSelection || []);
   }, [initialStudentSelection]);
+
+  useEffect(() => {
+    setTeacherMultiSelections(initialTeacherSelection || []);
+  }, [initialTeacherSelection]);
 
   useEffect(() => {
     reset(initialFormData);
   }, [initialFormData, reset]);
 
   useEffect(() => {
-    const getStudents = async () => {
-      const studentDocuments = await getDocs(
+    const getUsers = async () => {
+      const userDocuments = await getDocs(
         query(
           collection(database, "users"),
-          where("userType", "==", UserType.Student)
+          where("userType", "!=", UserType.Admin)
         )
       );
-      const students = studentDocuments.docs.map(
-        (document) =>
-          ({
-            id: document.id,
-            displayName: document.data().displayName,
-            email: document.data().email,
-          } as Student)
+      const users = userDocuments.docs.map((document) => ({
+        id: document.id,
+        displayName: document.data().displayName,
+        email: document.data().email,
+        userType: document.data().userType,
+      }));
+
+      const students = users.filter(
+        (user) => user.userType == UserType.Student
       );
+      const teachers = users.filter(
+        (user) => user.userType == UserType.Teacher
+      );
+
       setAllStudents(students);
+      setAllTeachers(teachers);
     };
 
-    getStudents();
+    getUsers();
   }, []);
 
   function validateDates(startDate: string, endDate: string): boolean {
@@ -107,13 +122,21 @@ export default function CourseForm({
 
     onCourseFormSubmitted(
       formData,
-      multiSelections.map(
+      studentMultiSelections.map(
         (selection: any) =>
           ({
             id: selection.id,
             displayName: selection.displayName,
             email: selection.email,
           } as Student)
+      ),
+      teacherMultiSelections.map(
+        (selection: any) =>
+          ({
+            id: selection.id,
+            displayName: selection.displayName,
+            email: selection.email,
+          } as Teacher)
       )
     );
   }
@@ -158,6 +181,21 @@ export default function CourseForm({
         <span style={{ color: "red" }}>End Date is missing or invalid</span>
       )}
       <br />
+      <br />
+      <label>Assign a Teacher</label>
+      <Typeahead
+        id="basic-typeahead-multiple"
+        size="sm"
+        labelKey={(teacher: any) => `${teacher.displayName}`}
+        className="form-control"
+        multiple
+        onChange={setTeacherMultiSelections}
+        options={allTeachers}
+        placeholder="Select a teacher..."
+        selected={teacherMultiSelections}
+        maxResults={5}
+        paginate={false}
+      />
       <br />
       <label>Class Times</label>
       <div className="d-flex flex-column align-items-left">
@@ -210,16 +248,15 @@ export default function CourseForm({
         id="basic-typeahead-multiple"
         labelKey={(student: any) => `${student.displayName}`}
         className="form-control"
+        size="sm"
         multiple
-        onChange={setMultiSelections}
+        onChange={setStudentMultiSelections}
         options={allStudents}
-        placeholder="Choose several states..."
-        selected={multiSelections}
+        placeholder="Select your students..."
+        selected={studentMultiSelections}
+        maxResults={5}
+        paginate={false}
       />
-      <br />
-      {multiSelections.map((s: User) => (
-        <p key={s.id}>{s.id}</p>
-      ))}
       <br />
       <input className="btn btn-dark" type="submit" value="Submit" />
     </form>

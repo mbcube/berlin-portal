@@ -1,7 +1,7 @@
 import { useGetCollectionDocuments } from "../../lib/hooks";
 import { User } from "../../lib/models/user.model";
 
-export default function SessionListView(props: { classId: string }) {
+export default function UserListView() {
   const userCollection = useGetCollectionDocuments<User>("users");
 
   return (

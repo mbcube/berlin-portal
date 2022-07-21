@@ -24,8 +24,6 @@ export default function EditUser() {
         ...userDocument.data(),
       } as User;
 
-      console.log(user);
-
       setUserState(user);
     };
 
