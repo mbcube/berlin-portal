@@ -10,15 +10,11 @@ export const SessionsView = ({ sessions }: any) => {
           {session.courseName} :
           <br />
           {Object.keys(session.sessions).map((sessionKey) => (
-            <a
+            <SessionView
               key={sessionKey}
-              href={session.sessions[sessionKey]}
-              target="_blank"
-              rel="noreferrer"
-              className="btn btn-link"
-            >
-              {sessionKey}
-            </a>
+              session={session}
+              dayKey={sessionKey}
+            />
           ))}
         </p>
       ))}
@@ -30,12 +26,12 @@ export const SessionView = ({ session, dayKey }: any) => {
   return (
     <a
       key={session.id}
-      href={session.sessions[dayKey]}
+      href={`/session?id=${session.sessions[dayKey]}`}
       target="_blank"
       rel="noreferrer"
       className="btn btn-link"
     >
-      Go to session
+      {dayKey}
     </a>
   );
 };
