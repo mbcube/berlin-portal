@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useContext } from 'react'
@@ -46,6 +47,45 @@ export default function Navbar() {
           )}
           {/*  admin specific nav items */}
           {user && user.userType === UserType.Admin && (
+=======
+import Link from "next/link";
+import { useContext } from "react";
+import { UserContext } from "../lib/context";
+import { auth } from "../lib/firebase";
+import { UserType } from "../lib/models/user-type.enum";
+
+export default function Navbar() {
+  const user = useContext(UserContext);
+
+  return (
+    <nav>
+      <ul className="nav mt-1">
+        <li className="nav-item">
+          <Link href="/">
+            <button type="button" className="btn btn-link">
+              Feed
+            </button>
+          </Link>
+          <Link href="/home">
+            <button type="button" className="btn btn-link">
+              Home
+            </button>
+          </Link>
+        </li>
+        {!user && (
+          <li className="nav-item">
+            <Link href="/login">
+              <button type="button" className="btn btn-link">
+                Login
+              </button>
+            </Link>
+          </li>
+        )}
+        {/*  admin specific nav items */}
+        {user &&
+          (user.userType === UserType.Admin ||
+            user.userType === UserType.Teacher) && (
+>>>>>>> 99172abcdae49085d0ed7417e6302b6c6511d251
             <>
               <li className="nav-item">
                 <a className={styles.navlink} href="/users/new">
@@ -94,6 +134,7 @@ export default function Navbar() {
                 </a>
               </li>
               <li className="nav-item">
+<<<<<<< HEAD
                 <a className={styles.navlink} href="/courses">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -115,35 +156,24 @@ export default function Navbar() {
 
                   <p className={styles.p}> Create Course</p>
                 </a>
-              </li>
-            </>
-          )}
-          {/*  admin specific nav items */}
-          {user && user.userType === UserType.Teacher && (
-            <>
-              <li className="nav-item">
-                <Link href="/">
+=======
+                <Link href="/courses/new">
                   <button type="button" className="btn btn-link">
-                    treacher link 1
+                    Create Course
                   </button>
                 </Link>
+>>>>>>> 99172abcdae49085d0ed7417e6302b6c6511d251
               </li>
               <li className="nav-item">
-                <Link href="/">
+                <Link href="/courses">
                   <button type="button" className="btn btn-link">
-                    treacher link 2
-                  </button>
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link href="/">
-                  <button type="button" className="btn btn-link">
-                    treacher link 3
+                    Course List
                   </button>
                 </Link>
               </li>
             </>
           )}
+<<<<<<< HEAD
           {!!user && (
             <li className="nav-item">
               <Link href="/">
@@ -159,4 +189,23 @@ export default function Navbar() {
       </div>
     </nav>
   )
+=======
+        {!!user && (
+          <li className="nav-item">
+            <Link href="/">
+              <button
+                onClick={() => auth.signOut()}
+                type="button"
+                className="btn btn-link d-flex"
+              >
+                logout &nbsp;
+                <i className="bi bi-box-arrow-right"></i>
+              </button>
+            </Link>
+          </li>
+        )}
+      </ul>
+    </nav>
+  );
+>>>>>>> 99172abcdae49085d0ed7417e6302b6c6511d251
 }
