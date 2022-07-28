@@ -1,8 +1,10 @@
 import { UserType } from "./user-type.enum";
 
-export interface User {
+export interface UserInformation {
   id: string;
   displayName: string;
-  userType: UserType;
   email: string;
+}
+export interface User extends UserInformation {
+  userType: UserType;
 }

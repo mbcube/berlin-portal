@@ -1,4 +1,5 @@
 import type { AppProps } from "next/app";
+import { useRouter } from "next/router";
 import { Toaster } from "react-hot-toast";
 import Navbar from "../components/navbar";
 import { UserContext } from "../lib/context";
@@ -7,8 +8,16 @@ import "../styles/globals.scss";
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   const user = useUserData();
+  const router = useRouter();
+  const fullPageRoutes = ["/login", "/account-actions"];
 
-  return (
+  return fullPageRoutes.includes(router.route) ||
+    router.pathname === "/_error" ? (
+    <>
+      <Component {...pageProps} />
+      <Toaster toastOptions={{ duration: 8000 }}></Toaster>
+    </>
+  ) : (
     <>
       <UserContext.Provider value={user}>
         <Navbar></Navbar>
