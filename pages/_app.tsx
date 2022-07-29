@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { MainLayout, MinimalLayout } from "../components/layouts";
 import { UserContext } from "../lib/context";
 import { useUserData } from "../lib/hooks";
+
 import "../styles/globals.scss";
 
 export default function MyApp({ Component, pageProps }: AppProps) {
