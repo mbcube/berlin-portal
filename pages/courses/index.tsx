@@ -39,7 +39,7 @@ export default function CourseList() {
           <div className="row">
             <div className="col">
               <div className="card mb-4">
-                <div className="card-header">Course List</div>
+                {/* <div className="card-header">Course List</div> */}
                 <div className="card-body">
                   <table className="table table-hover">
                     <thead>
