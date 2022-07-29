@@ -1,4 +1,5 @@
 import { Toaster } from "react-hot-toast";
+import Banner from "./banner";
 import Navbar from "./navbar";
 
 export function MinimalLayout({ children }: any) {
@@ -13,9 +14,10 @@ export function MinimalLayout({ children }: any) {
 export function MainLayout({ children }: any) {
   return (
     <>
-      <Navbar></Navbar>
-      {children}
-      <Toaster></Toaster>
+      <Banner />
+      <Navbar />
+      <section className="main-section">{children}</section>
+      <Toaster />
     </>
   );
 }

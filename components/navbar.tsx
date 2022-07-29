@@ -14,7 +14,7 @@ export default function Navbar() {
   return router.route === "/login" ? (
     <></>
   ) : (
-    <nav id="sidebarMenu" className={styles.sidebar}>
+    <nav className={styles.sidebar}>
       <div className="position-sticky pt-3 sidebar-sticky">
         <ul className="nav flex-column">
           <li className={styles.navitem}>
