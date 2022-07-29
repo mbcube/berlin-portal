@@ -1,4 +1,5 @@
 import { doc, getDoc, setDoc } from "firebase/firestore";
+import Image from "next/image";
 import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
@@ -119,16 +120,32 @@ function EditCourse({
 
   return (
     <>
-      <div className="d-flex align-items-center justify-content-between">
-        <p> Course Id : {router.query.courseId} </p>
-        <button
-          className="btn btn-danger"
-          type="button"
-          onClick={() => setShowEditMode(!showEditMode)}
-        >
-          {showEditMode ? "Cancel" : "Edit"}
-        </button>
-      </div>
+      <header className="page-header page-header-compact page-header-light border-bottom bg-white mb-4">
+        <div className="container-xl px-4">
+          <div className="page-header-content">
+            <div className="row align-items-center justify-content-between pt-3">
+              <div className="col-auto mb-3">
+                <h1 className="page-header-title">
+                  <div className="page-header-icon">
+                    <i data-feather="user"></i>
+                  </div>
+                  Course
+                </h1>
+              </div>
+              <div className="col-12 col-xl-auto mb-3">
+                <button
+                  className="btn btn-sm btn-light text-primary"
+                  onClick={() => setShowEditMode(!showEditMode)}
+                >
+                  <i className="bi bi-pencil-square me-2"></i>
+                  Edit
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+
       {showEditMode ? (
         <>
           <h1>Edit Course </h1>
@@ -141,34 +158,89 @@ function EditCourse({
         </>
       ) : (
         <>
-          <h1>View Course </h1>
-          <p>Name: {courseState?.courseName}</p>
-          <p>Start Date: {courseState?.startDate}</p>
-          <p>End Date: {courseState?.endDate}</p>
-          <br />
-          <h3> Teachers : </h3>
-          {courseState?.teachers?.map((teacher: Student) => (
-            <p
-              key={teacher.id}
-            >{`- ${teacher.displayName}, ${teacher.email}`}</p>
-          ))}
-          <br />
-          <h3> Students : </h3>
-          {courseState?.students?.map((student: Student) => (
-            <p
-              key={student.id}
-            >{`- ${student.displayName}, ${student.email}`}</p>
-          ))}
-          <br />
-          <h3> Sessions : </h3>
-          {Object.values(DAYS_OF_THE_WEEK).map(
-            (dayOfTheWeek: DAYS_OF_THE_WEEK) =>
-              courseState?.daysOfTheWeek[dayOfTheWeek].isActive && (
-                <p>
-                  {`- ${dayOfTheWeek}: ${course.daysOfTheWeek[dayOfTheWeek].startTime} - ${course.daysOfTheWeek[dayOfTheWeek].endTime}`}
-                </p>
-              )
-          )}
+          <div className="container-fluid px-4">
+            <div className="card">
+              <div className="card-body">
+                <h5 className="card-title mb-3">{courseState?.courseName}</h5>
+                <div className="row">
+                  <div className="col-md-12 col-lg-6">
+                    <p>
+                      <i className="bi bi-calendar4-range me-2"></i>
+                      {courseState?.startDate} <i className="bi bi-dash "></i>
+                      {courseState?.endDate}
+                    </p>
+                    <div className="medium text-muted mb-2">Teachers:</div>
+                    <div className="row mb-3">
+                      {courseState?.teachers?.map((teacher: Teacher) => (
+                        <div key={teacher.id} className="col col-md-6">
+                          <div className="d-flex align-items-center">
+                            <div className="avatar avatar-lg">
+                              <Image
+                                layout="fill"
+                                className="avatar-img img-fluid"
+                                src={`/img/illustrations/profiles/profile-${
+                                  [1, 2, 3, 4, 5, 6][
+                                    Math.floor(Math.random() * 6)
+                                  ]
+                                }.png`}
+                                alt=""
+                              />
+                            </div>
+                            <div className="ms-3">
+                              <div className="fs-5 text-dark fw-500">
+                                {teacher.displayName}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                    <div className="medium text-muted mb-2">Student:</div>
+                    <div className="row mb-3">
+                      {courseState?.students?.map((student: Student) => (
+                        <div key={student.id} className="col col-md-6">
+                          <div className="d-flex align-items-center">
+                            <div className="avatar avatar-lg">
+                              <Image
+                                layout="fill"
+                                className="avatar-img img-fluid"
+                                src={`/img/illustrations/profiles/profile-${
+                                  [1, 2, 3, 4, 5, 6][
+                                    Math.floor(Math.random() * 6)
+                                  ]
+                                }.png`}
+                                alt=""
+                              />
+                            </div>
+                            <div className="ms-3">
+                              <div className="fs-5 text-dark fw-500">
+                                {student.displayName}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="col-md-12  col-lg-6">
+                    <div className="medium text-muted mb-2">Sessions:</div>
+                    {Object.values(DAYS_OF_THE_WEEK).map(
+                      (dayOfTheWeek: DAYS_OF_THE_WEEK) =>
+                        courseState?.daysOfTheWeek[dayOfTheWeek].isActive && (
+                          <p key={dayOfTheWeek}>
+                            <i className="bi bi-calendar-event me-2"></i>
+                            {`${dayOfTheWeek}:`}{" "}
+                            {course.daysOfTheWeek[dayOfTheWeek].startTime}
+                            <i className="bi bi-dash "></i>
+                            {course.daysOfTheWeek[dayOfTheWeek].endTime}
+                          </p>
+                        )
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </>
       )}
     </>

@@ -1,9 +1,10 @@
 import type { AppProps } from "next/app";
+import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
-import { Toaster } from "react-hot-toast";
-import Navbar from "../components/navbar";
+import { MainLayout, MinimalLayout } from "../components/layouts";
 import { UserContext } from "../lib/context";
 import { useUserData } from "../lib/hooks";
+
 import "../styles/globals.scss";
 
 export default function MyApp({ Component, pageProps }: AppProps) {
@@ -11,18 +12,19 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
   const fullPageRoutes = ["/login", "/account-actions"];
 
+  dynamic(import("bootstrap") as any, { ssr: false });
+
   return fullPageRoutes.includes(router.route) ||
     router.pathname === "/_error" ? (
-    <>
+    <MinimalLayout>
       <Component {...pageProps} />
-      <Toaster toastOptions={{ duration: 8000 }}></Toaster>
-    </>
+    </MinimalLayout>
   ) : (
     <>
       <UserContext.Provider value={user}>
-        <Navbar></Navbar>
-        <Component {...pageProps} />
-        <Toaster></Toaster>
+        <MainLayout>
+          <Component {...pageProps} />
+        </MainLayout>
       </UserContext.Provider>
     </>
   );
