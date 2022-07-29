@@ -1,5 +1,5 @@
-@import 'bootstrap/scss/bootstrap';
-@import 'bootstrap-icons/font/bootstrap-icons.scss';
+@import "bootstrap/scss/bootstrap";
+@import "bootstrap-icons/font/bootstrap-icons.scss";
 
 html,
 body {
@@ -35,10 +35,6 @@ header {
   max-width: 330px;
   padding: 15px;
 }
-.mb-7 {
-  margin-top: 15px;
-  margin-bottom: 10px;
-}
 
 a {
   color: inherit;
@@ -56,9 +52,7 @@ a {
   --bs-text-opacity: 1;
   color: rgba(var(--bs-white-rgb), var(--bs-text-opacity)) !important;
 }
-.p-3 {
-  padding: 1rem !important;
-}
+
 header {
   display: block;
 }
@@ -73,4 +67,3 @@ svg {
 svg:hover {
   color: #333;
 }
-

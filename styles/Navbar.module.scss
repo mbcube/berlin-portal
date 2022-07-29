@@ -2,6 +2,7 @@
   font-weight: 500;
   color: #333;
 }
+
 .navlink {
   display: block;
   text-decoration: none;
@@ -12,6 +13,7 @@
   transition-timing-function: ease-in-out, ease-in-out, ease-in-out;
   transition-delay: 0s, 0s, 0s;
 }
+
 .p {
   display: inline-block;
   text-decoration: none;
@@ -23,14 +25,12 @@
 .feather {
   width: 16px;
   height: 17px;
-
 }
+
 .nav {
   margin-bottom: 100px;
   margin-right: 100px;
   margin-left: 100px;
-
-
 }
 
 .sidebar {
@@ -46,7 +46,6 @@
   width: 200px;
 }
 
-
 .navitem {
   display: flex;
   flex-wrap: wrap;
@@ -54,8 +53,8 @@
   margin-bottom: 0;
   list-style: none;
   color: #6c757d;
-
 }
+
 .p1 {
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
