@@ -1,6 +1,6 @@
-import { Toaster } from "react-hot-toast";
-import Banner from "./banner";
-import Navbar from "./navbar";
+import { Toaster } from 'react-hot-toast'
+import Banner from './Banner'
+import Navbar from './navbar'
 
 export function MinimalLayout({ children }: any) {
   return (
@@ -8,16 +8,22 @@ export function MinimalLayout({ children }: any) {
       {children}
       <Toaster toastOptions={{ duration: 8000 }}></Toaster>
     </>
-  );
+  )
 }
 
 export function MainLayout({ children }: any) {
   return (
     <>
       <Banner />
-      <Navbar />
-      <section className="main-section">{children}</section>
+      <div id="layoutSidenav">
+        <div id="layoutSidenav_nav">
+          <Navbar />
+        </div>
+        <div id="layoutSidenav_content">
+          <section className="main-section">{children}</section>
+        </div>
+      </div>
       <Toaster />
     </>
-  );
+  )
 }
