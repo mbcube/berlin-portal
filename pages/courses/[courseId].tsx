@@ -1,50 +1,50 @@
-import { doc, getDoc, setDoc } from "firebase/firestore";
-import Image from "next/image";
-import { useRouter } from "next/router";
-import { useContext, useEffect, useState } from "react";
-import toast from "react-hot-toast";
-import CourseForm from "../../components/forms/course-form";
-import { UserContext } from "../../lib/context";
-import { database } from "../../lib/firebase";
-import { Course, Student, Teacher } from "../../lib/models/course.model";
-import { UserType } from "../../lib/models/user-type.enum";
-import { DAYS_OF_THE_WEEK } from "../../lib/utils";
+import { doc, getDoc, setDoc } from 'firebase/firestore'
+import Image from 'next/image'
+import { useRouter } from 'next/router'
+import { useContext, useEffect, useState } from 'react'
+import toast from 'react-hot-toast'
+import CourseForm from '../../components/forms/course-form'
+import { UserContext } from '../../lib/context'
+import { database } from '../../lib/firebase'
+import { Course, Student, Teacher } from '../../lib/models/course.model'
+import { UserType } from '../../lib/models/user-type.enum'
+import { DAYS_OF_THE_WEEK } from '../../lib/utils'
 
 export default function ViewEditCourse() {
-  const router = useRouter();
-  const user = useContext(UserContext);
-  const [courseState, setCourseState] = useState<Course>();
+  const router = useRouter()
+  const user = useContext(UserContext)
+  const [courseState, setCourseState] = useState<Course>()
   const [studentSelectionState, setStudentSelectionState] = useState<Student[]>(
     []
-  );
+  )
   const [teacherSelectionState, setTeacherSelectionState] = useState<Teacher[]>(
     []
-  );
+  )
   useEffect(() => {
-    getCourse();
-  }, [router.query.courseId]);
+    getCourse()
+  }, [router.query.courseId])
 
   async function getCourse() {
-    if (!router.query.courseId) return;
+    if (!router.query.courseId) return
     const courseDocument = await getDoc(
-      doc(database, "courses", `${router.query.courseId}`)
-    );
+      doc(database, 'courses', `${router.query.courseId}`)
+    )
     const course = {
       id: router.query.userId,
       ...courseDocument.data(),
-    } as Course;
+    } as Course
 
-    setCourseState(course);
-    setStudentSelectionState(course.students || []);
-    setTeacherSelectionState(course.teachers || []);
+    setCourseState(course)
+    setStudentSelectionState(course.students || [])
+    setTeacherSelectionState(course.teachers || [])
   }
 
   async function courseEdited() {
-    await getCourse();
+    await getCourse()
   }
 
   if (user?.userType === UserType.Student) {
-    return <ViewCourse />;
+    return <ViewCourse />
   }
 
   return (
@@ -55,7 +55,7 @@ export default function ViewEditCourse() {
       teachers={teacherSelectionState}
       onCourseEdited={courseEdited}
     />
-  );
+  )
 }
 
 function EditCourse({
@@ -65,31 +65,31 @@ function EditCourse({
   teachers,
   onCourseEdited,
 }: any) {
-  const [showEditMode, setShowEditMode] = useState(false);
-  const [initialFormData, setInitialFormData] = useState<any>();
-  const [courseState, setCourseState] = useState<Course>();
+  const [showEditMode, setShowEditMode] = useState(false)
+  const [initialFormData, setInitialFormData] = useState<any>()
+  const [courseState, setCourseState] = useState<Course>()
   const [studentSelectionState, setStudentSelectionState] =
-    useState<Student[]>();
+    useState<Student[]>()
   const [teacherSelectionState, setTeacherSelectionState] =
-    useState<Student[]>();
+    useState<Student[]>()
 
   useEffect(() => {
     setInitialFormData({
-      courseName: course?.courseName || "",
+      courseName: course?.courseName || '',
       startDate: course?.startDate || 0,
       endDate: course?.endDate || 0,
       daysOfTheWeek: course?.daysOfTheWeek || [],
-    });
-    setCourseState(course);
-  }, [course]);
+    })
+    setCourseState(course)
+  }, [course])
 
   useEffect(() => {
-    setStudentSelectionState(students);
-  }, [students]);
+    setStudentSelectionState(students)
+  }, [students])
 
   useEffect(() => {
-    setTeacherSelectionState(teachers);
-  }, [teachers]);
+    setTeacherSelectionState(teachers)
+  }, [teachers])
 
   async function onEditCourse(
     formData: any,
@@ -105,17 +105,17 @@ function EditCourse({
           ...students.map((student) => student.id),
           ...teachers.map((teacher) => teacher.id),
         ],
-      });
-      toast.success(`Course Edited`);
-      setShowEditMode(false);
-      onCourseEdited();
+      })
+      toast.success(`Course Edited`)
+      setShowEditMode(false)
+      onCourseEdited()
     } catch (error) {
-      toast.error(`Unable to modify course`);
+      toast.error(`Unable to modify course`)
     }
   }
 
   async function editCourseDocument(course: Course): Promise<void> {
-    await setDoc(doc(database, "courses", router.query.courseId), course);
+    await setDoc(doc(database, 'courses', router.query.courseId), course)
   }
 
   return (
@@ -229,7 +229,7 @@ function EditCourse({
                         courseState?.daysOfTheWeek[dayOfTheWeek].isActive && (
                           <p key={dayOfTheWeek}>
                             <i className="bi bi-calendar-event me-2"></i>
-                            {`${dayOfTheWeek}:`}{" "}
+                            {`${dayOfTheWeek}:`}{' '}
                             {course.daysOfTheWeek[dayOfTheWeek].startTime}
                             <i className="bi bi-dash "></i>
                             {course.daysOfTheWeek[dayOfTheWeek].endTime}
@@ -244,7 +244,7 @@ function EditCourse({
         </>
       )}
     </>
-  );
+  )
 }
 
 function ViewCourse({ router }: any) {
@@ -252,5 +252,5 @@ function ViewCourse({ router }: any) {
     <div className="d-flex align-items-center justify-content-between">
       <p> Hello Student your Course Id is : {router.query.courseId} </p>
     </div>
-  );
+  )
 }
