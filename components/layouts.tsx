@@ -1,6 +1,7 @@
-import { Toaster } from 'react-hot-toast'
-import Banner from './Banner'
-import Navbar from './navbar'
+import Script from "next/script";
+import { Toaster } from "react-hot-toast";
+import Banner from "./banner";
+import Navbar from "./navbar";
 
 export function MinimalLayout({ children }: any) {
   return (
@@ -8,12 +9,13 @@ export function MinimalLayout({ children }: any) {
       {children}
       <Toaster toastOptions={{ duration: 8000 }}></Toaster>
     </>
-  )
+  );
 }
 
 export function MainLayout({ children }: any) {
   return (
     <>
+      <Script src="/scripts/vendor/sb-admin.js" />
       <Banner />
       <div id="layoutSidenav">
         <div id="layoutSidenav_nav">
@@ -25,5 +27,5 @@ export function MainLayout({ children }: any) {
       </div>
       <Toaster />
     </>
-  )
+  );
 }

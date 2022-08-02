@@ -1,16 +1,16 @@
-@import './vendor/sb-admin.scss';
-@import 'bootstrap/scss/bootstrap-utilities.scss';
-@import 'bootstrap-icons/font/bootstrap-icons.scss';
+@import "./vendor/sb-admin.scss";
+@import "bootstrap/scss/bootstrap-utilities.scss";
+@import "bootstrap-icons/font/bootstrap-icons.scss";
 
 .main-section {
   margin-top: 4.72rem;
-  margin-left: 13.5rem;
 }
 
 .main-header {
   position: fixed;
   width: 100%;
   top: 0;
+  z-index: 1080;
 }
 
 .logo {

@@ -1,97 +1,97 @@
-import Link from 'next/link'
-import { useRouter } from 'next/router'
-import { useContext } from 'react'
-import { UserContext } from '../lib/context'
-import { auth } from '../lib/firebase'
-import { UserType } from '../lib/models/user-type.enum'
-import styles from '../styles/Navbar.module.scss'
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { useContext } from "react";
+import { UserContext } from "../lib/context";
+import { auth } from "../lib/firebase";
+import { UserType } from "../lib/models/user-type.enum";
+import styles from "../styles/Navbar.module.scss";
 
 export default function Navbar() {
-  const user = useContext(UserContext)
-  const router = useRouter()
+  const user = useContext(UserContext);
+  const router = useRouter();
 
-  return router.route === '/login' ? (
+  return router.route === "/login" ? (
     <></>
   ) : (
-    <nav className={styles.sidebar}>
-      <div className="position-sticky pt-3 sidebar-sticky">
-        <ul className="nav flex-column">
-          <li className={styles.navitem}>
-            <Link href="/">
-              <span className={styles.navlink} aria-current="page">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className=" feather-home align-text-bottom "
-                  aria-hidden="true"
-                >
-                  <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                  <polyline points="9 22 9 12 15 12 15 22"></polyline>
-                </svg>{' '}
-                <p className={styles.p}>Feed</p>
-              </span>
-            </Link>
-          </li>
-          {!user && (
-            <li className="nav-item">
-              <Link href="/login">
-                <p className={styles.p1}>Login</p>
+    <>
+      <nav className={`${styles.sidebar}  sidenav-light shadow-right`}>
+        <div className="position-sticky pt-3 sidebar-sticky">
+          <ul className="nav flex-column">
+            <li className={styles.navitem}>
+              <Link href="/">
+                <a className={styles.navlink} aria-current="page">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className=" feather-home align-text-bottom "
+                    aria-hidden="true"
+                  >
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                  </svg>
+                  <p className={styles.p}>Feed</p>
+                </a>
               </Link>
             </li>
-          )}
-
-          {user && user.userType === UserType.Admin && (
-            <>
+            {!user && (
               <li className="nav-item">
-                <Link href="/users/new">
-                  <span className={styles.navlink}>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      fill="currentColor"
-                      className="bi bi-person-plus-fill"
-                      viewBox="0 0 16 16"
-                    >
-                      <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
-                      <path
-                        fill-rule="evenodd"
-                        d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"
-                      />
-                    </svg>
-
-                    <p className={styles.p}> Create User</p>
-                  </span>
+                <Link href="/login">
+                  <p className={styles.p1}>Login</p>
                 </Link>
               </li>
-              <li className="nav-item">
-                <Link href="/users">
-                  <span className={styles.navlink}>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      fill="currentColor"
-                      className="bi bi-person-lines-fill"
-                      viewBox="0 0 16 16"
-                    >
-                      <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5 6s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zM11 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm.5 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1h-4zm2 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2zm0 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2z" />
-                    </svg>
+            )}
 
-                    <p className={styles.p}>User List</p>
-                  </span>
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link href="/courses">
-                  <span className={styles.navlink}>
+            {user && user.userType === UserType.Admin && (
+              <>
+                <li className="nav-item">
+                  <Link href="/users/new">
+                    <a className={styles.navlink}>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        fill="currentColor"
+                        className="bi bi-person-plus-fill"
+                        viewBox="0 0 16 16"
+                      >
+                        <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                        <path
+                          fillRule="evenodd"
+                          d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"
+                        />
+                      </svg>
+
+                      <p className={styles.p}> Create User</p>
+                    </a>
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link href="/users">
+                    <a className={styles.navlink}>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        fill="currentColor"
+                        className="bi bi-person-lines-fill"
+                        viewBox="0 0 16 16"
+                      >
+                        <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5 6s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zM11 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm.5 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1h-4zm2 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2zm0 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2z" />
+                      </svg>
+
+                      <p className={styles.p}>User List</p>
+                    </a>
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link href="/courses">
                     <a className={styles.navlink}>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -106,12 +106,10 @@ export default function Navbar() {
 
                       <p className={styles.p}> Create Course</p>
                     </a>
-                  </span>
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link href="/courses">
-                  <span className={styles.navlink}>
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link href="/courses">
                     <a className={styles.navlink}>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -126,28 +124,39 @@ export default function Navbar() {
                       </svg>
                       <p className={styles.p}> Course List</p>
                     </a>
-                  </span>
+                  </Link>
+                </li>
+              </>
+            )}
+
+            {!!user && (
+              <li className="nav-item">
+                <Link href="/">
+                  <a className={styles.navlink}>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      className="bi bi-door-closed-fill"
+                      viewBox="0 0 16 16"
+                    >
+                      <path d="M12 1a1 1 0 0 1 1 1v13h1.5a.5.5 0 0 1 0 1h-13a.5.5 0 0 1 0-1H3V2a1 1 0 0 1 1-1h8zm-2 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
+                    </svg>
+                    <p className={styles.p} onClick={() => auth.signOut()}>
+                      Logout
+                    </p>
+                  </a>
                 </Link>
               </li>
-            </>
-          )}
-
-          {!!user && (
-            <li className="nav-item">
-              <Link href="/">
-                <p onClick={() => auth.signOut()} className={styles.p1}>
-                  Logout &nbsp;
-                  <i className="bi bi-box-arrow-right"></i>
-                </p>
-              </Link>
-            </li>
-          )}
-        </ul>
-      </div>
-      <div id="layoutSidenav">
-        <div id="layoutSidenav_nav"></div>
-        <div id="layoutSidenav_content"></div>
-      </div>
-    </nav>
-  )
+            )}
+          </ul>
+        </div>
+        <div id="layoutSidenav">
+          <div id="layoutSidenav_nav"></div>
+          <div id="layoutSidenav_content"></div>
+        </div>
+      </nav>
+    </>
+  );
 }

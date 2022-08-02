@@ -148,13 +148,23 @@ function EditCourse({
 
       {showEditMode ? (
         <>
-          <h1>Edit Course </h1>
-          <CourseForm
-            onCourseFormSubmitted={onEditCourse}
-            initialFormData={initialFormData}
-            initialStudentSelection={studentSelectionState}
-            initialTeacherSelection={teacherSelectionState}
-          ></CourseForm>
+          <div className="container-fluid px-4">
+            <div className="card">
+              <div className="card-body">
+                <h5 className="card-title mb-3">Edit Course</h5>
+                <div className="row">
+                  <div className="col">
+                    <CourseForm
+                      onCourseFormSubmitted={onEditCourse}
+                      initialFormData={initialFormData}
+                      initialStudentSelection={studentSelectionState}
+                      initialTeacherSelection={teacherSelectionState}
+                    ></CourseForm>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </>
       ) : (
         <>

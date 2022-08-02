@@ -84,7 +84,7 @@ export default function NewUser() {
             <div className="col-xl-4">
               {/* Profile picture card*/}
               <div className="card mb-4 mb-xl-0">
-                <div className="card-header">Profile Picture</div>
+                {/* <div className="card-header">Profile Picture</div> */}
                 <div className="card-body text-center">
                   {/* Profile picture htmlFor=*/}
                   <Image
@@ -109,7 +109,7 @@ export default function NewUser() {
             <div className="col-xl-8">
               {/* Account details card*/}
               <div className="card mb-4">
-                <div className="card-header">Account Details</div>
+                {/* <div className="card-header">Account Details</div> */}
                 <div className="card-body">
                   <UserForm
                     onUserFormSubmitted={onCreateUser}
