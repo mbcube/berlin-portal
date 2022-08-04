@@ -35,9 +35,7 @@ function AdminHome() {
                   <div className="col">
                     <SessionListView></SessionListView>
                     <table>
-                      <tr>
-
-                      </tr>
+                      <tr></tr>
                     </table>
                   </div>
                   <div className="col">
@@ -61,6 +59,7 @@ function TeacherHome() {
 
   return (
     <>
+
       <TodaysSessionsView
         todaysSessions={homeData?.todaysSessions}
         todayKey={homeData?.todayKey}

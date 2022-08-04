@@ -1,6 +1,6 @@
-import moment from "moment";
-import { Session } from "../../lib/models/session.model";
-import { DATE_KEY_FORMAT } from "../../lib/utils";
+import moment from 'moment'
+import { Session } from '../../lib/models/session.model'
+import { DATE_KEY_FORMAT } from '../../lib/utils'
 
 export const SessionsView = ({ sessions }: any) => {
   return (
@@ -19,8 +19,8 @@ export const SessionsView = ({ sessions }: any) => {
         </p>
       ))}
     </>
-  );
-};
+  )
+}
 
 export const SessionView = ({ session, dayKey }: any) => {
   return (
@@ -33,19 +33,38 @@ export const SessionView = ({ session, dayKey }: any) => {
     >
       {dayKey}
     </a>
-  );
-};
+  )
+}
 
 export const TodaysSessionsView = ({ todaysSessions, todayKey }: any) => {
   return (
     todaysSessions && (
       <>
-        <h4>Today {moment.utc().format(DATE_KEY_FORMAT)}</h4>
+        <header className="page-header page-header-compact page-header-light border-bottom bg-white mb-4 p-3">
+          <div className="container-xl px-4">
+            <div className="page-header-content">
+              <h4 className="m-2">
+                Today {moment.utc().format(DATE_KEY_FORMAT)}
+              </h4>
+            </div>
+          </div>
+        </header>
+        <div className="container-fluid px-4">
+        <div className="card">
+          <div className="card-body">
+            <div className="row">
+              <div className="col">
         {todaysSessions?.map((session: Session) => (
           <SessionView key={session.id} session={session} dayKey={todayKey} />
         ))}
         {todaysSessions?.length === 0 && <p>You have no sessions today!</p>}
+        </div>
+            </div>
+          </div>
+        </div>
+      </div>
       </>
+
     )
-  );
-};
+  )
+}
