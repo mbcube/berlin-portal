@@ -22,7 +22,7 @@ function AdminHome() {
       <header className="page-header page-header-compact page-header-light border-bottom bg-white mb-4 p-3">
         <div className="container-xl px-4">
           <div className="page-header-content">
-            <h4 className="m-2">This is the landing page for an Admin</h4>
+            <h4 className="m-2">Home</h4>
           </div>
         </div>
       </header>
@@ -59,7 +59,6 @@ function TeacherHome() {
 
   return (
     <>
-
       <TodaysSessionsView
         todaysSessions={homeData?.todaysSessions}
         todayKey={homeData?.todayKey}
@@ -74,11 +73,28 @@ function StudentHome() {
 
   return (
     <>
-      <TodaysSessionsView
-        todaysSessions={homeData?.todaysSessions}
-        todayKey={homeData?.todayKey}
-      />
-      <CoursesView courses={homeData?.myCourses} />
+      <header className="page-header page-header-compact page-header-light border-bottom bg-white mb-4 p-3">
+        <div className="container-xl px-4">
+          <div className="page-header-content">
+            <h4 className="m-2">Home</h4>
+          </div>
+        </div>
+      </header>
+      <div className="container-fluid px-4">
+        <div className="card">
+          <div className="card-body">
+            <div className="row">
+              <div className="col">
+                <TodaysSessionsView
+                  todaysSessions={homeData?.todaysSessions}
+                  todayKey={homeData?.todayKey}
+                />
+                <CoursesView courses={homeData?.myCourses} />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   )
 }

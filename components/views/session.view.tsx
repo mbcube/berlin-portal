@@ -40,31 +40,14 @@ export const TodaysSessionsView = ({ todaysSessions, todayKey }: any) => {
   return (
     todaysSessions && (
       <>
-        <header className="page-header page-header-compact page-header-light border-bottom bg-white mb-4 p-3">
-          <div className="container-xl px-4">
-            <div className="page-header-content">
-              <h4 className="m-2">
-                Today {moment.utc().format(DATE_KEY_FORMAT)}
-              </h4>
-            </div>
-          </div>
-        </header>
-        <div className="container-fluid px-4">
-        <div className="card">
-          <div className="card-body">
-            <div className="row">
-              <div className="col">
-        {todaysSessions?.map((session: Session) => (
-          <SessionView key={session.id} session={session} dayKey={todayKey} />
-        ))}
-        {todaysSessions?.length === 0 && <p>You have no sessions today!</p>}
-        </div>
-            </div>
-          </div>
-        </div>
-      </div>
+        <h4 className="m-2">
+          Today {moment.utc().format(DATE_KEY_FORMAT)}
+          {todaysSessions?.map((session: Session) => (
+            <SessionView key={session.id} session={session} />
+          ))}
+        </h4>
+        <p>You have no sessions today!</p>
       </>
-
     )
   )
 }
