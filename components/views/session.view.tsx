@@ -1,6 +1,6 @@
-import moment from 'moment'
-import { Session } from '../../lib/models/session.model'
-import { DATE_KEY_FORMAT } from '../../lib/utils'
+import moment from "moment";
+import { Session } from "../../lib/models/session.model";
+import { DATE_KEY_FORMAT } from "../../lib/utils";
 
 export const SessionsView = ({ sessions }: any) => {
   return (
@@ -19,8 +19,8 @@ export const SessionsView = ({ sessions }: any) => {
         </p>
       ))}
     </>
-  )
-}
+  );
+};
 
 export const SessionView = ({ session, dayKey }: any) => {
   return (
@@ -33,14 +33,14 @@ export const SessionView = ({ session, dayKey }: any) => {
     >
       {dayKey}
     </a>
-  )
-}
+  );
+};
 
 export const TodaysSessionsView = ({ todaysSessions, todayKey }: any) => {
   return (
     todaysSessions && (
       <>
-        <h4 className="m-2">
+        <h4 className="me-2">
           Today {moment.utc().format(DATE_KEY_FORMAT)}
           {todaysSessions?.map((session: Session) => (
             <SessionView key={session.id} session={session} />
@@ -49,5 +49,5 @@ export const TodaysSessionsView = ({ todaysSessions, todayKey }: any) => {
         <p>You have no sessions today!</p>
       </>
     )
-  )
-}
+  );
+};

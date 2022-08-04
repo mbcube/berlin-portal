@@ -2,7 +2,6 @@ import { collection, getDocs, query, where } from "firebase/firestore";
 import moment from "moment";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-// import { Typeahead } from "react-bootstrap-typeahead";
 import { useForm } from "react-hook-form";
 import { database } from "../../lib/firebase";
 import { Student, Teacher } from "../../lib/models/course.model";

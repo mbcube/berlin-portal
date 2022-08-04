@@ -1,16 +1,16 @@
-import Link from 'next/link'
-import { useRouter } from 'next/router'
-import { useContext } from 'react'
-import { UserContext } from '../lib/context'
-import { auth } from '../lib/firebase'
-import { UserType } from '../lib/models/user-type.enum'
-import styles from '../styles/Navbar.module.scss'
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { useContext } from "react";
+import { UserContext } from "../lib/context";
+import { auth } from "../lib/firebase";
+import { UserType } from "../lib/models/user-type.enum";
+import styles from "../styles/Navbar.module.scss";
 
 export default function Navbar() {
-  const user = useContext(UserContext)
-  const router = useRouter()
+  const user = useContext(UserContext);
+  const router = useRouter();
 
-  return router.route === '/login' ? (
+  return router.route === "/login" ? (
     <></>
   ) : (
     <>
@@ -37,7 +37,7 @@ export default function Navbar() {
                     <polyline points="9 22 9 12 15 12 15 22"></polyline>
                   </svg>
                   <Link href="/home">
-                    <p className={styles.p}>Feed</p>
+                    <p className={styles.p}>Home</p>
                   </Link>
                 </a>
               </Link>
@@ -160,5 +160,5 @@ export default function Navbar() {
         </div>
       </nav>
     </>
-  )
+  );
 }
