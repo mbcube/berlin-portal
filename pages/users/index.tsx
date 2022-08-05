@@ -1,6 +1,6 @@
-import Image from "next/image";
 import Link from "next/link";
 import AuthGuard from "../../components/auth-guard";
+import { UserTypeAvatar } from "../../components/user-type-avatar";
 import { useGetCollectionDocuments } from "../../lib/hooks";
 import { UserType } from "../../lib/models/user-type.enum";
 import { User } from "../../lib/models/user.model";
@@ -22,7 +22,7 @@ export default function UserList() {
                   Users List
                 </h1>
               </div>
-              <div className="col-12 col-xl-auto mb-3">
+              <div className="col-auto col-xl-auto mb-3">
                 <Link href="/users/new">
                   <span className="btn btn-sm btn-light text-primary">
                     <i className="bi bi-person-plus me-1"></i>
@@ -65,15 +65,8 @@ export default function UserList() {
                                     <td>
                                       <div className="d-flex align-items-center">
                                         <div className="avatar me-2">
-                                          <Image
-                                            layout="fill"
-                                            className="avatar-img img-fluid"
-                                            src={`/img/illustrations/profiles/profile-${
-                                              [1, 2, 3, 4, 5, 6][
-                                                Math.floor(Math.random() * 6)
-                                              ]
-                                            }.png`}
-                                            alt=""
+                                          <UserTypeAvatar
+                                            userType={user.userType}
                                           />
                                         </div>
 

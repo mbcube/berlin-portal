@@ -1,9 +1,9 @@
 import { doc, getDoc, setDoc } from "firebase/firestore";
-import Image from "next/image";
 import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import CourseForm from "../../components/forms/course-form";
+import { UserTypeAvatar } from "../../components/user-type-avatar";
 import { UserContext } from "../../lib/context";
 import { database } from "../../lib/firebase";
 import { Course, Student, Teacher } from "../../lib/models/course.model";
@@ -132,13 +132,24 @@ function EditCourse({
                   Course
                 </h1>
               </div>
-              <div className="col-12 col-xl-auto mb-3">
+              <div className="col-auto col-xl-auto mb-3">
                 <button
-                  className="btn btn-sm btn-light text-primary"
+                  className={`btn btn-sm btn-light ${
+                    !showEditMode ? "text-primary" : "text-danger"
+                  }`}
                   onClick={() => setShowEditMode(!showEditMode)}
                 >
-                  <i className="bi bi-pencil-square me-2"></i>
-                  Edit
+                  {!showEditMode ? (
+                    <>
+                      <i className="bi bi-pencil-square me-2"></i>
+                      Edit
+                    </>
+                  ) : (
+                    <>
+                      <i className="bi bi-x-lg me-2"></i>
+                      Cancel
+                    </>
+                  )}
                 </button>
               </div>
             </div>
@@ -185,16 +196,7 @@ function EditCourse({
                         <div key={teacher.id} className="col col-md-6">
                           <div className="d-flex align-items-center">
                             <div className="avatar avatar-lg">
-                              <Image
-                                layout="fill"
-                                className="avatar-img img-fluid"
-                                src={`/img/illustrations/profiles/profile-${
-                                  [1, 2, 3, 4, 5, 6][
-                                    Math.floor(Math.random() * 6)
-                                  ]
-                                }.png`}
-                                alt=""
-                              />
+                              <UserTypeAvatar userType={UserType.Teacher} />
                             </div>
                             <div className="ms-3">
                               <div className="fs-5 text-dark fw-500">
@@ -211,16 +213,7 @@ function EditCourse({
                         <div key={student.id} className="col col-md-6">
                           <div className="d-flex align-items-center">
                             <div className="avatar avatar-lg">
-                              <Image
-                                layout="fill"
-                                className="avatar-img img-fluid"
-                                src={`/img/illustrations/profiles/profile-${
-                                  [1, 2, 3, 4, 5, 6][
-                                    Math.floor(Math.random() * 6)
-                                  ]
-                                }.png`}
-                                alt=""
-                              />
+                              <UserTypeAvatar userType={UserType.Student} />
                             </div>
                             <div className="ms-3">
                               <div className="fs-5 text-dark fw-500">

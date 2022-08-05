@@ -1,11 +1,11 @@
-import Link from 'next/link'
-import AuthGuard from '../../components/auth-guard'
-import { useGetCollectionDocuments } from '../../lib/hooks'
-import { Course } from '../../lib/models/course.model'
-import { UserType } from '../../lib/models/user-type.enum'
+import Link from "next/link";
+import AuthGuard from "../../components/auth-guard";
+import { useGetCollectionDocuments } from "../../lib/hooks";
+import { Course } from "../../lib/models/course.model";
+import { UserType } from "../../lib/models/user-type.enum";
 
 export default function CourseList() {
-  const coursesState = useGetCollectionDocuments<Course>('courses')
+  const coursesState = useGetCollectionDocuments<Course>("courses");
 
   return (
     <AuthGuard userTypes={[UserType.Admin, UserType.Teacher]}>
@@ -21,7 +21,7 @@ export default function CourseList() {
                   Course List
                 </h1>
               </div>
-              <div className="col-12 col-xl-auto mb-3">
+              <div className="col-auto col-xl-auto mb-3">
                 <Link href="/courses/new">
                   <span className="btn btn-sm btn-light text-primary">
                     <i className="bi bi-file-earmark-plus me-2"></i>
@@ -39,7 +39,7 @@ export default function CourseList() {
           <div className="row">
             <div className="col">
               <div className="card mb-4">
-              { /* <div className="card-header">Course List</div>*/}
+                {/* <div className="card-header">Course List</div> */}
                 <div className="card-body">
                   <table className="table table-hover">
                     <thead>
@@ -57,7 +57,7 @@ export default function CourseList() {
                           <Link
                             key={course.id}
                             className="text-dark line-height-normal mb-1"
-                            href={'courses/' + course.id}
+                            href={"courses/" + course.id}
                           >
                             <tr>
                               <td>
@@ -71,7 +71,7 @@ export default function CourseList() {
                               <td>{course.students?.length}</td>
                             </tr>
                           </Link>
-                        )
+                        );
                       })}
                     </tbody>
                   </table>
@@ -82,11 +82,11 @@ export default function CourseList() {
         )}
       </div>
     </AuthGuard>
-  )
+  );
 }
 
 {
- /* <h1>Course List</h1>
+  /* <h1>Course List</h1>
 {coursesState?.map((course) => (
   <Link key={course.id} href={"courses/" + course.id}>
     <button className="btn btn-link d-block">{course.courseName}</button>

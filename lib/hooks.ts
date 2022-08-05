@@ -92,6 +92,8 @@ export function useHomeData() {
             startDate: document.data().startDate,
             endDate: document.data().endDate,
             daysOfTheWeek: document.data().daysOfTheWeek,
+            teachers: document.data().teachers,
+            students: document.data().students,
           } as Course)
       );
 
