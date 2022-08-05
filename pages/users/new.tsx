@@ -2,6 +2,7 @@ import axios from "axios";
 import { doc, setDoc } from "firebase/firestore";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useContext } from "react";
 import toast from "react-hot-toast";
 import AuthGuard from "../../components/auth-guard";
@@ -11,6 +12,7 @@ import { auth, database } from "../../lib/firebase";
 import { UserType } from "../../lib/models/user-type.enum";
 
 export default function NewUser() {
+  const router = useRouter();
   const user = useContext(UserContext);
 
   async function onCreateUser(formData: any) {
@@ -23,6 +25,7 @@ export default function NewUser() {
         formData.userType
       );
       toast.success(`Account Created`);
+      router.push(`/users`);
     } catch (error) {
       toast.error(`Unable to create account`);
     }
@@ -66,7 +69,7 @@ export default function NewUser() {
                     Add User
                   </h1>
                 </div>
-                <div className="col-12 col-xl-auto mb-3">
+                <div className="col-auto col-xl-auto mb-3">
                   <Link href="/users">
                     <a className="btn btn-sm btn-light text-primary">
                       <i className="me-1" data-feather="arrow-left"></i>

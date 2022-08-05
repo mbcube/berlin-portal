@@ -1,7 +1,7 @@
 import { signInWithEmailAndPassword } from "firebase/auth";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { UserContext } from "../lib/context";
@@ -10,6 +10,13 @@ import { EMAIL_REGEX } from "../lib/utils";
 
 export default function Login() {
   const router = useRouter();
+  const user = useContext(UserContext);
+
+  useEffect(() => {
+    if (!!auth.currentUser) {
+      router.push("/home");
+    }
+  }, []);
 
   const {
     register,
@@ -17,13 +24,11 @@ export default function Login() {
     formState: { errors },
   } = useForm();
 
-  const user = useContext(UserContext);
-
   async function onLogin(formData: any) {
     try {
       await signInWithEmailAndPassword(auth, formData.email, formData.password);
       toast.success(`Welcome`);
-      router.push("/");
+      router.push("/home");
     } catch (error) {
       toast.error(`Invalid Credentials`);
     }
@@ -39,7 +44,7 @@ export default function Login() {
         <form
           id="sign-in-form"
           onSubmit={handleSubmit(onLogin)}
-          className="text-center w-100"
+          className="text-center w-100 mt-5"
         >
           <Image
             className="logo"

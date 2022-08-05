@@ -1,12 +1,13 @@
 import { collection, getDocs, query, where } from "firebase/firestore";
 import moment from "moment";
-import Image from "next/image";
 import { useEffect, useState } from "react";
+// import { Typeahead } from "react-bootstrap-typeahead";
 import { useForm } from "react-hook-form";
 import { database } from "../../lib/firebase";
 import { Student, Teacher } from "../../lib/models/course.model";
 import { UserType } from "../../lib/models/user-type.enum";
 import { DATE_FORMAT, DATE_REGEX, DAYS_OF_THE_WEEK } from "../../lib/utils";
+import { UserTypeAvatar } from "../user-type-avatar";
 import CustomTypeahead from "./custom-typeahead";
 
 export default function CourseForm({
@@ -230,14 +231,7 @@ export default function CourseForm({
                   className="d-flex align-items-center flex-shrink-0 me-3"
                 >
                   <div className="avatar avatar-xl me-3 bg-gray-200">
-                    <Image
-                      layout="fill"
-                      className="avatar-img img-fluid"
-                      src={`/img/illustrations/profiles/profile-${
-                        [1, 2, 3, 4, 5, 6][Math.floor(Math.random() * 6)]
-                      }.png`}
-                      alt=""
-                    />
+                    <UserTypeAvatar userType={UserType.Teacher} />
                   </div>
                   <div className="d-flex flex-column fw-bold">
                     <span className="text-dark line-height-normal mb-1">
@@ -292,14 +286,7 @@ export default function CourseForm({
                   className="d-flex align-items-center flex-shrink-0 me-3"
                 >
                   <div className="avatar avatar-xl me-3 bg-gray-200">
-                    <Image
-                      layout="fill"
-                      className="avatar-img img-fluid"
-                      src={`/img/illustrations/profiles/profile-${
-                        [1, 2, 3, 4, 5, 6][Math.floor(Math.random() * 6)]
-                      }.png`}
-                      alt=""
-                    />
+                    <UserTypeAvatar userType={UserType.Student} />
                   </div>
                   <div className="d-flex flex-column fw-bold">
                     <span className="text-dark line-height-normal mb-1">
@@ -402,7 +389,7 @@ export default function CourseForm({
       </div>
 
       <br />
-      <input className="btn btn-dark" type="submit" value="Submit" />
+      <input className="btn btn-primary" type="submit" value="Submit" />
     </form>
   );
 }

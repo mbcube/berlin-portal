@@ -60,7 +60,7 @@ export default function EditUser() {
                     Update User
                   </h1>
                 </div>
-                <div className="col-12 col-xl-auto mb-3">
+                <div className="col-auto col-xl-auto mb-3">
                   <Link href="/users">
                     <a className="btn btn-sm btn-light text-primary">
                       <i className="me-1" data-feather="arrow-left"></i>

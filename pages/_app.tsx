@@ -14,6 +14,8 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 
   dynamic(import("bootstrap") as any, { ssr: false });
 
+  if (router.route === "/") return <Component {...pageProps} />;
+
   return fullPageRoutes.includes(router.route) ||
     router.pathname === "/_error" ? (
     <MinimalLayout>

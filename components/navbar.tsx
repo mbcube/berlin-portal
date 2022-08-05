@@ -2,7 +2,6 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useContext } from "react";
 import { UserContext } from "../lib/context";
-import { auth } from "../lib/firebase";
 import { UserType } from "../lib/models/user-type.enum";
 import styles from "../styles/Navbar.module.scss";
 
@@ -18,7 +17,7 @@ export default function Navbar() {
         <div className="position-sticky pt-3 sidebar-sticky">
           <ul className="nav flex-column">
             <li className={styles.navitem}>
-              <Link href="/">
+              <Link href="/home">
                 <a className={styles.navlink} aria-current="page">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -42,17 +41,10 @@ export default function Navbar() {
                 </a>
               </Link>
             </li>
-            {!user && (
-              <li className="nav-item">
-                <Link href="/login">
-                  <p className={styles.p1}>Login</p>
-                </Link>
-              </li>
-            )}
 
             {user && user.userType === UserType.Admin && (
               <>
-                <li className="nav-item">
+                {/* <li className="nav-item">
                   <Link href="/users/new">
                     <a className={styles.navlink}>
                       <svg
@@ -73,7 +65,7 @@ export default function Navbar() {
                       <p className={styles.p}> Create User</p>
                     </a>
                   </Link>
-                </li>
+                </li> */}
                 <li className="nav-item">
                   <Link href="/users">
                     <a className={styles.navlink}>
@@ -92,7 +84,7 @@ export default function Navbar() {
                     </a>
                   </Link>
                 </li>
-                <li className="nav-item">
+                {/* <li className="nav-item">
                   <Link href="/courses">
                     <a className={styles.navlink}>
                       <svg
@@ -109,7 +101,7 @@ export default function Navbar() {
                       <p className={styles.p}> Create Course</p>
                     </a>
                   </Link>
-                </li>
+                </li> */}
                 <li className="nav-item">
                   <Link href="/courses">
                     <a className={styles.navlink}>
@@ -131,7 +123,7 @@ export default function Navbar() {
               </>
             )}
 
-            {!!user && (
+            {/* {!!user && (
               <li className="nav-item">
                 <Link href="/">
                   <a className={styles.navlink}>
@@ -151,12 +143,8 @@ export default function Navbar() {
                   </a>
                 </Link>
               </li>
-            )}
+            )} */}
           </ul>
-        </div>
-        <div id="layoutSidenav">
-          <div id="layoutSidenav_nav"></div>
-          <div id="layoutSidenav_content"></div>
         </div>
       </nav>
     </>
