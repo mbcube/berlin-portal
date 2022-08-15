@@ -19,7 +19,7 @@ export default function Landing() {
                 <Link href="/">
                   <a className="navbar-brand d-flex align-items-center">
                     <Image
-                      className="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none m-0 "
+                      className="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none m-0"
                       src="/berlin-logo.png"
                       alt="logo"
                       width="50"

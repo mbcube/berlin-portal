@@ -39,7 +39,7 @@ export default function Banner() {
         <Link href="/">
           <span className="navbar-brand d-flex align-items-center text-decoration-none ">
             <Image
-              className=" d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none m-0 "
+              className=" d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none m-0"
               src="/berlin-logo.png"
               alt="logo"
               width="40"
