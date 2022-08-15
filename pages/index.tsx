@@ -1,7 +1,7 @@
-import Head from "next/head";
-import Image from "next/image";
-import Link from "next/link";
-import Script from "next/script";
+import Head from 'next/head'
+import Image from 'next/image'
+import Link from 'next/link'
+import Script from 'next/script'
 
 export default function Landing() {
   return (
@@ -19,7 +19,7 @@ export default function Landing() {
                 <Link href="/">
                   <a className="navbar-brand d-flex align-items-center">
                     <Image
-                      className="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none "
+                      className="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none m-0 "
                       src="/berlin-logo.png"
                       alt="logo"
                       width="50"
@@ -29,23 +29,32 @@ export default function Landing() {
                   </a>
                 </Link>
 
-                <button
-                  className="navbar-toggler"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#navbarSupportedContent"
-                  aria-controls="navbarSupportedContent"
-                  aria-expanded="false"
-                  aria-label="Toggle navigation"
-                >
-                  <i data-feather="menu"></i>
-                </button>
                 <div
-                  className="collapse navbar-collapse"
+                  className="collapse navbar-collapse  "
                   id="navbarSupportedContent"
                 >
-                  <ul className="navbar-nav ms-auto me-lg-5">
-                    {/* <li className="nav-item">
+                  <ul className="navbar-nav ms-auto me-lg-6"></ul>
+                </div>
+                <Link href="/login">
+                  <a className="btn fw-500 ms-lg-4    btn-warning">
+                    Login
+                    <button
+                      className="navbar-toggler "
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#navbarSupportedContent"
+                      aria-controls="navbarSupportedContent"
+                      aria-expanded="false"
+                      aria-label="Toggle navigation"
+                    >
+                      <i data-feather="menu"></i>
+                    </button>
+                  </a>
+                </Link>
+              </div>
+            </nav>
+
+            {/* <li className="nav-item">
                       <a className="nav-link" href="index.html">
                         Home
                       </a>
@@ -507,13 +516,7 @@ export default function Landing() {
                         </a>
                       </div>
                     </li> */}
-                  </ul>
-                  <Link href="/login">
-                    <a className="btn fw-500 ms-lg-4 btn-warning">Login</a>
-                  </Link>
-                </div>
-              </div>
-            </nav>
+
             {/* Page Header*/}
             <header
               className="page-header-ui page-header-ui-dark bg-img-cover overlay overlay-80"
@@ -557,7 +560,7 @@ export default function Landing() {
                 <div className="row gx-5 text-center">
                   <div className="col-lg-4 mb-5 mb-lg-0">
                     <div className="icon-stack icon-stack-xl bg-gradient-warning-to-secondary text-white mb-4">
-                      <i className="bi bi-translate  text-black"></i>{" "}
+                      <i className="bi bi-translate  text-black"></i>{' '}
                     </div>
                     <h2>Learn</h2>
                     <p className="mb-0">
@@ -811,14 +814,14 @@ export default function Landing() {
                 <div className="row gx-5 justify-content-center">
                   <div className="col-lg-10">
                     <div className="display-6 text-center py-10 my-10 text-white">
-                      Success is no accident. It is{" "}
+                      Success is no accident. It is{' '}
                       <span className="text-warning">
                         hard work, perseverance, learning, studying, sacrifice
-                      </span>{" "}
-                      and most of all,{" "}
+                      </span>{' '}
+                      and most of all,{' '}
                       <span className="text-warning">
                         love of what you are learning
-                      </span>{" "}
+                      </span>{' '}
                       to do.
                     </div>
                   </div>
@@ -1077,7 +1080,7 @@ export default function Landing() {
       <Script src="https://cdnjs.cloudflare.com/ajax/libs/lity/2.4.0/lity.min.js" />
       <Script src="https://unpkg.com/aos@next/dist/aos.js" />
       {/* <script>
-        
+
             AOS.init({
                 disable: 'mobile',
                 duration: 600,
@@ -1085,5 +1088,5 @@ export default function Landing() {
             });
         </script> */}
     </>
-  );
+  )
 }

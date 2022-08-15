@@ -1,14 +1,14 @@
-import Image from "next/image";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { useContext } from "react";
-import { UserContext } from "../lib/context";
-import { auth } from "../lib/firebase";
-import { UserTypeAvatar } from "./user-type-avatar";
+import Image from 'next/image'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+import { useContext } from 'react'
+import { UserContext } from '../lib/context'
+import { auth } from '../lib/firebase'
+import { UserTypeAvatar } from './user-type-avatar'
 
 export default function Banner() {
-  const user = useContext(UserContext);
-  const router = useRouter();
+  const user = useContext(UserContext)
+  const router = useRouter()
 
   return (
     <header className="main-header p-3 m-auto bg-dark text-white zindex-popover">
@@ -16,7 +16,7 @@ export default function Banner() {
         {user && (
           <button
             className="btn btn-icon btn-transparent-dark order-1 order-lg-0 me-2 ms-lg-2 me-lg-0"
-            onClick={() => document.body.classList.toggle("sidenav-toggled")}
+            onClick={() => document.body.classList.toggle('sidenav-toggled')}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -37,9 +37,9 @@ export default function Banner() {
         )}
 
         <Link href="/">
-          <span className="navbar-brand d-flex align-items-center text-decoration-none">
+          <span className="navbar-brand d-flex align-items-center text-decoration-none ">
             <Image
-              className="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none "
+              className=" d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none m-0 "
               src="/berlin-logo.png"
               alt="logo"
               width="40"
@@ -86,8 +86,8 @@ export default function Banner() {
                   <a
                     className="dropdown-item"
                     onClick={() => {
-                      auth.signOut();
-                      router.push("/");
+                      auth.signOut()
+                      router.push('/')
                     }}
                   >
                     <div className="dropdown-item-icon">
@@ -109,5 +109,5 @@ export default function Banner() {
         </ul>
       </div>
     </header>
-  );
+  )
 }
