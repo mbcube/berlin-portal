@@ -31,7 +31,7 @@ function AdminHome() {
           <div className="col-4">
             <div className="card">
               <div className="card-body">
-                <SessionListView></SessionListView>
+              <SessionListView></SessionListView>
               </div>
             </div>
           </div>
