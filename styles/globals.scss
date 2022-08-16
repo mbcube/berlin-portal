@@ -1,6 +1,6 @@
-@import "./vendor/sb-admin.scss";
-@import "bootstrap/scss/bootstrap-utilities.scss";
-@import "bootstrap-icons/font/bootstrap-icons.scss";
+@import './vendor/sb-admin.scss';
+@import 'bootstrap/scss/bootstrap-utilities.scss';
+@import 'bootstrap-icons/font/bootstrap-icons.scss';
 
 .main-section {
   margin-top: 4.72rem;
@@ -14,8 +14,9 @@
 }
 
 .logo {
-  width: 100px;
-  height: 100px;
+  max-width: 100%;
+  height: auto;
+  display: block;
 }
 
 nav {
@@ -81,7 +82,6 @@ header {
 li a p {
   text-decoration: none;
 }
-
 svg {
   width: 20px;
   height: 18px;
