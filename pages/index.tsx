@@ -1,9 +1,13 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import Link from 'next/link'
-import Script from 'next/script'
+import { useTranslation } from "next-i18next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import Head from "next/head";
+import Image from "next/image";
+import Link from "next/link";
+import Script from "next/script";
 
-export default function Landing() {
+const Landing = () => {
+  const { t } = useTranslation("common");
+
   return (
     <>
       <Head>
@@ -25,7 +29,9 @@ export default function Landing() {
                       width="50"
                       height="50"
                     />
-                    <span className="navbar-brand ms-2">Berlin House</span>
+                    <span className="navbar-brand ms-2">
+                      Berlin House {t("example")}
+                    </span>
                   </a>
                 </Link>
 
@@ -1088,5 +1094,15 @@ export default function Landing() {
             });
         </script> */}
     </>
-  )
+  );
+};
+
+export async function getStaticProps({ locale }: any) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ["common"])),
+    },
+  };
 }
+
+export default Landing;

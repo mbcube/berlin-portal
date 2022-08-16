@@ -1,3 +1,4 @@
+import { appWithTranslation } from "next-i18next";
 import type { AppProps } from "next/app";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
@@ -7,7 +8,7 @@ import { useUserData } from "../lib/hooks";
 
 import "../styles/globals.scss";
 
-export default function MyApp({ Component, pageProps }: AppProps) {
+const MyApp = ({ Component, pageProps }: AppProps) => {
   const user = useUserData();
   const router = useRouter();
   const fullPageRoutes = ["/login", "/account-actions"];
@@ -30,4 +31,6 @@ export default function MyApp({ Component, pageProps }: AppProps) {
       </UserContext.Provider>
     </>
   );
-}
+};
+
+export default appWithTranslation(MyApp);
