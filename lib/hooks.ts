@@ -8,7 +8,15 @@ import {
   where,
 } from "firebase/firestore";
 import moment from "moment";
-import { useContext, useEffect, useState } from "react";
+import {
+  Dispatch,
+  MutableRefObject,
+  SetStateAction,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { UserContext } from "./context";
 import { auth, database } from "./firebase";
@@ -131,4 +139,31 @@ export function useHomeData() {
   }, [user]);
 
   return homeData;
+}
+
+export function useMenuToggle() {
+  const [isMenuVisible, setIsMenuVisible] = useState(false);
+  const elementRef = useRef<any>();
+
+  useEffect(() => {
+    const checkIfClickedOutside = (e: any) => {
+      if (
+        isMenuVisible &&
+        elementRef.current &&
+        !elementRef.current.contains(e.target)
+      ) {
+        setIsMenuVisible(false);
+      }
+    };
+    document.addEventListener("mousedown", checkIfClickedOutside);
+    return () => {
+      document.removeEventListener("mousedown", checkIfClickedOutside);
+    };
+  }, [isMenuVisible]);
+
+  return [isMenuVisible, setIsMenuVisible, elementRef] as [
+    boolean,
+    Dispatch<SetStateAction<boolean>>,
+    MutableRefObject<any>
+  ];
 }

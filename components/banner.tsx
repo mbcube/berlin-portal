@@ -1,14 +1,16 @@
-import Image from 'next/image'
-import Link from 'next/link'
-import { useRouter } from 'next/router'
-import { useContext } from 'react'
-import { UserContext } from '../lib/context'
-import { auth } from '../lib/firebase'
-import { UserTypeAvatar } from './user-type-avatar'
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { useContext } from "react";
+import { UserContext } from "../lib/context";
+import { auth } from "../lib/firebase";
+import { useMenuToggle } from "../lib/hooks";
+import { UserTypeAvatar } from "./user-type-avatar";
 
 export default function Banner() {
-  const user = useContext(UserContext)
-  const router = useRouter()
+  const user = useContext(UserContext);
+  const router = useRouter();
+  const [isMenuVisible, setIsMenuVisible, elemntRef] = useMenuToggle();
 
   return (
     <header className="main-header p-3 m-auto bg-dark text-white zindex-popover">
@@ -16,7 +18,7 @@ export default function Banner() {
         {user && (
           <button
             className="btn btn-icon btn-transparent-dark order-1 order-lg-0 me-2 ms-lg-2 me-lg-0"
-            onClick={() => document.body.classList.toggle('sidenav-toggled')}
+            onClick={() => document.body.classList.toggle("sidenav-toggled")}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -57,18 +59,23 @@ export default function Banner() {
             {user && (
               <>
                 <a
+                  onClick={() => setIsMenuVisible(!isMenuVisible)}
                   className="btn btn-icon btn-transparent-dark dropdown-toggle"
-                  id="navbarDropdownUserImage"
                   role="button"
-                  data-bs-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
                 >
                   <UserTypeAvatar userType={user.userType} />
                 </a>
                 <div
-                  className="dropdown-menu dropdown-menu-end border-0 shadow animated-fade-in-up"
-                  aria-labelledby="navbarDropdownUserImage"
+                  ref={elemntRef}
+                  className={`dropdown-menu dropdown-menu-end border-0 shadow animated-fade-in-up ${
+                    isMenuVisible ? "show" : ""
+                  }`}
+                  style={{
+                    position: "absolute",
+                    inset: "0px 0px auto auto",
+                    margin: "0px",
+                    transform: "translate3d(0px, 46px, 0px)",
+                  }}
                 >
                   <h6 className="dropdown-header d-flex align-items-center">
                     <UserTypeAvatar userType={user.userType} />
@@ -86,8 +93,8 @@ export default function Banner() {
                   <a
                     className="dropdown-item"
                     onClick={() => {
-                      auth.signOut()
-                      router.push('/')
+                      auth.signOut();
+                      router.push("/");
                     }}
                   >
                     <div className="dropdown-item-icon">
@@ -109,5 +116,5 @@ export default function Banner() {
         </ul>
       </div>
     </header>
-  )
+  );
 }
