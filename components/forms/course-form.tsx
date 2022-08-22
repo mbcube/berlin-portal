@@ -22,8 +22,6 @@ export default function CourseForm({
   const [allStudents, setAllStudents] = useState<Student[]>([]);
   const [allTeachers, setAllTeachers] = useState<Teacher[]>([]);
 
-  const [teacherSelection, setTeacherSelection] = useState<any>();
-
   const {
     register,
     handleSubmit,
