@@ -1,3 +1,23 @@
 {
-  "example": "un example simple"
+  "example": "un example simple",
+  "registration": {
+    "registration-form": "Formulaire d'inscription",
+    "full-name": "Nom Complet",
+    "email": "e-mail",
+    "email-example": "nom@exemple.com",
+    "address": "Adresse",
+    "address-example": "123 rue échantillon",
+    "phone": "Téléphone",
+    "submit": "Soumettre",
+    "comments": "Commentaires",
+    "resume": "CV",
+    "success": "Merci pour votre soumission!",
+    "error": "Une erreur s'est produite, veuillez réessayer plus tard.",
+    "errors": {
+      "full-name": "S'il vous plait entrez votre nom entier.",
+      "email": "E-mail manquant ou invalide.",
+      "phone": "Téléphone manquant ou invalide.",
+      "resume": "CV manquant ou invalide."
+    }
+  }
 }

@@ -1,3 +1,23 @@
 {
-  "example": "Ein einfaches Beispiel"
+  "example": "Ein einfaches Beispiel",
+  "registration": {
+    "registration-form": "Anmeldeformular",
+    "full-name": "Vollständiger Name",
+    "email": "Email",
+    "email-example": "name@beispiel.com",
+    "address": "Adresse",
+    "address-example": "123 Probe dr",
+    "phone": "Telefon",
+    "submit": "Einreichen",
+    "comments": "Kommentare",
+    "resume": "Fortsetzen",
+    "success": "Vielen Dank für Ihre Einreichung!",
+    "error": "Ein Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.",
+    "errors": {
+      "full-name": "Bitte tragen Sie Ihren vollen Namen ein.",
+      "email": "E-Mail fehlt oder ist ungültig.",
+      "phone": "Telefon fehlt oder ist ungültig.",
+      "resume": "Lebenslauf fehlt oder ist ungültig."
+    }
+  }
 }

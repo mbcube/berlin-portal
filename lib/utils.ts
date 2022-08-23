@@ -17,3 +17,5 @@ export enum DAYS_OF_THE_WEEK {
 }
 
 export const DATE_KEY_FORMAT = "DD-MM-YYYY";
+
+export const PHONE_REGEX = /^[0-9]{10}$/;

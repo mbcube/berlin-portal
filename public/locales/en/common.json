@@ -1,3 +1,23 @@
 {
-  "example": "A simple example"
+  "example": "A simple example",
+  "registration": {
+    "registration-form": "Registration Form",
+    "full-name": "Full Name",
+    "email": "Email",
+    "email-example": "name@example.com",
+    "address": "Address",
+    "address-example": "123 sample dr",
+    "phone": "Phone",
+    "submit": "Submit",
+    "comments": "Comments",
+    "resume": "Resume",
+    "success": "Thank you for your submission!",
+    "error": "An error occurred, Please try again later.",
+    "errors": {
+      "full-name": "Please enter your full name.",
+      "email": "Email missing or invalid.",
+      "phone": "Phone missing or invalid.",
+      "resume": "Resume missing or invalid."
+    }
+  }
 }
