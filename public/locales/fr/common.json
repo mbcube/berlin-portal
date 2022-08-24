@@ -20,4 +20,22 @@
       "resume": "CV manquant ou invalide."
     }
   }
+  "workStudyTitle": "Voulez-vous étudier ou travailler en Allemagne? ",
+  "learnHeader": "Votre première étape et la plus importante est d’apprendre l’allemand.",
+  "studyDescription": "  Terminez vos études en Allemagne et commencez à construire votre idée future.",
+  "workDescription": "Déménager en Allemagne pour travailler et vivre dans le premier pays du monde.",
+  "learnTitle": "Apprendre",
+  "studyTitle": "Étude",
+  "workTitle": "Travail",
+  "supportTitle": "Prêt à commencer votre voyage en Allemagne?  ",
+  "learnDescription": "Notre centre de langues propose: des cours d’allemand donnés par des professeurs spécialisés, des contrats de travail et des opportunités de travail en Allemagne.",
+  "firstDivParag": "Le succès n’est pas un hasard. C’est ",
+  "secondDivParag": "  le travail acharné, la persévérance, l’apprentissage, l’étude, le sacrifice",
+  "thirddivParag": "et surtout",
+  "fourthdivParag": "l’amour de ce que vous apprenez ",
+  "lastdivParag": "à faire.",
+  "languages": "Anglais",
+  "langues": "Français",
+  "Sprachen": "Allemand",
+  "loginButton":"Connexion"
 }
