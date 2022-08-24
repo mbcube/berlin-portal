@@ -19,5 +19,29 @@
       "phone": "Telefon fehlt oder ist ungültig.",
       "resume": "Lebenslauf fehlt oder ist ungültig."
     }
-  }
+  },
+  "workStudyTitle": "Sie möchten in Deutschland studieren oder arbeiten?  ",
+  "learnHeader": "Der erste und wichtigste Schritt ist das Erlernen der deutschen Sprache.",
+  "studyDescription": "  Beenden Sie Ihr Studium in Deutschland und bauen Sie Ihre Ideen-Zukunft.",
+  "workDescription": "Ziehen Sie nach Deutschland, um zu arbeiten und erleben Sie das Leben in einem Land der Ersten Welt.",
+  "learnTitle": "Lernen",
+  "studyTitle": "Studie",
+  "workTitle": "Arbeit",
+  "supportTitle": "Bereit für Ihre  Reise nach Deutschland? ",
+  "learnDescription": "Unser Sprachzentrum bietet: Deutschunterricht durch Fachlehrer, Arbeitsverträge und Arbeitsmöglichkeiten in Deutschland.",
+  "firstDivParag": "Erfolg ist kein Zufall. Es ist",
+  "secondDivParag": "   harte Arbeit, Ausdauer, Lernen, Studium, Opfer",
+  "thirddivParag": "und vor allem,",
+  "fourthdivParag": "Liebe für das, was Sie lernen",
+  "lastdivParag": "zu tun .",
+  "english": "En",
+  "french": "Fr",
+  "german": "De",
+  "loginButton": "Anmelden",
+  "contactUs": "Kontaktiere Uns",
+  "legal": "legal",
+  "privacyPolicy": "Datenschutz-Bestimmungen",
+  "termsAndConditions": "Geschäftsbedingungen",
+  "License": "Licence",
+  "Copyright": "Urheberrechte"
 }

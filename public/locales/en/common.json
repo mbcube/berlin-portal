@@ -19,5 +19,29 @@
       "phone": "Phone missing or invalid.",
       "resume": "Resume missing or invalid."
     }
-  }
+  },
+  "workStudyTitle": "Do you want to study or work in Germany? 🇩🇪 ",
+  "learnHeader": "Your first and most important step is to learn the German Language.",
+  "studyDescription": "  Finish your studies in Germany and start building your idea future.",
+  "workDescription": "Relocate to Germany for work and experience life in afirst world country.",
+  "learnTitle": "Learn",
+  "studyTitle": "Study",
+  "workTitle": "Work",
+  "supportTitle": "Ready to start your journey to Germany? 🇩🇪 ",
+  "learnDescription": "Our language center offers: German lessons given by specialised teachers, work contracts and opportunities for work in Germany.",
+  "firstDivParag": "Success is no accident. It is",
+  "secondDivParag": "  hard work, perseverance, learning, studying, sacrifice",
+  "thirddivParag": "and most of all,",
+  "fourthdivParag": "love of what you are learning",
+  "lastdivParag": "to do.",
+  "english": "En",
+  "french": "Fr",
+  "german": "De",
+  "loginButton": "Login",
+  "contactUs": "Contact Us",
+  "legal": "Legal",
+  "privacyPolicy": "Privacy Policy",
+  "termsAndConditions": "Terms and conditions",
+  "License": "Licence",
+  "Copyright": "Copyright"
 }
