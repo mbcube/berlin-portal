@@ -20,13 +20,9 @@ const Landing = () => {
               <div className="col-xl-8 col-lg-10 text-center">
                 <div data-aos="fade-up">
                   <h1 className="page-header-ui-title">
-                    Do you want to study or work in Germany? 🇩🇪 <br />
+                    {t("workStudyTitle")} <br />
                   </h1>
-                  <p className="page-header-ui-text">
-                    Our language center offers: German lessons given by
-                    specialised teachers, work contracts and opportunities for
-                    work in Germany.
-                  </p>
+                  <p className="page-header-ui-text">{t("learnHeader")}</p>
                 </div>
               </div>
             </div>
@@ -49,33 +45,24 @@ const Landing = () => {
           <div className="row gx-5 text-center">
             <div className="col-lg-4 mb-5 mb-lg-0">
               <div className="icon-stack icon-stack-xl bg-gradient-warning-to-secondary text-white mb-4">
-                <i className="bi bi-translate  text-black"></i>
+                <i className="bi bi-translate  text-black"></i>{" "}
               </div>
-              <h2>Learn</h2>
-              <p className="mb-0">
-                Your first and most important step is to learn the German
-                lanugage.
-              </p>
+              <h2> {t("learnTitle")}</h2>
+              <p className="mb-0">{t("learnDescription")}</p>
             </div>
             <div className="col-lg-4 mb-5 mb-lg-0">
               <div className="icon-stack icon-stack-xl bg-gradient-warning-to-secondary text-white mb-4">
                 <i className="bi bi-book  text-black"></i>
               </div>
-              <h2>Study</h2>
-              <p className="mb-0">
-                Finish your studies in Germany and start building your idea
-                future.
-              </p>
+              <h2> {t("studyTitle")}</h2>
+              <p className="mb-0">{t("studyDescription")}</p>
             </div>
             <div className="col-lg-4">
               <div className="icon-stack icon-stack-xl bg-gradient-warning-to-secondary text-white mb-4">
                 <i className="bi bi-person-workspace  text-black"></i>
               </div>
-              <h2>Work</h2>
-              <p className="mb-0">
-                Relocate to Germany for work and experience life in a first
-                world country.
-              </p>
+              <h2> {t("workTitle")}</h2>
+              <p className="mb-0">{t("workDescription")}</p>
             </div>
           </div>
         </div>
@@ -126,15 +113,11 @@ const Landing = () => {
           <div className="row gx-5 justify-content-center">
             <div className="col-lg-10">
               <div className="display-6 text-center py-10 my-10 text-white">
-                Success is no accident. It is{" "}
-                <span className="text-warning">
-                  hard work, perseverance, learning, studying, sacrifice
-                </span>{" "}
-                and most of all,{" "}
-                <span className="text-warning">
-                  love of what you are learning
-                </span>{" "}
-                to do.
+                {t("firstDivParag")}{" "}
+                <span className="text-warning">{t("secondDivParag")}</span>{" "}
+                {t("thirddivParag")}{" "}
+                <span className="text-warning">{t("fourthdivParag")}</span>{" "}
+                {t("lastdivParag")}
               </div>
             </div>
           </div>
@@ -144,14 +127,14 @@ const Landing = () => {
         <div className="container px-5">
           <div className="row gx-5 justify-content-center">
             <div className="col-xl-6 col-lg-8 col-md-10 text-center my-10 py-10">
-              <h2>Ready to start your journey to Germany? 🇩🇪 </h2>
+              <h2> {t("supportTitle")}</h2>
               <a
                 className="btn btn-warning fw-500"
                 href="https://www.facebook.com/BerlinHousetemara"
                 data-aos="fade-up"
                 data-aos-delay="100"
               >
-                Contact us
+                {t("contactUs")}
               </a>
             </div>
           </div>

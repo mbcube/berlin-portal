@@ -19,7 +19,7 @@
       "phone": "Telefon fehlt oder ist ungültig.",
       "resume": "Lebenslauf fehlt oder ist ungültig."
     }
-  }
+  },
   "workStudyTitle": "Sie möchten in Deutschland studieren oder arbeiten?  ",
   "learnHeader": "Der erste und wichtigste Schritt ist das Erlernen der deutschen Sprache.",
   "studyDescription": "  Beenden Sie Ihr Studium in Deutschland und bauen Sie Ihre Ideen-Zukunft.",
@@ -34,8 +34,14 @@
   "thirddivParag": "und vor allem,",
   "fourthdivParag": "Liebe für das, was Sie lernen",
   "lastdivParag": "zu tun .",
-  "languages": "Englisch",
-  "langues": "Französisch",
-  "Sprachen": "Deutsch",
-  "loginButton": "Anmelden"
+  "english": "En",
+  "french": "Fr",
+  "german": "De",
+  "loginButton": "Anmelden",
+  "contactUs": "Kontaktiere Uns",
+  "legal": "legal",
+  "privacyPolicy": "Datenschutz-Bestimmungen",
+  "termsAndConditions": "Geschäftsbedingungen",
+  "License": "Licence",
+  "Copyright": "Urheberrechte"
 }

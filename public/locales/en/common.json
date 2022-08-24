@@ -19,7 +19,7 @@
       "phone": "Phone missing or invalid.",
       "resume": "Resume missing or invalid."
     }
-  }
+  },
   "workStudyTitle": "Do you want to study or work in Germany? 🇩🇪 ",
   "learnHeader": "Your first and most important step is to learn the German Language.",
   "studyDescription": "  Finish your studies in Germany and start building your idea future.",
@@ -34,8 +34,14 @@
   "thirddivParag": "and most of all,",
   "fourthdivParag": "love of what you are learning",
   "lastdivParag": "to do.",
-  "languages":"English",
-  "langues":"French",
-  "Sprachen":"Deutsch",
-  "loginButton":"Login"
+  "english": "En",
+  "french": "Fr",
+  "german": "De",
+  "loginButton": "Login",
+  "contactUs": "Contact Us",
+  "legal": "Legal",
+  "privacyPolicy": "Privacy Policy",
+  "termsAndConditions": "Terms and conditions",
+  "License": "Licence",
+  "Copyright": "Copyright"
 }

@@ -1,6 +1,6 @@
-@import './vendor/sb-admin.scss';
-@import 'bootstrap/scss/bootstrap-utilities.scss';
-@import 'bootstrap-icons/font/bootstrap-icons.scss';
+@import "./vendor/sb-admin.scss";
+@import "bootstrap/scss/bootstrap-utilities.scss";
+@import "bootstrap-icons/font/bootstrap-icons.scss";
 
 .main-section {
   margin-top: 4.72rem;
@@ -94,4 +94,8 @@ svg:hover {
 }
 svg.feather {
   color: white;
+}
+
+.lang-dropdown:focus {
+  outline: 0;
 }

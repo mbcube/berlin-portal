@@ -2,10 +2,12 @@ import { useTranslation } from "next-i18next";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import Script from "next/script";
 
 export function PublicLayout({ children }: any) {
   const { t } = useTranslation("common");
+  const router = useRouter();
 
   return (
     <>
@@ -27,9 +29,7 @@ export function PublicLayout({ children }: any) {
                       width="50"
                       height="50"
                     />
-                    <span className="navbar-brand ms-2">
-                      Berlin House {t("example")}
-                    </span>
+                    <span className="navbar-brand ms-2">Berlin House</span>
                   </a>
                 </Link>
 
@@ -39,9 +39,26 @@ export function PublicLayout({ children }: any) {
                 >
                   <ul className="navbar-nav ms-auto me-lg-6"></ul>
                 </div>
+                <span className="nav-item ">
+                  <select
+                    className="nav-link lang-dropdown bg-transparent border-0 text-warning"
+                    defaultValue={router.locale}
+                    onChange={(event) =>
+                      router.push(router.asPath, router.asPath, {
+                        locale: event.target.value,
+                      })
+                    }
+                  >
+                    <option value="en">{t("english")}</option>
+                    <option value="fr">{t("french")}</option>
+                    <option value="de">{t("german")}</option>
+                  </select>
+                </span>
+
                 <Link href="/login">
                   <a className="btn fw-500 ms-lg-4    btn-warning">
-                    Login
+                    {t("loginButton")}
+
                     <button
                       className="navbar-toggler "
                       type="button"
@@ -94,17 +111,17 @@ export function PublicLayout({ children }: any) {
                     </div>
                     <div className="col-lg-3 col-md-6">
                       <div className="text-uppercase-expanded text-xs mb-4">
-                        Legal
+                        {t("legal")}
                       </div>
                       <ul className="list-unstyled mb-0">
                         <li className="mb-2">
-                          <a href="#!">Privacy Policy</a>
+                          <a href="#!">{t("privacyPolicy")}</a>
                         </li>
                         <li className="mb-2">
-                          <a href="#!">Terms and Conditions</a>
+                          <a href="#!">{t("termsAndConditions")}</a>
                         </li>
                         <li>
-                          <a href="#!">License</a>
+                          <a href="#!">{t("License")}</a>
                         </li>
                       </ul>
                     </div>
@@ -114,12 +131,12 @@ export function PublicLayout({ children }: any) {
               <hr className="my-5" />
               <div className="row gx-5 align-items-center">
                 <div className="col-md-6 small">
-                  Copyright &copy; Berlin House 2022
+                  {t("Copyright")} &copy; Berlin House 2022
                 </div>
                 <div className="col-md-6 text-md-end small">
-                  <a href="#!">Privacy Policy</a>
+                  <a href="#!">{t("privacyPolicy")}</a>
                   &middot;
-                  <a href="#!">Terms &amp; Conditions</a>
+                  <a href="#!">{t("termsAndConditions")}</a>
                 </div>
               </div>
             </div>
