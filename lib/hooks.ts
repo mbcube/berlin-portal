@@ -42,6 +42,7 @@ export function useUserData() {
           userType: data?.userType,
           displayName: data?.displayName,
           email: data?.email,
+          Payment: data?.Payment,
         } as User);
       });
     } else {

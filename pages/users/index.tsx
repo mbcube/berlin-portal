@@ -1,13 +1,12 @@
-import Link from "next/link";
-import AuthGuard from "../../components/auth-guard";
-import { UserTypeAvatar } from "../../components/user-type-avatar";
-import { useGetCollectionDocuments } from "../../lib/hooks";
-import { UserType } from "../../lib/models/user-type.enum";
-import { User } from "../../lib/models/user.model";
+import Link from 'next/link'
+import AuthGuard from '../../components/auth-guard'
+import { UserTypeAvatar } from '../../components/user-type-avatar'
+import { useGetCollectionDocuments } from '../../lib/hooks'
+import { UserType } from '../../lib/models/user-type.enum'
+import { User } from '../../lib/models/user.model'
 
 export default function UserList() {
-  const usersState = useGetCollectionDocuments<User>("users");
-
+  const usersState = useGetCollectionDocuments<User>('users')
   return (
     <AuthGuard userTypes={[UserType.Admin, UserType.Teacher]}>
       <header className="page-header page-header-compact page-header-light border-bottom bg-white mb-4">
@@ -43,12 +42,15 @@ export default function UserList() {
                 <div className="col" key={userType}>
                   <div className="card mb-4">
                     <div className="card-header">{userType}s</div>
+
                     <div className="card-body">
                       <table className="table table-hover">
                         <thead>
                           <tr>
                             <th>User</th>
                             <th>Email</th>
+                            {UserType.Student &&
+                              userType == UserType.Student && <th>Payment</th>}
                           </tr>
                         </thead>
                         <tbody>
@@ -59,7 +61,7 @@ export default function UserList() {
                                 <Link
                                   key={user.id}
                                   className="text-dark line-height-normal mb-1"
-                                  href={"users/" + user.id}
+                                  href={'users/' + user.id}
                                 >
                                   <tr>
                                     <td>
@@ -74,9 +76,13 @@ export default function UserList() {
                                       </div>
                                     </td>
                                     <td>{user.email}</td>
+                                    {UserType.Student &&
+                                      userType == UserType.Student && (
+                                        <td>{user.Payment}</td>
+                                      )}
                                   </tr>
                                 </Link>
-                              );
+                              )
                             })}
                         </tbody>
                       </table>
@@ -89,7 +95,7 @@ export default function UserList() {
         )}
       </div>
     </AuthGuard>
-  );
+  )
 }
 
 // {usersState

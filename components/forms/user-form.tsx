@@ -1,7 +1,7 @@
-import { useEffect } from "react";
-import { useForm } from "react-hook-form";
-import { UserType } from "../../lib/models/user-type.enum";
-import { EMAIL_REGEX } from "../../lib/utils";
+import { useEffect } from 'react'
+import { useForm } from 'react-hook-form'
+import { UserType } from '../../lib/models/user-type.enum'
+import { EMAIL_REGEX } from '../../lib/utils'
 
 export default function UserForm({
   onUserFormSubmitted,
@@ -11,16 +11,18 @@ export default function UserForm({
     register,
     handleSubmit,
     reset,
+    watch,
     formState: { errors },
-  } = useForm();
+  } = useForm()
+  const userTypeWatch = watch('userType')
 
   async function onCreateUser(formData: any) {
-    onUserFormSubmitted(formData);
+    onUserFormSubmitted(formData)
   }
 
   useEffect(() => {
-    reset(initialFormData);
-  }, [initialFormData, reset]);
+    reset(initialFormData)
+  }, [initialFormData, reset])
 
   return (
     <form onSubmit={handleSubmit(onCreateUser)}>
@@ -35,13 +37,13 @@ export default function UserForm({
             className="form-control"
             type="text"
             placeholder="Enter the display name"
-            {...register("displayName", {
+            {...register('displayName', {
               required: true,
               minLength: 3,
             })}
           />
           {errors.displayName && (
-            <label className="mt-2" style={{ color: "red" }}>
+            <label className="mt-2" style={{ color: 'red' }}>
               Display name is required
             </label>
           )}
@@ -56,22 +58,26 @@ export default function UserForm({
           className="form-control"
           type="email"
           placeholder="Enter the email address"
-          {...register("email", {
+          {...register('email', {
             required: true,
             pattern: EMAIL_REGEX,
           })}
         />
         {errors.email && (
-          <label className="mt-1" style={{ color: "red" }}>
+          <label className="mt-1" style={{ color: 'red' }}>
             Email is missing or invalid.
           </label>
         )}
       </div>
+
       {/* Form Group (Roles)*/}
       <div className="col-md-6 mb-3">
         <label className="small mb-1">Role</label>
 
-        <select className="form-select" {...register("userType")}>
+        <select
+          className="form-select"
+          {...register('userType', { value: UserType.Student })}
+        >
           <option disabled>Select a role:</option>
           <option value={UserType.Student}>{UserType.Student}</option>
           <option value={UserType.Teacher}>{UserType.Teacher}</option>
@@ -79,8 +85,36 @@ export default function UserForm({
         </select>
         {errors.userType && <p>Role is required.</p>}
       </div>
+      {/* Form Group (Payment)*/}
+      {userTypeWatch && userTypeWatch == UserType.Student && (
+        <div className="col-md-6 mb-3">
+          <label
+            className="small mb-1"
+            htmlFor="inputPayment"
+            {...register('Payment')}
+          >
+            Payment
+          </label>
+          <input
+            {...register('Payment')}
+            className="form-control"
+            type="text"
+            placeholder="Enter the Payment"
+            {...register('Payment', {
+              required: true,
+              pattern: /\d+/,
+            })}
+          />
+          {errors.Payment && (
+            <label className="mt-1" style={{ color: 'red' }}>
+              Please enter Payment .
+            </label>
+          )}
+        </div>
+      )}
+
       {/* Submit button*/}
       <input className="btn btn-primary" type="submit" value="Submit" />
     </form>
-  );
+  )
 }

@@ -71,8 +71,9 @@ export default function CourseForm({
         (user) => user.userType == UserType.Teacher
       );
 
-      setAllStudents(students);
-      setAllTeachers(teachers);
+
+     {/* setAllStudents(students);
+      setAllTeachers(teachers);*/}
     };
 
     getUsers();
