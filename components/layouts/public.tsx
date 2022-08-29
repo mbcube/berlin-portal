@@ -39,39 +39,34 @@ export function PublicLayout({ children }: any) {
                 >
                   <ul className="navbar-nav ms-auto me-lg-6"></ul>
                 </div>
-                <span className="nav-item ">
-                  <select
-                    className="nav-link lang-dropdown bg-transparent border-0 text-warning"
-                    defaultValue={router.locale}
-                    onChange={(event) =>
-                      router.push(router.asPath, router.asPath, {
-                        locale: event.target.value,
-                      })
-                    }
-                  >
-                    <option value="en">{t("english")}</option>
-                    <option value="fr">{t("french")}</option>
-                    <option value="de">{t("german")}</option>
-                  </select>
-                </span>
-
-                <Link href="/login">
-                  <a className="btn fw-500 ms-lg-4    btn-warning">
-                    {t("loginButton")}
-
-                    <button
-                      className="navbar-toggler "
-                      type="button"
-                      data-bs-toggle="collapse"
-                      data-bs-target="#navbarSupportedContent"
-                      aria-controls="navbarSupportedContent"
-                      aria-expanded="false"
-                      aria-label="Toggle navigation"
+                <div className="d-flex d-sm-flex align-items-center justify-content-end ">
+                  <span className="nav-item ">
+                    <select
+                      className="nav-link lang-dropdown bg-transparent border-0 text-warning"
+                      defaultValue={router.locale}
+                      onChange={(event) =>
+                        router.push(router.asPath, router.asPath, {
+                          locale: event.target.value,
+                        })
+                      }
                     >
-                      <i data-feather="menu"></i>
-                    </button>
-                  </a>
-                </Link>
+                      <option value="en">{t("english")}</option>
+                      <option value="fr">{t("french")}</option>
+                      <option value="de">{t("german")}</option>
+                    </select>
+                  </span>
+
+                  <Link href="/login">
+                    <>
+                      <a className="btn fw-500 ms-4 btn-warning d-none d-sm-inline">
+                        {t("loginButton")}
+                      </a>
+                      <a className="btn btn-link text-warning d-sm-none px-2">
+                        <i className="bi bi-box-arrow-in-right"></i>
+                      </a>
+                    </>
+                  </Link>
+                </div>
               </div>
             </nav>
             {children}
