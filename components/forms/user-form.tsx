@@ -96,9 +96,9 @@ export default function UserForm({
             Payment
           </label>
           <input
-            {...register('Payment')}
+            {...register('payment')}
             className="form-control"
-            type="text"
+            type="number"
             placeholder="Enter the Payment"
             {...register('Payment', {
               required: true,
@@ -107,7 +107,7 @@ export default function UserForm({
           />
           {errors.Payment && (
             <label className="mt-1" style={{ color: 'red' }}>
-              Please enter Payment .
+              Please enter a valid payment amount.
             </label>
           )}
         </div>
