@@ -57,14 +57,14 @@ export function PublicLayout({ children }: any) {
                   </span>
 
                   <Link href="/login">
-                    <>
+                    <span>
                       <a className="btn fw-500 ms-4 btn-warning d-none d-sm-inline">
                         {t("loginButton")}
                       </a>
                       <a className="btn btn-link text-warning d-sm-none px-2">
                         <i className="bi bi-box-arrow-in-right"></i>
                       </a>
-                    </>
+                    </span>
                   </Link>
                 </div>
               </div>
