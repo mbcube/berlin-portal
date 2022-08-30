@@ -88,19 +88,14 @@ export default function UserForm({
       {/* Form Group (Payment)*/}
       {userTypeWatch && userTypeWatch == UserType.Student && (
         <div className="col-md-6 mb-3">
-          <label
-            className="small mb-1"
-            htmlFor="inputPayment"
-            {...register('Payment')}
-          >
+          <label className="small mb-1" htmlFor="inputPayment">
             Payment
           </label>
           <input
-            {...register('payment')}
             className="form-control"
             type="number"
             placeholder="Enter the Payment"
-            {...register('Payment', {
+            {...register('payment', {
               required: true,
               pattern: /\d+/,
             })}
