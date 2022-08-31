@@ -78,7 +78,7 @@ export default function UserList() {
                                     <td>{user.email}</td>
                                     {UserType.Student &&
                                       userType == UserType.Student && (
-                                        <td>{user.Payment}</td>
+                                        <td>{user.payment}</td>
                                       )}
                                   </tr>
                                 </Link>

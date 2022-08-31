@@ -48,13 +48,13 @@ export default function NewUser() {
     email: string,
     displayName: string,
     userType: UserType,
-    Payment: null
+    payment: null
   ) {
     await setDoc(doc(database, 'users', uid), {
       email,
       displayName,
       userType,
-      Payment,
+      payment,
     })
   }
 
