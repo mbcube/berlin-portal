@@ -1,12 +1,16 @@
 import { arrayUnion, doc, updateDoc } from "firebase/firestore";
 import { getStorage, ref, uploadBytes } from "firebase/storage";
+import moment from "moment";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { database } from "../lib/firebase";
-import { Registration } from "../lib/models/registration.model";
-import { EMAIL_REGEX, PHONE_REGEX } from "../lib/utils";
+import { database } from "../../lib/firebase";
+import {
+  Registration,
+  RegistrationItem,
+} from "../../lib/models/registration.model";
+import { DATE_FORMAT, EMAIL_REGEX, PHONE_REGEX } from "../../lib/utils";
 
 const Registration = () => {
   const { t } = useTranslation("common");
@@ -19,11 +23,6 @@ const Registration = () => {
   const {
     register,
     handleSubmit,
-    setError,
-    getValues,
-    setValue,
-    reset,
-    watch,
     formState: { errors },
   } = useForm();
 
@@ -77,7 +76,8 @@ const Registration = () => {
           address: registration.address,
           comments: registration.comments,
           resume: filePath,
-        }),
+          createdDate: moment().utc().format(DATE_FORMAT),
+        } as RegistrationItem),
       });
       return true;
     } catch {
@@ -149,7 +149,7 @@ const Registration = () => {
                         </div>
                         <div className="col-md-6">
                           <label
-                            className="text-dark mb-2"
+                            className="text-dark mb-2 mt-3 mt-md-0"
                             htmlFor="inputEmail"
                           >
                             {t("registration.email")}
@@ -197,7 +197,7 @@ const Registration = () => {
                         </div>
                         <div className="col-md-6">
                           <label
-                            className="text-dark mb-2"
+                            className="text-dark mb-2 mt-3 mt-md-0"
                             htmlFor="inputAddress"
                           >
                             {t("registration.address")}
