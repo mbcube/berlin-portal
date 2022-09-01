@@ -21,19 +21,13 @@ export default function Navbar() {
                 <a className={styles.navlink} aria-current="page">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className=" feather-home align-text-bottom "
-                    aria-hidden="true"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    className="bi bi-house-door-fill"
+                    viewBox="0 0 16 16"
                   >
-                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                    <path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5z" />
                   </svg>
                   <Link href="/home">
                     <p className={styles.p}>Home</p>
@@ -44,28 +38,6 @@ export default function Navbar() {
 
             {user && user.userType === UserType.Admin && (
               <>
-                {/* <li className="nav-item">
-                  <Link href="/users/new">
-                    <a className={styles.navlink}>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="16"
-                        height="16"
-                        fill="currentColor"
-                        className="bi bi-person-plus-fill"
-                        viewBox="0 0 16 16"
-                      >
-                        <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
-                        <path
-                          fillRule="evenodd"
-                          d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"
-                        />
-                      </svg>
-
-                      <p className={styles.p}> Create User</p>
-                    </a>
-                  </Link>
-                </li> */}
                 <li className="nav-item">
                   <Link href="/users">
                     <a className={styles.navlink}>
@@ -84,24 +56,6 @@ export default function Navbar() {
                     </a>
                   </Link>
                 </li>
-                {/* <li className="nav-item">
-                  <Link href="/courses">
-                    <a className={styles.navlink}>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="16"
-                        height="16"
-                        fill="currentColor"
-                        className="bi bi-file-earmark-plus-fill"
-                        viewBox="0 0 16 16"
-                      >
-                        <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0zM9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1zM8.5 7v1.5H10a.5.5 0 0 1 0 1H8.5V11a.5.5 0 0 1-1 0V9.5H6a.5.5 0 0 1 0-1h1.5V7a.5.5 0 0 1 1 0z" />
-                      </svg>
-
-                      <p className={styles.p}> Create Course</p>
-                    </a>
-                  </Link>
-                </li> */}
                 <li className="nav-item">
                   <Link href="/courses">
                     <a className={styles.navlink}>
@@ -120,30 +74,26 @@ export default function Navbar() {
                     </a>
                   </Link>
                 </li>
+                <li className="nav-item">
+                  <Link href="/registration/view">
+                    <a className={styles.navlink}>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        fill="currentColor"
+                        className="bi bi-file-earmark-person-fill"
+                        viewBox="0 0 16 16"
+                      >
+                        <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0zM9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1zM11 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0zm2 5.755V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-.245S4 12 8 12s5 1.755 5 1.755z" />
+                      </svg>
+
+                      <p className={styles.p}> Registration forms</p>
+                    </a>
+                  </Link>
+                </li>
               </>
             )}
-
-            {/* {!!user && (
-              <li className="nav-item">
-                <Link href="/">
-                  <a className={styles.navlink}>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      fill="currentColor"
-                      className="bi bi-door-closed-fill"
-                      viewBox="0 0 16 16"
-                    >
-                      <path d="M12 1a1 1 0 0 1 1 1v13h1.5a.5.5 0 0 1 0 1h-13a.5.5 0 0 1 0-1H3V2a1 1 0 0 1 1-1h8zm-2 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
-                    </svg>
-                    <p className={styles.p} onClick={() => auth.signOut()}>
-                      Logout
-                    </p>
-                  </a>
-                </Link>
-              </li>
-            )} */}
           </ul>
         </div>
       </nav>
