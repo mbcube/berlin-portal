@@ -38,7 +38,7 @@ export default function EditUser() {
         email: formData.email,
         displayName: formData.displayName,
         userType: formData.userType,
-        Payment: formData.payment,
+        payment: formData.payment,
 
       });
 

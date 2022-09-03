@@ -23,7 +23,7 @@ export default function NewUser() {
         formData.email,
         formData.displayName,
         formData.userType,
-        formData.Payment
+        formData.payment
       )
       toast.success(`Account Created`)
       router.push(`/users`)
@@ -37,7 +37,7 @@ export default function NewUser() {
       authUser: auth.currentUser,
       userType: user?.userType,
       email,
-      Payment: null,
+      payment: null,
     })
 
     return response.data.uid
@@ -48,7 +48,7 @@ export default function NewUser() {
     email: string,
     displayName: string,
     userType: UserType,
-    payment: null
+    payment: number
   ) {
     await setDoc(doc(database, 'users', uid), {
       email,

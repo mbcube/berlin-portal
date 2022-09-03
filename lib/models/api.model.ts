@@ -18,5 +18,5 @@ export type UserRequest = {
   userType: UserType
   email: string
   studie: Student
-  Payment: null
+  payment: number
 }

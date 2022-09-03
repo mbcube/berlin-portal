@@ -100,7 +100,7 @@ export default function UserForm({
               pattern: /\d+/,
             })}
           />
-          {errors.Payment && (
+          {errors.payment && (
             <label className="mt-1" style={{ color: 'red' }}>
               Please enter a valid payment amount.
             </label>
