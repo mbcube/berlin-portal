@@ -1,57 +1,61 @@
-import axios from "axios";
-import { doc, setDoc } from "firebase/firestore";
-import Image from "next/image";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { useContext } from "react";
-import toast from "react-hot-toast";
-import AuthGuard from "../../components/auth-guard";
-import UserForm from "../../components/forms/user-form";
-import { UserContext } from "../../lib/context";
-import { auth, database } from "../../lib/firebase";
-import { UserType } from "../../lib/models/user-type.enum";
+import axios from 'axios'
+import { doc, setDoc } from 'firebase/firestore'
+import Image from 'next/image'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+import { useContext } from 'react'
+import toast from 'react-hot-toast'
+import AuthGuard from '../../components/auth-guard'
+import UserForm from '../../components/forms/user-form'
+import { UserContext } from '../../lib/context'
+import { auth, database } from '../../lib/firebase'
+import { UserType } from '../../lib/models/user-type.enum'
 
 export default function NewUser() {
-  const router = useRouter();
-  const user = useContext(UserContext);
+  const router = useRouter()
+  const user = useContext(UserContext)
 
   async function onCreateUser(formData: any) {
     try {
-      const uid = await createUser(formData.email);
+      const uid = await createUser(formData.email)
       await createUserDocument(
         uid,
         formData.email,
         formData.displayName,
-        formData.userType
-      );
-      toast.success(`Account Created`);
-      router.push(`/users`);
+        formData.userType,
+        formData.payment
+      )
+      toast.success(`Account Created`)
+      router.push(`/users`)
     } catch (error) {
-      toast.error(`Unable to create account`);
+      toast.error(`Unable to create account`)
     }
   }
 
   async function createUser(email: string): Promise<string> {
-    const response = await axios.post("/api/firebase-api", {
+    const response = await axios.post('/api/firebase-api', {
       authUser: auth.currentUser,
       userType: user?.userType,
       email,
-    });
+      payment: null,
+    })
 
-    return response.data.uid;
+    return response.data.uid
   }
 
   async function createUserDocument(
     uid: string,
     email: string,
     displayName: string,
-    userType: UserType
+    userType: UserType,
+    payment: number
   ) {
-    await setDoc(doc(database, "users", uid), {
+    await setDoc(doc(database, 'users', uid), {
       email,
       displayName,
       userType,
-    });
+      payment,
+    })
   }
 
   return (
@@ -125,5 +129,5 @@ export default function NewUser() {
         </div>
       </main>
     </AuthGuard>
-  );
+  )
 }

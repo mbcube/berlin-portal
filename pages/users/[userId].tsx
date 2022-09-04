@@ -38,6 +38,8 @@ export default function EditUser() {
         email: formData.email,
         displayName: formData.displayName,
         userType: formData.userType,
+        payment: formData.payment,
+
       });
 
       toast.success(`Account updated`);
