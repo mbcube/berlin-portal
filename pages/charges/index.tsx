@@ -1,7 +1,7 @@
-import Link from 'next/link'
-import AuthGuard from '../../components/auth-guard'
-import UserTypeView from '../../components/user-type'
-import { UserType } from '../../lib/models/user-type.enum'
+import Link from "next/link";
+import AuthGuard from "../../components/auth-guard";
+import UserTypeView from "../../components/user-type";
+import { UserType } from "../../lib/models/user-type.enum";
 export default function Home() {
   return (
     <UserTypeView
@@ -9,7 +9,7 @@ export default function Home() {
       Teacher={undefined}
       Student={undefined}
     />
-  )
+  );
 }
 
 function AdminHome() {
@@ -32,7 +32,7 @@ function AdminHome() {
                   <Link href="/charges/charge">
                     <span className="btn btn-sm btn-light text-primary">
                       <i className="bi bi-file-earmark-plus me-2"></i>
-                      Éditer
+                      Ajouter
                     </span>
                   </Link>
                 </div>
@@ -48,10 +48,10 @@ function AdminHome() {
                   <table className="table table-hover">
                     <thead>
                       <tr>
-                        <th>Nom de la charge</th>
-                        <th>Date d'entrer</th>
+                        <th>Description</th>
+                        <th>Date </th>
                         <th>Type</th>
-                        <th>Prix de la charge</th>
+                        <th>Prix </th>
                       </tr>
                     </thead>
                     <tbody>
@@ -71,5 +71,5 @@ function AdminHome() {
         </div>
       </AuthGuard>
     </>
-  )
+  );
 }
