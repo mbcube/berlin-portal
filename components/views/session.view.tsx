@@ -40,11 +40,11 @@ export const TodaysSessionsView = ({ todaysSessions, todayKey }: any) => {
   return (
     todaysSessions && (
       <>
-        <h4>Today {moment.utc().format(DATE_KEY_FORMAT)}</h4>
+        <h4>Aujourd'hui {moment.utc().format(DATE_KEY_FORMAT)}</h4>
         {todaysSessions?.map((session: Session) => (
           <SessionView key={session.id} session={session} dayKey={todayKey} />
         ))}
-        {todaysSessions?.length === 0 && <p>You have no sessions today!</p>}
+        {todaysSessions?.length === 0 && <p>Vous n'avez aucune session aujourd'hui !</p>}
       </>
     )
   );

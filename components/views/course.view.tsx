@@ -1,7 +1,7 @@
-import { Course, Student, Teacher } from "../../lib/models/course.model";
-import { UserType } from "../../lib/models/user-type.enum";
-import { DAYS_OF_THE_WEEK } from "../../lib/utils";
-import { UserTypeAvatar } from "../user-type-avatar";
+import { Course, Student, Teacher } from '../../lib/models/course.model'
+import { UserType } from '../../lib/models/user-type.enum'
+import { DAYS_OF_THE_WEEK } from '../../lib/utils'
+import { UserTypeAvatar } from '../user-type-avatar'
 
 export const CourseView = ({ course, isShort }: any) => {
   return (
@@ -17,7 +17,7 @@ export const CourseView = ({ course, isShort }: any) => {
           </p>
           {!isShort && (
             <>
-              <div className="medium text-muted mb-2">Teachers:</div>
+              <div className="medium text-muted mb-2">Enseignants:</div>
               <div className="row mb-3">
                 {course?.teachers?.map((teacher: Teacher) => (
                   <div key={teacher.id} className="col col-md-6">
@@ -39,7 +39,7 @@ export const CourseView = ({ course, isShort }: any) => {
 
           {!isShort && (
             <>
-              <div className="medium text-muted mb-2">Student:</div>
+              <div className="medium text-muted mb-2">Étudiant:</div>
               <div className="row mb-3">
                 {course?.students?.map((student: Student) => (
                   <div key={student.id} className="col col-md-6">
@@ -66,7 +66,7 @@ export const CourseView = ({ course, isShort }: any) => {
               course?.daysOfTheWeek[dayOfTheWeek].isActive && (
                 <p key={dayOfTheWeek}>
                   <i className="bi bi-calendar-event me-2"></i>
-                  {`${dayOfTheWeek}:`}{" "}
+                  {`${dayOfTheWeek}:`}
                   {course.daysOfTheWeek[dayOfTheWeek].startTime}
                   <i className="bi bi-dash "></i>
                   {course.daysOfTheWeek[dayOfTheWeek].endTime}
@@ -76,8 +76,8 @@ export const CourseView = ({ course, isShort }: any) => {
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
 export const CoursesView = ({ courses, isShort }: any) => {
   return (
@@ -91,5 +91,5 @@ export const CoursesView = ({ courses, isShort }: any) => {
         ))}
       </>
     )
-  );
-};
+  )
+}
