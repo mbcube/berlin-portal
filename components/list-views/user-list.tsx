@@ -4,7 +4,9 @@ import { User } from "../../lib/models/user.model";
 import { UserTypeAvatar } from "../user-type-avatar";
 
 export default function UserListView() {
-  const userCollection = useGetCollectionDocuments<User>("users");
+  const userCollection = useGetCollectionDocuments<User>("users", {
+    limit: 10,
+  });
 
   return (
     <table className="table table-hover">

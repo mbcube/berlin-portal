@@ -93,7 +93,7 @@ export default function Navbar() {
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link href="/charges">
+                  <Link href="/expenses">
                     <a className={styles.navlink}>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"

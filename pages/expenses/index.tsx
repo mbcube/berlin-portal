@@ -1,18 +1,18 @@
+import moment from "moment";
 import Link from "next/link";
 import AuthGuard from "../../components/auth-guard";
-import UserTypeView from "../../components/user-type";
+import { useGetCollectionDocuments } from "../../lib/hooks";
+import { Expense } from "../../lib/models/expense.model";
 import { UserType } from "../../lib/models/user-type.enum";
-export default function Home() {
-  return (
-    <UserTypeView
-      Admin={<AdminHome />}
-      Teacher={undefined}
-      Student={undefined}
-    />
-  );
-}
+import { DATE_FORMAT } from "../../lib/utils";
+export default function Expenses() {
+  const today = moment().format(DATE_FORMAT);
+  const lastMonth = moment().subtract(30, "day").format(DATE_FORMAT);
 
-function AdminHome() {
+  const expenseCollection = useGetCollectionDocuments<Expense>("expenses", {
+    startDate: lastMonth,
+    endDate: today,
+  });
   return (
     <>
       <AuthGuard userTypes={[UserType.Admin]}>
@@ -25,11 +25,11 @@ function AdminHome() {
                     <div className="page-header-icon">
                       <i data-feather="user"></i>
                     </div>
-                    Charge
+                    Charges
                   </h1>
                 </div>
                 <div className="col-auto col-xl-auto mb-3">
-                  <Link href="/charges/charge">
+                  <Link href="/expenses/new">
                     <span className="btn btn-sm btn-light text-primary">
                       <i className="bi bi-file-earmark-plus me-2"></i>
                       Ajouter
@@ -55,13 +55,14 @@ function AdminHome() {
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td></td>
-                        <td></td>
-                        <td> </td>
-                        <td></td>
-                        <td></td>
-                      </tr>
+                      {expenseCollection?.map((expense) => (
+                        <tr key={expense.timestamp}>
+                          <td>{expense.description}</td>
+                          <td>{expense.date}</td>
+                          <td>{expense.type} </td>
+                          <td>{expense.price} DH</td>
+                        </tr>
+                      ))}
                     </tbody>
                   </table>
                 </div>

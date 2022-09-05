@@ -4,9 +4,10 @@ export interface Expense {
   type: ExpenseType;
   price: number;
   currency: "DH";
+  timestamp: number;
 }
 
 export enum ExpenseType {
-  material,
-  immaterial,
+  material = "material",
+  immaterial = "immaterial",
 }

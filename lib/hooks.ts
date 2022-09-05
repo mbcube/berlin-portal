@@ -3,8 +3,10 @@ import {
   doc,
   getDoc,
   getDocs,
+  limit,
   onSnapshot,
   query,
+  QueryConstraint,
   where,
 } from "firebase/firestore";
 import moment from "moment";
@@ -24,7 +26,7 @@ import { Course } from "./models/course.model";
 import { Home } from "./models/home.model";
 import { Session } from "./models/session.model";
 import { User } from "./models/user.model";
-import { DATE_KEY_FORMAT } from "./utils";
+import { DATE_FORMAT, DATE_KEY_FORMAT } from "./utils";
 
 export function useUserData() {
   const [authUser] = useAuthState(auth);
@@ -55,13 +57,43 @@ export function useUserData() {
   return user;
 }
 
-export function useGetCollectionDocuments<T>(collectionName: string) {
+export interface CollectionDocumentHookFilters {
+  startDate?: string;
+  endDate?: string;
+  limit?: number;
+}
+
+export function useGetCollectionDocuments<T>(
+  collectionName: string,
+  filters?: CollectionDocumentHookFilters
+) {
   const [collectionDocuments, setCollectionDocuments] = useState<T[]>();
 
   useEffect(() => {
     const getDocuments = async () => {
+      const buildConstraints: QueryConstraint[] = [];
+
+      if (filters?.limit) {
+        buildConstraints.push(limit(filters?.limit));
+      }
+
+      if (filters?.startDate) {
+        buildConstraints.push(
+          where(
+            "timestamp",
+            ">=",
+            moment(filters.startDate, DATE_FORMAT).unix()
+          )
+        );
+      }
+      if (filters?.endDate) {
+        buildConstraints.push(
+          where("timestamp", ">=", moment(filters.endDate, DATE_FORMAT).unix())
+        );
+      }
+
       const documentQuery = await getDocs(
-        query(collection(database, collectionName))
+        query(collection(database, collectionName), ...buildConstraints)
       );
       const documents = documentQuery.docs.map(
         (document) =>

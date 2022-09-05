@@ -1,24 +1,45 @@
+import { addDoc, collection } from "firebase/firestore";
 import moment from "moment";
+import router from "next/router";
 import "react-bootstrap-typeahead/css/Typeahead.css";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import AuthGuard from "../../components/auth-guard";
-import { ExpenseType } from "../../lib/models/expense.model";
+import { database } from "../../lib/firebase";
+import { Expense, ExpenseType } from "../../lib/models/expense.model";
 import { UserType } from "../../lib/models/user-type.enum";
 import { DATE_FORMAT, DATE_REGEX } from "../../lib/utils";
 
-export default function Éditer() {
+export default function Editer() {
   const today = moment().format(DATE_FORMAT);
 
   const {
     register,
     handleSubmit,
-    setError,
-    getValues,
-    setValue,
-    reset,
-    watch,
     formState: { errors },
   } = useForm();
+
+  async function onCreateExpense(formData: any) {
+    try {
+      await createExpenseDocument({
+        ...formData,
+        currency: "DH",
+        timestamp: moment().unix(),
+      });
+      toast.success(`Votre charge a été ajouté avec succès`);
+      router.push("/expenses");
+    } catch (error) {
+      toast.error(`Une Erreur S'est Produite, Veuillez Réessayer Plus Tard`);
+    }
+  }
+
+  async function createExpenseDocument(expense: Expense): Promise<string> {
+    const response = await addDoc(collection(database, "expenses"), {
+      ...expense,
+    });
+
+    return response.id;
+  }
 
   return (
     <AuthGuard userTypes={[UserType.Admin]}>
@@ -32,72 +53,81 @@ export default function Éditer() {
       <div className="container-fluid px-4">
         <div className="card">
           <div className="card-body">
-            <form className="form-group">
+            <form
+              className="form-group"
+              onSubmit={handleSubmit(onCreateExpense)}
+            >
               <div className="row gx-3 mb-3">
                 <div className="col col-lg-6">
                   <section className="mb-3">
                     <label className="small mb-1">Description </label>
                     <input
-                      className="form-control"
+                      className="form-control mb-2"
                       type="text"
-                      placeholder="Enter course name"
+                      placeholder="Description de la charge"
                       {...register("description", {
                         required: true,
                         minLength: 5,
                       })}
                     />
                     {errors.description && (
-                      <span style={{ color: "red" }}>
-                        Description is missing or invalid.
-                      </span>
+                      <span style={{ color: "red" }}>Description invalid.</span>
                     )}
                   </section>
-
                   <section className="mb-3">
                     <label className="small mb-1">Date</label>
                     <div className="d-flex align-items-center justify-content-between">
                       <i className="bi bi-calendar-event me-2"></i>
                       <input
-                        className="form-control"
+                        className="form-control mb-2"
                         type="date"
                         {...register("date", {
+                          value: today,
                           required: true,
                           pattern: DATE_REGEX,
                         })}
                       />
                     </div>
                     {errors.date && (
-                      <span style={{ color: "red" }}>
-                        Start Date is missing or invalid
-                      </span>
+                      <span style={{ color: "red" }}>Date invalid.</span>
                     )}
                   </section>
                   <section className="mb-3">
                     <label className="small mb-1">Type</label>
 
-                    <select className="form-select" {...register("userType")}>
+                    <select
+                      className="form-select mb-2"
+                      {...register("type", {
+                        required: true,
+                      })}
+                    >
                       <option disabled>Select:</option>
                       <option value={ExpenseType.material}>materiel</option>
                       <option value={ExpenseType.immaterial}>immateriel</option>
                     </select>
-                    {errors.userType && <p>Role is required.</p>}
+                    {errors.userType && (
+                      <span style={{ color: "red" }}>Type invalid.</span>
+                    )}
                   </section>
 
                   <section className="mb-3">
-                    <label className="small mb-1">Prix</label>
+                    <label className="small mb-1">Prix (DH)</label>
                     <input
-                      className="form-control"
-                      type="text"
-                      placeholder="Entrer le prix de la charge "
+                      className="form-control mb-2"
+                      type="number"
+                      placeholder="Prix de la charge "
+                      {...register("price", {
+                        required: true,
+                        pattern: /\d+/,
+                      })}
                     />
+                    {errors.price && (
+                      <span style={{ color: "red" }}>Prix invalid.</span>
+                    )}
                   </section>
-                  <input
-                    className="btn btn-primary"
-                    type="submit"
-                    value="Submit"
-                  />
                 </div>
               </div>
+              <input className="btn btn-primary" type="submit" value="Submit" />
             </form>
           </div>
         </div>
