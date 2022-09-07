@@ -1,6 +1,7 @@
 import moment from "moment";
 import Link from "next/link";
 import AuthGuard from "../../components/auth-guard";
+import Spinner from "../../components/spinner";
 import { useGetCollectionDocuments } from "../../lib/hooks";
 import { Expense } from "../../lib/models/expense.model";
 import { UserType } from "../../lib/models/user-type.enum";
@@ -45,26 +46,29 @@ export default function Expenses() {
             <div className="col-12">
               <div className="card">
                 <div className="card-body">
-                  <table className="table table-hover">
-                    <thead>
-                      <tr>
-                        <th>Description</th>
-                        <th>Date </th>
-                        <th>Type</th>
-                        <th>Prix </th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {expenseCollection?.map((expense) => (
-                        <tr key={expense.timestamp}>
-                          <td>{expense.description}</td>
-                          <td>{expense.date}</td>
-                          <td>{expense.type} </td>
-                          <td>{expense.price} DH</td>
+                  {!expenseCollection && <Spinner />}
+                  {expenseCollection && (
+                    <table className="table table-hover">
+                      <thead>
+                        <tr>
+                          <th>Description</th>
+                          <th>Date </th>
+                          <th>Type</th>
+                          <th>Prix </th>
                         </tr>
-                      ))}
-                    </tbody>
-                  </table>
+                      </thead>
+                      <tbody>
+                        {expenseCollection?.map((expense) => (
+                          <tr key={expense.timestamp}>
+                            <td>{expense.description}</td>
+                            <td>{expense.date}</td>
+                            <td>{expense.type} </td>
+                            <td>{expense.price} DH</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  )}
                 </div>
               </div>
             </div>

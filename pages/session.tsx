@@ -4,6 +4,7 @@ import ErrorPage from "next/error";
 import { useRouter } from "next/router";
 import { FC } from "react";
 import { useUserData } from "../lib/hooks";
+import { UserType } from "../lib/models/user-type.enum";
 
 const JitsiMeeting = dynamic(
   () =>
@@ -21,35 +22,69 @@ export default function Session() {
     <ErrorPage statusCode={404} />
   ) : (
     <>
-      <JitsiMeeting
-        roomName={router.query.id as string}
-        userInfo={{
-          displayName: user?.displayName || "",
-          email: user?.email || "",
-        }}
-        configOverwrite={{
-          disableModeratorIndicator: true,
-          hideAddRoomButton: true,
-          enableWelcomePage: false,
-          disableSelfViewSettings: true,
-          prejoinConfig: {
-            enabled: true,
-            hideDisplayName: true,
-            hideExtraJoinButtons: ["no-audio"],
-          },
-          participantsPane: {
-            hideModeratorSettingsTab: true,
-            hideMoreActionsButton: true,
-            hideMuteAllButton: true,
-          },
-          breakoutRooms: {
+      {user?.userType == UserType.Student && (
+        <JitsiMeeting
+          roomName={router.query.id as string}
+          userInfo={{
+            displayName: user?.displayName || "",
+            email: user?.email || "",
+          }}
+          configOverwrite={{
+            disableInviteFunctions: true,
+            disableModeratorIndicator: true,
             hideAddRoomButton: true,
-            hideAutoAssignButton: true,
-            hideJoinRoomButton: true,
-          },
-        }}
-        getIFrameRef={(node) => (node.style.height = "800px")}
-      />
+            enableWelcomePage: false,
+            disableSelfViewSettings: true,
+            disablePolls: true,
+
+            recordingService: {
+              enabled: false,
+            },
+            prejoinConfig: {
+              enabled: true,
+              hideDisplayName: true,
+              hideExtraJoinButtons: ["no-audio"],
+            },
+            participantsPane: {
+              hideModeratorSettingsTab: true,
+              hideMoreActionsButton: true,
+              hideMuteAllButton: true,
+            },
+            breakoutRooms: {
+              hideAddRoomButton: true,
+              hideAutoAssignButton: true,
+              hideJoinRoomButton: true,
+            },
+            toolbarButtons: [
+              "camera",
+              "chat",
+              "closedcaptions",
+              "feedback",
+              "filmstrip",
+              "fullscreen",
+              "hangup",
+              "help",
+              "microphone",
+              "profile",
+              "raisehand",
+              "tileview",
+              "toggle-camera",
+              "__end",
+            ],
+          }}
+          getIFrameRef={(node) => (node.style.height = "800px")}
+        />
+      )}
+      {user?.userType != UserType.Student && (
+        <JitsiMeeting
+          roomName={router.query.id as string}
+          userInfo={{
+            displayName: user?.displayName || "",
+            email: user?.email || "",
+          }}
+          getIFrameRef={(node) => (node.style.height = "800px")}
+        />
+      )}
     </>
   );
 }

@@ -33,7 +33,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   ) : (
     <>
       <UserContext.Provider value={user}>
-        <MainLayout>
+        <MainLayout user={user}>
           <Component {...pageProps} />
         </MainLayout>
       </UserContext.Provider>
