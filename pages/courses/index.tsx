@@ -1,5 +1,6 @@
 import Link from "next/link";
 import AuthGuard from "../../components/auth-guard";
+import Spinner from "../../components/spinner";
 import { useGetCollectionDocuments } from "../../lib/hooks";
 import { Course } from "../../lib/models/course.model";
 import { UserType } from "../../lib/models/user-type.enum";
@@ -34,7 +35,7 @@ export default function CourseList() {
         </div>
       </header>
       <div className="container-xl px-4">
-        {!coursesState && <p> Your data is on the way!</p>}
+        {!coursesState && <Spinner />}
         {coursesState && (
           <div className="row">
             <div className="col">

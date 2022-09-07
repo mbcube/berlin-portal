@@ -1,12 +1,13 @@
-import Link from 'next/link'
-import AuthGuard from '../../components/auth-guard'
-import { UserTypeAvatar } from '../../components/user-type-avatar'
-import { useGetCollectionDocuments } from '../../lib/hooks'
-import { UserType } from '../../lib/models/user-type.enum'
-import { User } from '../../lib/models/user.model'
+import Link from "next/link";
+import AuthGuard from "../../components/auth-guard";
+import Spinner from "../../components/spinner";
+import { UserTypeAvatar } from "../../components/user-type-avatar";
+import { useGetCollectionDocuments } from "../../lib/hooks";
+import { UserType } from "../../lib/models/user-type.enum";
+import { User } from "../../lib/models/user.model";
 
 export default function UserList() {
-  const usersState = useGetCollectionDocuments<User>('users')
+  const usersState = useGetCollectionDocuments<User>("users");
   return (
     <AuthGuard userTypes={[UserType.Admin, UserType.Teacher]}>
       <header className="page-header page-header-compact page-header-light border-bottom bg-white mb-4">
@@ -34,7 +35,7 @@ export default function UserList() {
         </div>
       </header>
       <div className="container-xl px-4">
-        {!usersState && <p> Your data is on the way!</p>}
+        {!usersState && <Spinner />}
         {usersState && (
           <div className="row">
             {[UserType.Admin, UserType.Teacher, UserType.Student].map(
@@ -61,7 +62,7 @@ export default function UserList() {
                                 <Link
                                   key={user.id}
                                   className="text-dark line-height-normal mb-1"
-                                  href={'users/' + user.id}
+                                  href={"users/" + user.id}
                                 >
                                   <tr>
                                     <td>
@@ -82,7 +83,7 @@ export default function UserList() {
                                       )}
                                   </tr>
                                 </Link>
-                              )
+                              );
                             })}
                         </tbody>
                       </table>
@@ -95,7 +96,7 @@ export default function UserList() {
         )}
       </div>
     </AuthGuard>
-  )
+  );
 }
 
 // {usersState

@@ -2,6 +2,7 @@ import { doc, getDoc } from "firebase/firestore";
 import { getDownloadURL, getStorage, ref } from "firebase/storage";
 import { useEffect, useState } from "react";
 import AuthGuard from "../../components/auth-guard";
+import Spinner from "../../components/spinner";
 import { database } from "../../lib/firebase";
 import {
   RegistrationDocument,
@@ -81,7 +82,7 @@ const RegistrationForms = () => {
           <div className="col">
             <div className="card mb-4">
               <div className="card-body">
-                {!registrationDocument && <p> Your data is on the way!</p>}
+                {!registrationDocument && <Spinner />}
                 {selectedItem && (
                   <>
                     <h5 className="card-title mb-3">
