@@ -9,6 +9,6 @@ export default function UserTypeView(props: { [key in UserType]: any }) {
   return user && props[user.userType] ? (
     props[user.userType]
   ) : (
-    <ErrorPage statusCode={404} title="Not Found" />
+    <ErrorPage statusCode={404} title="Pas trouvé" />
   );
 }

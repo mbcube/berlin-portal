@@ -27,10 +27,10 @@ export default function Login() {
   async function onLogin(formData: any) {
     try {
       await signInWithEmailAndPassword(auth, formData.email, formData.password);
-      toast.success(`Welcome`);
+      toast.success(`Bienvenue`);
       router.push("/home");
     } catch (error) {
-      toast.error(`Invalid Credentials`);
+      toast.error(`Informations d'identification invalides`);
     }
   }
 
@@ -54,41 +54,42 @@ export default function Login() {
             layout="fixed"
             alt="logo"
           />
-          <h4 className="h4 mb-3 fw-normal">Login</h4>
-          <div className="form-floating">
-            <input
-              type="email"
-              className="form-control"
-              id="floatingInput"
-              placeholder="name@example.com"
-              {...register("email", { required: true, pattern: EMAIL_REGEX })}
-            />
-            <label htmlFor="floatingInput">Type Email</label>
-          </div>
-          {errors.email && (
-            <span style={{ color: "red" }}>Email is missing or invalid.</span>
-          )}
+          <h4 className="h4 mb-3 fw-normal">Connexion</h4>
+          <section className="mb-2">
+            <div className="form-floating mb-2">
+              <input
+                type="email"
+                className="form-control"
+                id="floatingInput"
+                placeholder="name@example.com"
+                {...register("email", { required: true, pattern: EMAIL_REGEX })}
+              />
+              <label htmlFor="floatingInput">E-mail</label>
+            </div>
+            {errors.email && (
+              <span style={{ color: "red" }}>
+                E-mail manquant ou non valide.
+              </span>
+            )}
+          </section>
 
-          <div className="form-floating">
-            <input
-              type="password"
-              className="form-control mb-3"
-              id="floatingPassword"
-              placeholder="Password"
-              {...register("password", { required: true })}
-            />
-            <label htmlFor="floatingPassword">Password</label>
-          </div>
-          {errors.password && (
-            <span style={{ color: "red" }}>Password is missing.</span>
-          )}
-
-          <div className="checkbox mb-3 ">
-            <label>
-              <input type="checkbox" className="box" value="remember-me" />
-              Remember me
-            </label>
-          </div>
+          <section className="mb-4">
+            <div className="form-floating mb-2">
+              <input
+                type="password"
+                className="form-control"
+                id="floatingPassword"
+                placeholder="Mot de passe"
+                {...register("password", { required: true })}
+              />
+              <label htmlFor="floatingPassword">Mot de passe</label>
+            </div>
+            {errors.password && (
+              <span style={{ color: "red" }}>
+                Le mot de passe est manquant.
+              </span>
+            )}
+          </section>
 
           <input
             className="w-100 btn btn-lg btn-primary"
@@ -99,7 +100,7 @@ export default function Login() {
         </form>
       ) : (
         <>
-          <h1>Logout</h1>
+          <h1>Se déconnecter</h1>
           <input type="button" onClick={() => auth.signOut()} value="logout" />
         </>
       )}

@@ -18,7 +18,7 @@ export default function ResetPassword() {
   async function onReset(formData: any) {
     if (!router.query.email || !router.query.oobCode) {
       toast.error(
-        `Something went wrong, please generate a new reset-password link and try again.`
+        `Quelque chose s'est mal passé, veuillez générer un nouveau lien et réessayer.`
       );
       return;
     }
@@ -26,7 +26,7 @@ export default function ResetPassword() {
     if (formData["password"] !== formData["verifyPassword"]) {
       setError("verifyPassword", {
         type: "manual",
-        message: "Passwords do not match",
+        message: "Les mots de passe ne correspondent pas",
       });
       return;
     }
@@ -38,12 +38,12 @@ export default function ResetPassword() {
         formData.password
       );
       toast.success(
-        `Your password has ben reset, login with your new password.`
+        `Votre mot de passe a réinitialisé Ben, connectez-vous avec votre nouveau mot de passe.`
       );
       router.push("/login");
     } catch (error) {
       toast.error(
-        `Something went wrong, please generate a new reset-password link and try again.`
+        `Quelque chose s'est mal passé, veuillez générer un nouveau lien et réessayer.`
       );
     }
   }
@@ -63,40 +63,44 @@ export default function ResetPassword() {
           layout="fixed"
           alt="logo"
         />
-        <h4 className="h4 mb-2 fw-normal">Reset your password</h4>
+        <h4 className="h4 mb-2 fw-normal">Réinitialisez votre mot de passe</h4>
         <h6 className="h6 mb-4 fw-normal">{router.query.email}</h6>
         <div className="form-floating">
           <input
             type="password"
             className="form-control mb-2"
-            placeholder="Password"
+            placeholder="Mot de passe"
             {...register("password", { required: true })}
           />
-          <label htmlFor="floatingPassword">Password</label>
+          <label htmlFor="floatingPassword">Mot de passe</label>
         </div>
         {errors.password && (
-          <label className="mb-2 text-danger">Password is missing.</label>
+          <label className="mb-2 text-danger">
+            Le mot de passe est manquant.
+          </label>
         )}
 
         <div className="form-floating">
           <input
             type="password"
             className="form-control mb-2"
-            placeholder="Re-enter Password"
+            placeholder="Entrez à nouveau le mot de passe"
             {...register("verifyPassword", { required: true })}
           />
-          <label htmlFor="floatingPassword">Re-enter Password</label>
+          <label htmlFor="floatingPassword">
+            Entrez à nouveau le mot de passe
+          </label>
         </div>
         {errors.verifyPassword && (
           <label className="mb-2 text-danger">
-            {errors.verifyPassword.message || "Password is missing."}
+            {errors.verifyPassword.message || "Le mot de passe est manquant."}
           </label>
         )}
 
         <input
           className="w-100 btn btn-lg btn-primary"
           type="submit"
-          value="Reset Password"
+          value="Réinitialiser"
         />
         <p className="mt-5 mb-3 text-muted">&copy; 2022-2023</p>
       </form>

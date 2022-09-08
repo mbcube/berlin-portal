@@ -17,7 +17,7 @@ export const CourseView = ({ course, isShort }: any) => {
           </p>
           {!isShort && (
             <>
-              <div className="medium text-muted mb-2">Teachers:</div>
+              <div className="medium text-muted mb-2">Enseignants:</div>
               <div className="row mb-3">
                 {course?.teachers?.map((teacher: Teacher) => (
                   <div key={teacher.id} className="col col-md-6">
@@ -39,7 +39,7 @@ export const CourseView = ({ course, isShort }: any) => {
 
           {!isShort && (
             <>
-              <div className="medium text-muted mb-2">Student:</div>
+              <div className="medium text-muted mb-2">Étudiants:</div>
               <div className="row mb-3">
                 {course?.students?.map((student: Student) => (
                   <div key={student.id} className="col col-md-6">
@@ -66,7 +66,7 @@ export const CourseView = ({ course, isShort }: any) => {
               course?.daysOfTheWeek[dayOfTheWeek].isActive && (
                 <p key={dayOfTheWeek}>
                   <i className="bi bi-calendar-event me-2"></i>
-                  {`${dayOfTheWeek}:`}{" "}
+                  {`${dayOfTheWeek}:`}
                   {course.daysOfTheWeek[dayOfTheWeek].startTime}
                   <i className="bi bi-dash "></i>
                   {course.daysOfTheWeek[dayOfTheWeek].endTime}
@@ -83,12 +83,14 @@ export const CoursesView = ({ courses, isShort }: any) => {
   return (
     courses && (
       <>
-        <h2> Course List</h2>
+        <h2> Liste de cours</h2>
         {courses?.map((course: Course) => (
           <div key={course.id}>
             <CourseView course={course} isShort={isShort}></CourseView>
           </div>
         ))}
+
+        {courses?.length === 0 && <p>Aucun cours disponible</p>}
       </>
     )
   );

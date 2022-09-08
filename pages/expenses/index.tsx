@@ -22,12 +22,7 @@ export default function Expenses() {
             <div className="page-header-content">
               <div className="row align-items-center justify-content-between pt-3">
                 <div className="col-auto mb-3">
-                  <h1 className="page-header-title">
-                    <div className="page-header-icon">
-                      <i data-feather="user"></i>
-                    </div>
-                    Charges
-                  </h1>
+                  <h1 className="page-header-title">Charges</h1>
                 </div>
                 <div className="col-auto col-xl-auto mb-3">
                   <Link href="/expenses/new">

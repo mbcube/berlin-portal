@@ -41,9 +41,9 @@ export default function EditUser() {
         payment: formData.payment,
       });
 
-      toast.success(`Account updated`);
+      toast.success(`Compte mis à jour`);
     } catch (error) {
-      toast.error(`Unable to update account`);
+      toast.error(`Impossible de mettre à jour le compte`);
     }
   }
   return (
@@ -54,18 +54,13 @@ export default function EditUser() {
             <div className="page-header-content">
               <div className="row align-items-center justify-content-between pt-3">
                 <div className="col-auto mb-3">
-                  <h1 className="page-header-title">
-                    <div className="page-header-icon">
-                      <i data-feather="user-plus"></i>
-                    </div>
-                    Update User
-                  </h1>
+                  <h1 className="page-header-title">Mettre à jour</h1>
                 </div>
                 <div className="col-auto col-xl-auto mb-3">
                   <Link href="/users">
                     <a className="btn btn-sm btn-light text-primary">
-                      <i className="me-1" data-feather="arrow-left"></i>
-                      Back to Users List
+                      <i className="bi bi-arrow-left-short"></i>
+                      Retour
                     </a>
                   </Link>
                 </div>
@@ -79,7 +74,7 @@ export default function EditUser() {
             <div className="col-xl-4">
               {/* Profile picture card*/}
               <div className="card mb-4 mb-xl-0">
-                <div className="card-header">Profile Picture</div>
+                <div className="card-header">Image de profil</div>
                 <div className="card-body text-center">
                   {/* Profile picture htmlFor=*/}
                   <Image
@@ -92,11 +87,11 @@ export default function EditUser() {
                   />
                   {/* Profile picture help block*/}
                   <div className="small font-italic text-muted mb-4">
-                    JPG or PNG no larger than 5 MB
+                    JPG ou PNG pas plus de 5 Mo
                   </div>
                   {/* Profile picture upload button*/}
                   <button className="btn btn-primary" type="button">
-                    Upload new image
+                    Télécharger une nouvelle image
                   </button>
                 </div>
               </div>
@@ -104,7 +99,7 @@ export default function EditUser() {
             <div className="col-xl-8">
               {/* Account details card*/}
               <div className="card mb-4">
-                <div className="card-header">Account Details</div>
+                <div className="card-header">Détails du compte</div>
                 <div className="card-body">
                   <UserForm
                     onUserFormSubmitted={onEditUser}

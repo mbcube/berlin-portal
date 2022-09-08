@@ -6,13 +6,14 @@ import { UserTypeAvatar } from "../user-type-avatar";
 
 export default function UserListView() {
   const userCollection = useGetCollectionDocuments<User>("users", {
-    limit: 10,
+    limit: 0,
   });
 
   return (
     <>
+      <h2> Liste d&apos;utilisateurs</h2>
       {!userCollection && <Spinner />}
-      {userCollection && (
+      {userCollection && userCollection.length !== 0 && (
         <table className="table table-hover">
           <thead>
             <tr>
@@ -48,6 +49,7 @@ export default function UserListView() {
           </tbody>
         </table>
       )}
+      {userCollection?.length === 0 && <p>Aucun utilisateur disponible!</p>}
     </>
   );
 }

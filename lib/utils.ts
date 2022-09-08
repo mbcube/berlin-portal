@@ -7,15 +7,14 @@ export const DATE_REGEX =
 export const DATE_FORMAT = "YYYY-MM-DD";
 
 export enum DAYS_OF_THE_WEEK {
-  Monday = "Monday",
-  Tuesday = "Tuesday",
-  Wednesday = "Wednesday",
-  Thursday = "Thursday",
-  Friday = "Friday",
-  Saturday = "Saturday",
-  Sunday = "Sunday",
+  Monday = "Lundi",
+  Tuesday = "Mardi",
+  Wednesday = "Mercredi",
+  Thursday = "Jeudi",
+  Friday = "Vendredi",
+  Saturday = "Samedi",
+  Sunday = "Dimanche",
 }
-
 export const DATE_KEY_FORMAT = "DD-MM-YYYY";
 
 export const PHONE_REGEX = /^[0-9]{10}$/;

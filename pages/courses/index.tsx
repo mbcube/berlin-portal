@@ -15,18 +15,13 @@ export default function CourseList() {
           <div className="page-header-content">
             <div className="row align-items-center justify-content-between pt-3">
               <div className="col-auto mb-3">
-                <h1 className="page-header-title">
-                  <div className="page-header-icon">
-                    <i data-feather="user"></i>
-                  </div>
-                  Course List
-                </h1>
+                <h1 className="page-header-title">Liste de cours</h1>
               </div>
               <div className="col-auto col-xl-auto mb-3">
                 <Link href="/courses/new">
                   <span className="btn btn-sm btn-light text-primary">
                     <i className="bi bi-file-earmark-plus me-2"></i>
-                    Create Course
+                    Créer un cours
                   </span>
                 </Link>
               </div>
@@ -45,11 +40,11 @@ export default function CourseList() {
                   <table className="table table-hover">
                     <thead>
                       <tr>
-                        <th>Name</th>
-                        <th>Start Date</th>
-                        <th>End Date</th>
-                        <th>Teacher</th>
-                        <th>Students</th>
+                        <th>Nom</th>
+                        <th>Date de début</th>
+                        <th>Date de fin</th>
+                        <th>Enseignant</th>
+                        <th>Étudiants</th>
                       </tr>
                     </thead>
                     <tbody>

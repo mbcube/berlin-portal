@@ -88,7 +88,7 @@ export function useGetCollectionDocuments<T>(
       }
       if (filters?.endDate) {
         buildConstraints.push(
-          where("timestamp", ">=", moment(filters.endDate, DATE_FORMAT).unix())
+          where("timestamp", "<=", moment(filters.endDate, DATE_FORMAT).unix())
         );
       }
 

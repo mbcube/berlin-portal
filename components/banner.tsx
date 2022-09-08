@@ -100,7 +100,7 @@ export default function Banner() {
                     <div className="dropdown-item-icon">
                       <i className="bi bi-box-arrow-right"></i>
                     </div>
-                    Logout
+                    Se déconnecter
                   </a>
                 </div>
               </>
@@ -108,7 +108,7 @@ export default function Banner() {
             {!user && (
               <Link href="/login">
                 <button type="button" className="btn btn-outline-light">
-                  Login
+                  Connexion
                 </button>
               </Link>
             )}
