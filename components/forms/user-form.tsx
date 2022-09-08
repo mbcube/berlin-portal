@@ -1,7 +1,7 @@
-import { useEffect } from 'react'
-import { useForm } from 'react-hook-form'
-import { UserType } from '../../lib/models/user-type.enum'
-import { EMAIL_REGEX } from '../../lib/utils'
+import { useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { UserType } from "../../lib/models/user-type.enum";
+import { EMAIL_REGEX } from "../../lib/utils";
 
 export default function UserForm({
   onUserFormSubmitted,
@@ -13,16 +13,16 @@ export default function UserForm({
     reset,
     watch,
     formState: { errors },
-  } = useForm()
-  const userTypeWatch = watch('userType')
+  } = useForm();
+  const userTypeWatch = watch("userType");
 
   async function onCreateUser(formData: any) {
-    onUserFormSubmitted(formData)
+    onUserFormSubmitted(formData);
   }
 
   useEffect(() => {
-    reset(initialFormData)
-  }, [initialFormData, reset])
+    reset(initialFormData);
+  }, [initialFormData, reset]);
 
   return (
     <form onSubmit={handleSubmit(onCreateUser)}>
@@ -37,14 +37,14 @@ export default function UserForm({
             className="form-control"
             type="text"
             placeholder="Enter the display name"
-            {...register('displayName', {
+            {...register("displayName", {
               required: true,
               minLength: 3,
             })}
           />
           {errors.displayName && (
-            <label className="mt-2" style={{ color: 'red' }}>
-              Display name is required
+            <label className="mt-2" style={{ color: "red" }}>
+              Le nom d&apos;affichage est requis
             </label>
           )}
         </div>
@@ -52,20 +52,20 @@ export default function UserForm({
       {/* Form Group (email address)*/}
       <div className="col-md-6 mb-3">
         <label className="small mb-1" htmlFor="inputEmailAddress">
-          Email address
+          Adresse e-mail
         </label>
         <input
           className="form-control"
           type="email"
-          placeholder="Enter the email address"
-          {...register('email', {
+          placeholder="Entrez l'adresse e-mail"
+          {...register("email", {
             required: true,
             pattern: EMAIL_REGEX,
           })}
         />
         {errors.email && (
-          <label className="mt-1" style={{ color: 'red' }}>
-            Email is missing or invalid.
+          <label className="mt-1" style={{ color: "red" }}>
+            Le courrier électronique est manquant ou non valide.
           </label>
         )}
       </div>
@@ -76,33 +76,33 @@ export default function UserForm({
 
         <select
           className="form-select"
-          {...register('userType', { value: UserType.Student })}
+          {...register("userType", { value: UserType.Student })}
         >
-          <option disabled>Select a role:</option>
+          <option disabled>Sélectionnez un rôle:</option>
           <option value={UserType.Student}>{UserType.Student}</option>
           <option value={UserType.Teacher}>{UserType.Teacher}</option>
           <option value={UserType.Admin}>{UserType.Admin}</option>
         </select>
-        {errors.userType && <p>Role is required.</p>}
+        {errors.userType && <p>Le rôle est requis.</p>}
       </div>
       {/* Form Group (Payment)*/}
       {userTypeWatch && userTypeWatch == UserType.Student && (
         <div className="col-md-6 mb-3">
           <label className="small mb-1" htmlFor="inputPayment">
-            Payment
+            Paiement
           </label>
           <input
             className="form-control"
             type="number"
-            placeholder="Enter the Payment"
-            {...register('payment', {
+            placeholder="Entrez le paiement"
+            {...register("payment", {
               required: true,
               pattern: /\d+/,
             })}
           />
           {errors.payment && (
-            <label className="mt-1" style={{ color: 'red' }}>
-              Please enter a valid payment amount.
+            <label className="mt-1" style={{ color: "red" }}>
+              Veuillez saisir un montant de paiement valide.
             </label>
           )}
         </div>
@@ -111,5 +111,5 @@ export default function UserForm({
       {/* Submit button*/}
       <input className="btn btn-primary" type="submit" value="Submit" />
     </form>
-  )
+  );
 }

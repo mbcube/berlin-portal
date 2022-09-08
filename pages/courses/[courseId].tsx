@@ -1,4 +1,5 @@
 import { doc, getDoc, setDoc } from "firebase/firestore";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
@@ -106,11 +107,11 @@ function EditCourse({
           ...teachers.map((teacher) => teacher.id),
         ],
       });
-      toast.success(`Course Edited`);
+      toast.success(`Cours modifier`);
       setShowEditMode(false);
       onCourseEdited();
     } catch (error) {
-      toast.error(`Unable to modify course`);
+      toast.error(`Impossible de modifier le cours`);
     }
   }
 
@@ -125,14 +126,15 @@ function EditCourse({
           <div className="page-header-content">
             <div className="row align-items-center justify-content-between pt-3">
               <div className="col-auto mb-3">
-                <h1 className="page-header-title">
-                  <div className="page-header-icon">
-                    <i data-feather="user"></i>
-                  </div>
-                  Course
-                </h1>
+                <h1 className="page-header-title">Cours</h1>
               </div>
               <div className="col-auto col-xl-auto mb-3">
+                <Link href="/courses">
+                  <span className="btn btn-sm btn-light text-primary me-3">
+                    <i className="bi bi-arrow-left-short"></i>
+                    Retour
+                  </span>
+                </Link>
                 <button
                   className={`btn btn-sm btn-light ${
                     !showEditMode ? "text-primary" : "text-danger"
@@ -142,12 +144,12 @@ function EditCourse({
                   {!showEditMode ? (
                     <>
                       <i className="bi bi-pencil-square me-2"></i>
-                      Edit
+                      Modifier
                     </>
                   ) : (
                     <>
                       <i className="bi bi-x-lg me-2"></i>
-                      Cancel
+                      Annuler
                     </>
                   )}
                 </button>
@@ -162,7 +164,7 @@ function EditCourse({
           <div className="container-fluid px-4">
             <div className="card">
               <div className="card-body">
-                <h5 className="card-title mb-3">Edit Course</h5>
+                <h5 className="card-title mb-3">Modifier le cours</h5>
                 <div className="row">
                   <div className="col">
                     <CourseForm
@@ -190,7 +192,7 @@ function EditCourse({
                       {courseState?.startDate} <i className="bi bi-dash "></i>
                       {courseState?.endDate}
                     </p>
-                    <div className="medium text-muted mb-2">Teachers:</div>
+                    <div className="medium text-muted mb-2">Enseignants:</div>
                     <div className="row mb-3">
                       {courseState?.teachers?.map((teacher: Teacher) => (
                         <div key={teacher.id} className="col col-md-6">
@@ -207,7 +209,7 @@ function EditCourse({
                         </div>
                       ))}
                     </div>
-                    <div className="medium text-muted mb-2">Student:</div>
+                    <div className="medium text-muted mb-2">Étudiants:</div>
                     <div className="row mb-3">
                       {courseState?.students?.map((student: Student) => (
                         <div key={student.id} className="col col-md-6">
@@ -226,7 +228,7 @@ function EditCourse({
                     </div>
                   </div>
                   <div className="col-md-12  col-lg-6">
-                    <div className="medium text-muted mb-2">Sessions:</div>
+                    <div className="medium text-muted mb-2">Séances:</div>
                     {Object.values(DAYS_OF_THE_WEEK).map(
                       (dayOfTheWeek: DAYS_OF_THE_WEEK) =>
                         courseState?.daysOfTheWeek[dayOfTheWeek].isActive && (

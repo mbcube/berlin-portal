@@ -1,46 +1,46 @@
-import axios from 'axios'
-import { doc, setDoc } from 'firebase/firestore'
-import Image from 'next/image'
-import Link from 'next/link'
-import { useRouter } from 'next/router'
-import { useContext } from 'react'
-import toast from 'react-hot-toast'
-import AuthGuard from '../../components/auth-guard'
-import UserForm from '../../components/forms/user-form'
-import { UserContext } from '../../lib/context'
-import { auth, database } from '../../lib/firebase'
-import { UserType } from '../../lib/models/user-type.enum'
+import axios from "axios";
+import { doc, setDoc } from "firebase/firestore";
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { useContext } from "react";
+import toast from "react-hot-toast";
+import AuthGuard from "../../components/auth-guard";
+import UserForm from "../../components/forms/user-form";
+import { UserContext } from "../../lib/context";
+import { auth, database } from "../../lib/firebase";
+import { UserType } from "../../lib/models/user-type.enum";
 
 export default function NewUser() {
-  const router = useRouter()
-  const user = useContext(UserContext)
+  const router = useRouter();
+  const user = useContext(UserContext);
 
   async function onCreateUser(formData: any) {
     try {
-      const uid = await createUser(formData.email)
+      const uid = await createUser(formData.email);
       await createUserDocument(
         uid,
         formData.email,
         formData.displayName,
         formData.userType,
         formData.payment
-      )
-      toast.success(`Account Created`)
-      router.push(`/users`)
+      );
+      toast.success(`Account Created`);
+      router.push(`/users`);
     } catch (error) {
-      toast.error(`Unable to create account`)
+      toast.error(`Unable to create account`);
     }
   }
 
   async function createUser(email: string): Promise<string> {
-    const response = await axios.post('/api/firebase-api', {
+    const response = await axios.post("/api/firebase-api", {
       authUser: auth.currentUser,
       userType: user?.userType,
       email,
       payment: null,
-    })
+    });
 
-    return response.data.uid
+    return response.data.uid;
   }
 
   async function createUserDocument(
@@ -50,12 +50,12 @@ export default function NewUser() {
     userType: UserType,
     payment: number
   ) {
-    await setDoc(doc(database, 'users', uid), {
+    await setDoc(doc(database, "users", uid), {
       email,
       displayName,
       userType,
       payment,
-    })
+    });
   }
 
   return (
@@ -70,14 +70,14 @@ export default function NewUser() {
                     <div className="page-header-icon">
                       <i data-feather="user-plus"></i>
                     </div>
-                    Add User
+                    Ajouter un Utilisateur
                   </h1>
                 </div>
                 <div className="col-auto col-xl-auto mb-3">
                   <Link href="/users">
                     <a className="btn btn-sm btn-light text-primary">
-                      <i className="me-1" data-feather="arrow-left"></i>
-                      Back to Users List
+                      <i className="bi bi-arrow-left-short"></i>
+                      Retour
                     </a>
                   </Link>
                 </div>
@@ -104,11 +104,11 @@ export default function NewUser() {
                   />
                   {/* Profile picture help block*/}
                   <div className="small font-italic text-muted mb-4">
-                    JPG or PNG no larger than 5 MB
+                    JPG ou PNG pas plus de 5 Mo
                   </div>
                   {/* Profile picture upload button*/}
                   <button className="btn btn-primary" type="button">
-                    Upload new image
+                    Télécharger une nouvelle image
                   </button>
                 </div>
               </div>
@@ -129,5 +129,5 @@ export default function NewUser() {
         </div>
       </main>
     </AuthGuard>
-  )
+  );
 }

@@ -1,7 +1,7 @@
-import { Course, Student, Teacher } from '../../lib/models/course.model'
-import { UserType } from '../../lib/models/user-type.enum'
-import { DAYS_OF_THE_WEEK } from '../../lib/utils'
-import { UserTypeAvatar } from '../user-type-avatar'
+import { Course, Student, Teacher } from "../../lib/models/course.model";
+import { UserType } from "../../lib/models/user-type.enum";
+import { DAYS_OF_THE_WEEK } from "../../lib/utils";
+import { UserTypeAvatar } from "../user-type-avatar";
 
 export const CourseView = ({ course, isShort }: any) => {
   return (
@@ -39,7 +39,7 @@ export const CourseView = ({ course, isShort }: any) => {
 
           {!isShort && (
             <>
-              <div className="medium text-muted mb-2">Étudiant:</div>
+              <div className="medium text-muted mb-2">Étudiants:</div>
               <div className="row mb-3">
                 {course?.students?.map((student: Student) => (
                   <div key={student.id} className="col col-md-6">
@@ -76,20 +76,22 @@ export const CourseView = ({ course, isShort }: any) => {
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
 export const CoursesView = ({ courses, isShort }: any) => {
   return (
     courses && (
       <>
-        <h2> Course List</h2>
+        <h2> Liste de cours</h2>
         {courses?.map((course: Course) => (
           <div key={course.id}>
             <CourseView course={course} isShort={isShort}></CourseView>
           </div>
         ))}
+
+        {courses?.length === 0 && <p>Aucun cours disponible</p>}
       </>
     )
-  )
-}
+  );
+};

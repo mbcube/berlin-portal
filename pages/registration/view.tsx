@@ -1,6 +1,7 @@
 import { doc, getDoc } from "firebase/firestore";
 import { getDownloadURL, getStorage, ref } from "firebase/storage";
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import AuthGuard from "../../components/auth-guard";
 import Spinner from "../../components/spinner";
 import { database } from "../../lib/firebase";
@@ -36,8 +37,14 @@ const RegistrationForms = () => {
   async function selectItem(item: RegistrationItem) {
     setSelectedItem(item);
     const storage = getStorage();
-    const url = await getDownloadURL(ref(storage, item.resume));
-    setSelectedResumeUrl(url);
+
+    try {
+      const url = await getDownloadURL(ref(storage, item.resume));
+      setSelectedResumeUrl(url);
+      console.log(item.resume);
+    } catch (e) {
+      toast.error("Impossible de récupérer le fichier.");
+    }
   }
 
   function clearItem(): void {
@@ -53,10 +60,7 @@ const RegistrationForms = () => {
             <div className="row align-items-center justify-content-between pt-3">
               <div className="col-auto mb-3">
                 <h1 className="page-header-title">
-                  <div className="page-header-icon">
-                    <i data-feather="user"></i>
-                  </div>
-                  Registration List
+                  Formulaires d&apos;inscription
                 </h1>
               </div>
               <div className="col-auto col-xl-auto mb-3">
@@ -70,7 +74,7 @@ const RegistrationForms = () => {
                   disabled={!selectedItem}
                 >
                   <i className="bi bi-arrow-left-short"></i>
-                  Back
+                  Retour
                 </button>
               </div>
             </div>
@@ -116,9 +120,9 @@ const RegistrationForms = () => {
                         </p>
                       </div>
                       <div className="col-md-12">
-                        <h5>Address: </h5>
+                        <h5>Adresse: </h5>
                         <p>{`${selectedItem.address}`}</p>
-                        <h5>Comments: </h5>
+                        <h5>Commentaires: </h5>
                         <p>{`${selectedItem.comments}`}</p>
                       </div>
                     </div>
@@ -129,9 +133,9 @@ const RegistrationForms = () => {
                   <table className="table table-hover">
                     <thead>
                       <tr>
-                        <th>Created Date</th>
-                        <th>FullName</th>
-                        <th>Resume</th>
+                        <th>Date de création</th>
+                        <th>Nom et prénom</th>
+                        <th>CV</th>
                       </tr>
                     </thead>
                     <tbody>

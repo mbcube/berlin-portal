@@ -1,5 +1,6 @@
 import { addDoc, collection } from "firebase/firestore";
 import moment from "moment";
+import Link from "next/link";
 import router from "next/router";
 import "react-bootstrap-typeahead/css/Typeahead.css";
 import { useForm } from "react-hook-form";
@@ -43,10 +44,22 @@ export default function Editer() {
 
   return (
     <AuthGuard userTypes={[UserType.Admin]}>
-      <header className="page-header page-header-compact page-header-light border-bottom bg-white mb-4 p-3">
+      <header className="page-header page-header-compact page-header-light border-bottom bg-white mb-4">
         <div className="container-xl px-4">
           <div className="page-header-content">
-            <h4 className="m-2">Create charges</h4>
+            <div className="row align-items-center justify-content-between pt-3">
+              <div className="col-auto mb-3">
+                <h1 className="page-header-title">Charge</h1>
+              </div>
+              <div className="col-auto col-xl-auto mb-3">
+                <Link href="/expenses">
+                  <span className="btn btn-sm btn-light text-primary me-3">
+                    <i className="bi bi-arrow-left-short"></i>
+                    Retour
+                  </span>
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </header>
@@ -101,7 +114,7 @@ export default function Editer() {
                         required: true,
                       })}
                     >
-                      <option disabled>Select:</option>
+                      <option disabled>Sélectionner:</option>
                       <option value={ExpenseType.material}>materiel</option>
                       <option value={ExpenseType.immaterial}>immateriel</option>
                     </select>

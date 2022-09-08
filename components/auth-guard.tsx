@@ -12,6 +12,6 @@ export default function AuthGuard(props: {
   return user && props.userTypes.includes(user.userType) ? (
     props.children
   ) : (
-    <ErrorPage statusCode={401} title="Unauthorized" />
+    <ErrorPage statusCode={401} title="Non autorisé" />
   );
 }

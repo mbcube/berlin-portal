@@ -5,6 +5,7 @@ import { DATE_KEY_FORMAT } from "../../lib/utils";
 export const SessionsView = ({ sessions }: any) => {
   return (
     <>
+      <h2> Liste de séances</h2>
       {sessions?.map((session: Session) => (
         <p key={session.id}>
           {session.courseName} :
@@ -18,6 +19,8 @@ export const SessionsView = ({ sessions }: any) => {
           ))}
         </p>
       ))}
+
+      {sessions?.length === 0 && <p>Aucune séance disponible</p>}
     </>
   );
 };
@@ -40,11 +43,13 @@ export const TodaysSessionsView = ({ todaysSessions, todayKey }: any) => {
   return (
     todaysSessions && (
       <>
-        <h4>Aujourd'hui {moment.utc().format(DATE_KEY_FORMAT)}</h4>
+        <h4>Aujourd&apos;hui {moment.utc().format(DATE_KEY_FORMAT)}</h4>
         {todaysSessions?.map((session: Session) => (
           <SessionView key={session.id} session={session} dayKey={todayKey} />
         ))}
-        {todaysSessions?.length === 0 && <p>Vous n'avez aucune session aujourd'hui !</p>}
+        {todaysSessions?.length === 0 && (
+          <p>Vous n&apos;avez aucune session aujourd&apos;hui !</p>
+        )}
       </>
     )
   );

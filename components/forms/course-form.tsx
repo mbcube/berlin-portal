@@ -1,14 +1,14 @@
-import { collection, getDocs, query, where } from 'firebase/firestore'
-import moment from 'moment'
-import { useEffect, useState } from 'react'
+import { collection, getDocs, query, where } from "firebase/firestore";
+import moment from "moment";
+import { useEffect, useState } from "react";
 // import { Typeahead } from "react-bootstrap-typeahead";
-import { useForm } from 'react-hook-form'
-import { database } from '../../lib/firebase'
-import { Student, Teacher } from '../../lib/models/course.model'
-import { UserType } from '../../lib/models/user-type.enum'
-import { DATE_FORMAT, DATE_REGEX, DAYS_OF_THE_WEEK } from '../../lib/utils'
-import { UserTypeAvatar } from '../user-type-avatar'
-import CustomTypeahead from './custom-typeahead'
+import { useForm } from "react-hook-form";
+import { database } from "../../lib/firebase";
+import { Student, Teacher } from "../../lib/models/course.model";
+import { UserType } from "../../lib/models/user-type.enum";
+import { DATE_FORMAT, DATE_REGEX, DAYS_OF_THE_WEEK } from "../../lib/utils";
+import { UserTypeAvatar } from "../user-type-avatar";
+import CustomTypeahead from "./custom-typeahead";
 
 export default function CourseForm({
   onCourseFormSubmitted,
@@ -16,11 +16,11 @@ export default function CourseForm({
   initialStudentSelection,
   initialTeacherSelection,
 }: any) {
-  const [studentMultiSelections, setStudentMultiSelections] = useState<any>([])
-  const [teacherMultiSelections, setTeacherMultiSelections] = useState<any>([])
+  const [studentMultiSelections, setStudentMultiSelections] = useState<any>([]);
+  const [teacherMultiSelections, setTeacherMultiSelections] = useState<any>([]);
 
-  const [allStudents, setAllStudents] = useState<Student[]>([])
-  const [allTeachers, setAllTeachers] = useState<Teacher[]>([])
+  const [allStudents, setAllStudents] = useState<Student[]>([]);
+  const [allTeachers, setAllTeachers] = useState<Teacher[]>([]);
 
   const {
     register,
@@ -33,57 +33,61 @@ export default function CourseForm({
     formState: { errors },
   } = useForm({
     defaultValues: initialFormData,
-  })
+  });
 
-  const watchAllFields = watch('daysOfTheWeek')
-
-  useEffect(() => {
-    setStudentMultiSelections(initialStudentSelection || [])
-  }, [initialStudentSelection])
+  const watchAllFields = watch("daysOfTheWeek");
 
   useEffect(() => {
-    setTeacherMultiSelections(initialTeacherSelection || [])
-  }, [initialTeacherSelection])
+    setStudentMultiSelections(initialStudentSelection || []);
+  }, [initialStudentSelection]);
 
   useEffect(() => {
-    reset(initialFormData)
-  }, [initialFormData, reset])
+    setTeacherMultiSelections(initialTeacherSelection || []);
+  }, [initialTeacherSelection]);
+
+  useEffect(() => {
+    reset(initialFormData);
+  }, [initialFormData, reset]);
 
   useEffect(() => {
     const getUsers = async () => {
       const userDocuments = await getDocs(
         query(
-          collection(database, 'users'),
-          where('userType', '!=', UserType.Admin)
+          collection(database, "users"),
+          where("userType", "!=", UserType.Admin)
         )
-      )
+      );
       const users = userDocuments.docs.map((document) => ({
         id: document.id,
         displayName: document.data().displayName,
         email: document.data().email,
         userType: document.data().userType,
-      }))
+      }));
 
-      const students = users.filter((user) => user.userType == UserType.Student)
-      const teachers = users.filter((user) => user.userType == UserType.Teacher)
+      const students = users.filter(
+        (user) => user.userType == UserType.Student
+      );
+      const teachers = users.filter(
+        (user) => user.userType == UserType.Teacher
+      );
 
-      setAllStudents(students)
-      setAllTeachers(teachers)
-    }
+      setAllStudents(students);
+      setAllTeachers(teachers);
+    };
 
-    getUsers()
-  }, [])
+    getUsers();
+  }, []);
 
   function validateDates(startDate: string, endDate: string): boolean {
-    const startMoment = moment(startDate, DATE_FORMAT)
-    const endMoment = moment(endDate, DATE_FORMAT)
+    const startMoment = moment(startDate, DATE_FORMAT);
+    const endMoment = moment(endDate, DATE_FORMAT);
 
-    return startMoment.isSameOrBefore(endMoment)
+    return startMoment.isSameOrBefore(endMoment);
   }
 
   function validateDaysOfTheWeek(): boolean {
-    var valid = true
-    const daysOfTheWeek = getValues().daysOfTheWeek
+    var valid = true;
+    const daysOfTheWeek = getValues().daysOfTheWeek;
     for (var dayOfTheWeek of Object.values(
       DAYS_OF_THE_WEEK
     ) as DAYS_OF_THE_WEEK[]) {
@@ -93,28 +97,28 @@ export default function CourseForm({
           daysOfTheWeek[dayOfTheWeek].startTime
       ) {
         setError(`daysOfTheWeek.${dayOfTheWeek}.startTime`, {
-          type: 'manual',
-          message: 'start time is after end time',
-        })
+          type: "manual",
+          message: "l'heure de début est postérieure à l'heure de fin",
+        });
 
-        valid = false
+        valid = false;
       }
     }
 
-    return valid
+    return valid;
   }
 
   async function onCreateCourse(formData: any) {
     if (!validateDates(formData.startDate, formData.endDate)) {
-      setError('startDate', {
-        type: 'manual',
-        message: 'Start date is after end date',
-      })
-      return
+      setError("startDate", {
+        type: "manual",
+        message: "La date de début est postérieure à la date de fin",
+      });
+      return;
     }
 
     if (!validateDaysOfTheWeek()) {
-      return
+      return;
     }
 
     onCourseFormSubmitted(
@@ -135,7 +139,7 @@ export default function CourseForm({
             email: selection.email,
           } as Teacher)
       )
-    )
+    );
   }
 
   return (
@@ -145,31 +149,31 @@ export default function CourseForm({
         {/* Form Group (first name)*/}
         <div className="col col-lg-6">
           <section className="mb-3">
-            <label className="small mb-1">Course Name</label>
+            <label className="small mb-1">Nom du cours</label>
             <input
               className="form-control"
               type="text"
-              placeholder="Enter course name"
-              {...register('courseName', {
+              placeholder="Entrez le nom du cours"
+              {...register("courseName", {
                 required: true,
                 minLength: 5,
               })}
             />
             {errors.courseName && (
-              <span style={{ color: 'red' }}>
-                Course name is missing or invalid.
+              <span style={{ color: "red" }}>
+                Le nom du cours est manquant ou invalide.
               </span>
             )}
           </section>
 
           <section className="mb-3">
-            <label className="small mb-1">Start Date</label>
+            <label className="small mb-1">Date de début</label>
             <div className="d-flex align-items-center justify-content-between">
               <i className="bi bi-calendar4-range me-2"></i>
               <input
                 className="form-control"
                 type="date"
-                {...register('startDate', {
+                {...register("startDate", {
                   required: true,
                   pattern: DATE_REGEX,
                 })}
@@ -178,27 +182,27 @@ export default function CourseForm({
               <input
                 className="form-control"
                 type="date"
-                {...register('endDate', {
+                {...register("endDate", {
                   required: true,
                   pattern: DATE_REGEX,
                 })}
               />
             </div>
             {errors.startDate && (
-              <span style={{ color: 'red' }}>
+              <span style={{ color: "red" }}>
                 {errors.startDate?.message ||
-                  'Start Date is missing or invalid'}
+                  "La date de début est manquante ou non valide"}
               </span>
             )}
             {errors.endDate && (
-              <span style={{ color: 'red' }}>
-                End Date is missing or invalid
+              <span style={{ color: "red" }}>
+                La date de fin est manquante ou non valide
               </span>
             )}
           </section>
 
           <section className="mb-3">
-            <label className="small mb-1">Assign a Teacher</label>
+            <label className="small mb-1">Assigner un enseignant</label>
             <CustomTypeahead
               className="mb-3"
               id="basic-typeahead-multiple"
@@ -210,11 +214,11 @@ export default function CourseForm({
                     (t: Teacher) => t.id === teacher.id
                   )
                 )
-                  return
-                setTeacherMultiSelections([...teacherMultiSelections, teacher])
+                  return;
+                setTeacherMultiSelections([...teacherMultiSelections, teacher]);
               }}
               options={allTeachers}
-              placeholder="Select a teacher..."
+              placeholder="Sélectionnez un enseignant ..."
               maxResults={5}
               paginate={false}
             />
@@ -241,7 +245,7 @@ export default function CourseForm({
                           teacherMultiSelections.filter(
                             (t: Teacher) => teacher.id !== t.id
                           )
-                        )
+                        );
                       }}
                     >
                       <i className="bi bi-x"></i>
@@ -253,7 +257,7 @@ export default function CourseForm({
           </section>
 
           <section className="mb-3">
-            <label className="small mb-1">Add Students</label>
+            <label className="small mb-1">Ajouter des étudiants</label>
             <CustomTypeahead
               className="mb-3"
               size="sm"
@@ -264,11 +268,11 @@ export default function CourseForm({
                     (s: Student) => s.id === student.id
                   )
                 )
-                  return
-                setStudentMultiSelections([...studentMultiSelections, student])
+                  return;
+                setStudentMultiSelections([...studentMultiSelections, student]);
               }}
               options={allStudents}
-              placeholder="Select your students..."
+              placeholder="Sélectionnez vos élèves ..."
               maxResults={5}
               paginate={false}
             />
@@ -296,7 +300,7 @@ export default function CourseForm({
                           studentMultiSelections.filter(
                             (s: Student) => student.id !== s.id
                           )
-                        )
+                        );
                       }}
                     >
                       <i className="bi bi-x"></i>
@@ -309,7 +313,7 @@ export default function CourseForm({
         </div>
         <div className="col col-offset-2 col-lg-6">
           <section className="mb-3">
-            <label className="small mb-1">Class Times</label>
+            <label className="small mb-1">Heures de classe</label>
             <div className="d-flex flex-column align-items-left">
               {watchAllFields &&
                 Object.values(DAYS_OF_THE_WEEK).map(
@@ -368,10 +372,10 @@ export default function CourseForm({
                         )}
                       </div>
                       {errors.daysOfTheWeek && errors.daysOfTheWeek[dayOfWeek] && (
-                        <span className="d-block mb-3" style={{ color: 'red' }}>
+                        <span className="d-block mb-3" style={{ color: "red" }}>
                           {errors.daysOfTheWeek[dayOfWeek]?.startTime
                             ?.message ||
-                            `Course time is missing or invalid for ${dayOfWeek}`}
+                            `Le temps du cours est manquant ou invalide pour ${dayOfWeek}`}
                         </span>
                       )}
                     </>
@@ -385,5 +389,5 @@ export default function CourseForm({
       <br />
       <input className="btn btn-primary" type="submit" value="Submit" />
     </form>
-  )
+  );
 }
