@@ -29,6 +29,7 @@ export default function NewUser() {
       router.push(`/users`);
     } catch (error) {
       toast.error(`Unable to create account`);
+      toast.error(JSON.stringify(error));
     }
   }
 

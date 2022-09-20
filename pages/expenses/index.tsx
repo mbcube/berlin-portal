@@ -12,7 +12,6 @@ export default function Expenses() {
 
   const expenseCollection = useGetCollectionDocuments<Expense>("expenses", {
     startDate: lastMonth,
-    endDate: today,
   });
   return (
     <>
