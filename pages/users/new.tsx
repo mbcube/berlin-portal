@@ -29,7 +29,6 @@ export default function NewUser() {
       router.push(`/users`);
     } catch (error) {
       toast.error(`Unable to create account`);
-      toast.error(JSON.stringify(error));
     }
   }
 
@@ -55,7 +54,7 @@ export default function NewUser() {
       email,
       displayName,
       userType,
-      payment,
+      payment: payment || "",
     });
   }
 
