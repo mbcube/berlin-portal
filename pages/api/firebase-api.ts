@@ -32,9 +32,6 @@ export default async function handler(
   }
 
   let randomPassword = (Math.random() + 1).toString(36).substring(2);
-  // TODO: DELETE THIS BEFORE PROD *****************************************//
-  randomPassword = "password";
-  // TODO: DELETE THIS BEFORE PROD *****************************************//
 
   try {
     const userCredentials = await createUserWithEmailAndPassword(
