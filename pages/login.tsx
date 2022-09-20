@@ -94,7 +94,7 @@ export default function Login() {
           <input
             className="w-100 btn btn-lg btn-primary"
             type="submit"
-            value="login"
+            value="Connexion"
           />
           <p className="mt-5 mb-3 text-muted">&copy; 2022-2023</p>
         </form>
