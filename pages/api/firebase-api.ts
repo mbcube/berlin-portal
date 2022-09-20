@@ -44,6 +44,6 @@ export default async function handler(
     await auth.signOut();
     res.status(200).json({ uid: userCredentials.user.uid });
   } catch (error) {
-    res.status(500).end();
+    res.status(500).end(JSON.stringify(error));
   }
 }
