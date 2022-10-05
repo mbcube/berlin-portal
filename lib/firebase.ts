@@ -26,3 +26,4 @@ const app = initializeApp(firebaseConfig);
 
 export const auth = getAuth(app);
 export const database = getFirestore(app);
+export const resetPasswordUrl = `https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=${process.env.NEXT_PUBLIC_API_KEY}`;
