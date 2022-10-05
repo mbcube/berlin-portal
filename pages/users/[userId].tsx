@@ -1,3 +1,4 @@
+import axios from "axios";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import Image from "next/image";
 import Link from "next/link";
@@ -6,7 +7,7 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import AuthGuard from "../../components/auth-guard";
 import UserForm from "../../components/forms/user-form";
-import { database } from "../../lib/firebase";
+import { database, resetPasswordUrl } from "../../lib/firebase";
 import { UserType } from "../../lib/models/user-type.enum";
 import { User } from "../../lib/models/user.model";
 
@@ -31,6 +32,36 @@ export default function EditUser() {
 
     getUser();
   }, [router.query.userId]);
+
+  async function SendResetPasswordEmail(): Promise<void> {
+    try {
+      await axios.post(resetPasswordUrl, {
+        requestType: "PASSWORD_RESET",
+        email: userState?.email,
+      });
+      toast.success(`Mot de pass réinitialiser `);
+    } catch (error) {
+      toast.error(`Impossible de réinitialiser`);
+    }
+  }
+
+  function ResetPassword(): void {
+    toast.dismiss();
+    toast((t) => (
+      <span>
+        Êtes-vous sûr?
+        <button
+          className="btn btn-link text-warning"
+          onClick={() => {
+            SendResetPasswordEmail();
+            toast.dismiss(t.id);
+          }}
+        >
+          Réinitialiser
+        </button>
+      </span>
+    ));
+  }
 
   async function onEditUser(formData: any) {
     try {
@@ -104,6 +135,8 @@ export default function EditUser() {
                   <UserForm
                     onUserFormSubmitted={onEditUser}
                     initialFormData={userState}
+                    showResetPassword={true}
+                    resetPassword={ResetPassword}
                     heading="Edit User"
                   ></UserForm>
                 </div>

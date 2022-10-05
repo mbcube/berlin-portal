@@ -6,6 +6,8 @@ import { EMAIL_REGEX } from "../../lib/utils";
 export default function UserForm({
   onUserFormSubmitted,
   initialFormData,
+  showResetPassword,
+  resetPassword,
 }: any) {
   const {
     register,
@@ -109,7 +111,15 @@ export default function UserForm({
       )}
 
       {/* Submit button*/}
-      <input className="btn btn-primary" type="submit" value="Submit" />
+      <input className="btn btn-primary" type="submit" value="Soumettre" />
+      {showResetPassword && (
+        <input
+          className="btn btn-warning ms-3"
+          type="button"
+          value="Réinitialiser mot de passe"
+          onClick={() => resetPassword()}
+        />
+      )}
     </form>
   );
 }
