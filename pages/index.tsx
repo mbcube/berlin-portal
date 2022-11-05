@@ -1,11 +1,12 @@
-import { useTranslation } from "next-i18next";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-
+import { useTranslation } from 'next-i18next'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import CollapsibleExample from '../components/nav'
 const Landing = () => {
-  const { t } = useTranslation("common");
+  const { t } = useTranslation('common')
 
   return (
     <>
+      <CollapsibleExample />
       {/* Page Header*/}
       <header
         className="page-header-ui page-header-ui-dark bg-img-cover overlay overlay-80"
@@ -20,9 +21,9 @@ const Landing = () => {
               <div className="col-xl-8 col-lg-10 text-center">
                 <div data-aos="fade-up">
                   <h1 className="page-header-ui-title">
-                    {t("workStudyTitle")} <br />
+                    {t('workStudyTitle')} <br />
                   </h1>
-                  <p className="page-header-ui-text">{t("learnHeader")}</p>
+                  <p className="page-header-ui-text">{t('learnHeader')}</p>
                 </div>
               </div>
             </div>
@@ -45,24 +46,24 @@ const Landing = () => {
           <div className="row gx-5 text-center">
             <div className="col-lg-4 mb-5 mb-lg-0">
               <div className="icon-stack icon-stack-xl bg-gradient-warning-to-secondary text-white mb-4">
-                <i className="bi bi-translate  text-black"></i>{" "}
+                <i className="bi bi-translate  text-black"></i>{' '}
               </div>
-              <h2> {t("learnTitle")}</h2>
-              <p className="mb-0">{t("learnDescription")}</p>
+              <h2> {t('learnTitle')}</h2>
+              <p className="mb-0">{t('learnDescription')}</p>
             </div>
             <div className="col-lg-4 mb-5 mb-lg-0">
               <div className="icon-stack icon-stack-xl bg-gradient-warning-to-secondary text-white mb-4">
                 <i className="bi bi-book  text-black"></i>
               </div>
-              <h2> {t("studyTitle")}</h2>
-              <p className="mb-0">{t("studyDescription")}</p>
+              <h2> {t('studyTitle')}</h2>
+              <p className="mb-0">{t('studyDescription')}</p>
             </div>
             <div className="col-lg-4">
               <div className="icon-stack icon-stack-xl bg-gradient-warning-to-secondary text-white mb-4">
                 <i className="bi bi-person-workspace  text-black"></i>
               </div>
-              <h2> {t("workTitle")}</h2>
-              <p className="mb-0">{t("workDescription")}</p>
+              <h2> {t('workTitle')}</h2>
+              <p className="mb-0">{t('workDescription')}</p>
             </div>
           </div>
         </div>
@@ -113,11 +114,11 @@ const Landing = () => {
           <div className="row gx-5 justify-content-center">
             <div className="col-lg-10">
               <div className="display-6 text-center py-10 my-10 text-white">
-                {t("firstDivParag")}{" "}
-                <span className="text-warning">{t("secondDivParag")}</span>{" "}
-                {t("thirddivParag")}{" "}
-                <span className="text-warning">{t("fourthdivParag")}</span>{" "}
-                {t("lastdivParag")}
+                {t('firstDivParag')}{' '}
+                <span className="text-warning">{t('secondDivParag')}</span>{' '}
+                {t('thirddivParag')}{' '}
+                <span className="text-warning">{t('fourthdivParag')}</span>{' '}
+                {t('lastdivParag')}
               </div>
             </div>
           </div>
@@ -127,14 +128,14 @@ const Landing = () => {
         <div className="container px-5">
           <div className="row gx-5 justify-content-center">
             <div className="col-xl-6 col-lg-8 col-md-10 text-center my-10 py-10">
-              <h2> {t("supportTitle")}</h2>
+              <h2> {t('supportTitle')}</h2>
               <a
                 className="btn btn-warning fw-500"
                 href="https://www.facebook.com/BerlinHousetemara"
                 data-aos="fade-up"
                 data-aos-delay="100"
               >
-                {t("contactUs")}
+                {t('contactUs')}
               </a>
             </div>
           </div>
@@ -152,15 +153,15 @@ const Landing = () => {
         </div>
       </section>
     </>
-  );
-};
+  )
+}
 
 export async function getStaticProps({ locale }: any) {
   return {
     props: {
-      ...(await serverSideTranslations(locale, ["common"])),
+      ...(await serverSideTranslations(locale, ['common'])),
     },
-  };
+  }
 }
 
-export default Landing;
+export default Landing
