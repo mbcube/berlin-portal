@@ -1,16 +1,21 @@
-import { useTranslation } from "next-i18next";
-import Head from "next/head";
-import Image from "next/image";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import Script from "next/script";
+import { useTranslation } from 'next-i18next'
+import Head from 'next/head'
+import Image from 'next/image'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+import Script from 'next/script'
+import publicRoutes from "../../pages/_app"
 
 export function PublicLayout({ children }: any) {
-  const { t } = useTranslation("common");
-  const router = useRouter();
+  const { t } = useTranslation('common')
+  const router = useRouter()
+  const publicRoutes = ['/', '/registration']
+
 
   return (
+
     <>
+
       <Head>
         {/* eslint-disable-next-line @next/next/no-css-tags */}
         <link href="/sb-kit.css" rel="stylesheet" key="test" />
@@ -50,16 +55,16 @@ export function PublicLayout({ children }: any) {
                         })
                       }
                     >
-                      <option value="en">{t("english")}</option>
-                      <option value="fr">{t("french")}</option>
-                      <option value="de">{t("german")}</option>
+                      <option value="en">{t('english')}</option>
+                      <option value="fr">{t('french')}</option>
+                      <option value="de">{t('german')}</option>
                     </select>
                   </span>
 
                   <Link href="/login">
                     <span>
                       <a className="btn fw-500 ms-4 btn-warning d-none d-sm-inline">
-                        {t("loginButton")}
+                        {t('loginButton')}
                       </a>
                       <a className="btn btn-link text-warning d-sm-none px-2">
                         <i className="bi bi-box-arrow-in-right"></i>
@@ -106,17 +111,17 @@ export function PublicLayout({ children }: any) {
                     </div>
                     <div className="col-lg-3 col-md-6">
                       <div className="text-uppercase-expanded text-xs mb-4">
-                        {t("legal")}
+                        {t('legal')}
                       </div>
                       <ul className="list-unstyled mb-0">
                         <li className="mb-2">
-                          <a href="#!">{t("privacyPolicy")}</a>
+                          <a href="#!">{t('privacyPolicy')}</a>
                         </li>
                         <li className="mb-2">
-                          <a href="#!">{t("termsAndConditions")}</a>
+                          <a href="#!">{t('termsAndConditions')}</a>
                         </li>
                         <li>
-                          <a href="#!">{t("License")}</a>
+                          <a href="#!">{t('License')}</a>
                         </li>
                       </ul>
                     </div>
@@ -126,12 +131,12 @@ export function PublicLayout({ children }: any) {
               <hr className="my-5" />
               <div className="row gx-5 align-items-center">
                 <div className="col-md-6 small">
-                  {t("Copyright")} &copy; Berlin House 2022
+                  {t('Copyright')} &copy; Berlin House 2022
                 </div>
                 <div className="col-md-6 text-md-end small">
-                  <a href="#!">{t("privacyPolicy")}</a>
+                  <a href="#!">{t('privacyPolicy')}</a>
                   &middot;
-                  <a href="#!">{t("termsAndConditions")}</a>
+                  <a href="#!">{t('termsAndConditions')}</a>
                 </div>
               </div>
             </div>
@@ -146,5 +151,6 @@ export function PublicLayout({ children }: any) {
       <Script src="https://cdnjs.cloudflare.com/ajax/libs/lity/2.4.0/lity.min.js" />
       <Script src="https://unpkg.com/aos@next/dist/aos.js" />
     </>
-  );
-}
+  )
+                    }
+                    
