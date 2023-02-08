@@ -5,7 +5,6 @@ import { useRouter } from "next/router";
 import Landing from ".";
 import { MainLayout } from "../components/layouts/main";
 import { MinimalLayout } from "../components/layouts/minimal";
-import { PublicLayout } from "../components/layouts/public";
 import { UserContext } from "../lib/context";
 import { useUserData } from "../lib/hooks";
 
@@ -15,7 +14,6 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   const user = useUserData();
   const router = useRouter();
   const fullPageRoutes = ["/login", "/account-actions"];
-  const publicRoutes = ["/", "/registration"];
 
   dynamic(import("bootstrap") as any, { ssr: false });
 
@@ -24,13 +22,6 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
       <UserContext.Provider value={user}>
         <Landing />
       </UserContext.Provider>
-    );
-
-  if (publicRoutes.includes(router.route))
-    return (
-      <PublicLayout>
-        <Component {...pageProps} />
-      </PublicLayout>
     );
 
   return fullPageRoutes.includes(router.route) ||
