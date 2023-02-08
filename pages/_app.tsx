@@ -2,6 +2,7 @@ import { appWithTranslation } from "next-i18next";
 import type { AppProps } from "next/app";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
+import Landing from ".";
 import { MainLayout } from "../components/layouts/main";
 import { MinimalLayout } from "../components/layouts/minimal";
 import { PublicLayout } from "../components/layouts/public";
@@ -17,6 +18,13 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   const publicRoutes = ["/", "/registration"];
 
   dynamic(import("bootstrap") as any, { ssr: false });
+
+  if (router.route == "/")
+    return (
+      <UserContext.Provider value={user}>
+        <Landing />
+      </UserContext.Provider>
+    );
 
   if (publicRoutes.includes(router.route))
     return (
